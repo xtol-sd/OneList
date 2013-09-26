@@ -30,7 +30,6 @@ public class LoginActivity extends Activity {
     private String email;
     private ProgressDialog progressDialog;
 
-    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
