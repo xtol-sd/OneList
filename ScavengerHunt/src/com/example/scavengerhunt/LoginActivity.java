@@ -122,7 +122,7 @@ public class LoginActivity extends Activity {
         if (!isValidEmail(getUserEmailInput())) {
             showToast(getString(R.string.hint_email));
             return false;
-        }
+        } 
         else { 
             return true;
         }
