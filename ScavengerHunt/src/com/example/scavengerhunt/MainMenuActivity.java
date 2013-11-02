@@ -1,6 +1,7 @@
 package com.example.scavengerhunt;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,9 +40,7 @@ public class MainMenuActivity extends Activity {
 		newGameButton = (Button) findViewById(R.id.mainMenuButton_newGame);
 		newGameButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// XXX open NewGameActivity
-				// Intent i = new Intent(mThisActivity, NewGameActivity.class);
-				// mThisActivity.startActivity(i);
+				startActivity(new Intent(MainMenuActivity.this, CreateGame.class));
 			}
 		});
 

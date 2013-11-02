@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="?android:attr/buttonBarStyle"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/editStartDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_startDate"
+        android:inputType="date"
+        android:onClick="showStartDatePickerDialog" />
+
+    <EditText
+        android:id="@+id/editStartTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_startTime"
+        android:inputType="time"
+        android:onClick="showStartTimePickerDialog" />
+
+    <EditText
+        android:id="@+id/editEndDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_endDate"
+        android:inputType="date"
+        android:onClick="showEndDatePickerDialog" />
+
+    <EditText
+        android:id="@+id/editEndTime"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_endTime"
+        android:inputType="date"
+        android:onClick="showEndTimePickerDialog" />
+
+    <Button
+        android:id="@+id/button_CreateGame"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_create" >
+    </Button>
+
+</LinearLayout>

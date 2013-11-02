@@ -24,7 +24,7 @@
     <string name="label_password">Password</string>
     <string name="hint_password">Enter password</string>
     <string name="label_email">Email</string>
-    <string name="hint_email">Enter your EMAIL</string>
+    <string name="hint_email">Enter your email</string>
     <string name="label_login_in_progress">Login in progress&#8230;</string>
     <string name="label_signup_in_progress">Sign up in progress for new user</string>
     <string name="label_login_please_wait">Please wait&#8230;</string>
@@ -36,13 +36,32 @@
     <string name="label_loginUsernameAlreadyExists">Already a user with that username.  Please choose a new username</string>
     <string name="label_loginEmailAlreadyExists">Already a user with that email address.  Please choose a new email</string>
     <string name="label_selectOption">What would you like to do?</string>
-    <string name="label_newgame">Start a new Game</string>
+    <string name="label_newgame">Create New Game</string>
     <string name="label_mygames">View My Games</string>
     <string name="label_gamesiamplaying">View Games I am Playing</string>
     <string name="label_joingame">Join a Game</string>
     <string name="title_activity_start">Start</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
     <string name="title_activity_main_menu">MainMenuActivity</string>
+
+    <!-- Game Creation Screen -->
+    <string name="label_creategame">Create New Game</string>
+    <string name="label_startdatetime">Start Date/Time:</string>
+    <string name="hint_startDate">Start Date</string>
+    <string name="hint_startTime">Start Time</string>
+    <string name="hint_endDate">End Date</string>
+    <string name="hint_endTime">End Time</string>
+    <string name="label_enddatetime">End Date/Time:</string>
+    <string name="label_gamename">Game Name:</string>
+    <string name="label_userlist">User List:</string>
+    <string name="label_itemlist">Item List:</string>
+    <string name="hint_newgamename">Sample Game Name</string>
+    <string name="choose">Choose</string>
+    <string name="reset">Reset</string>
+    <string name="button_create">Create Game</string>
+    <string name="cancel">Cancel</string>
+    <string name="label_create">Create</string>
+    <string name="title_activity_date_time_picker">DateTimePicker</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>

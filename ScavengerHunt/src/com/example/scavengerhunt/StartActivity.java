@@ -11,16 +11,13 @@ public class StartActivity extends Activity {
 	class InitializeParseTask extends AsyncTask {
 		@Override
 		protected Object doInBackground(Object... params) {
-			// Login to parse
 			ScavengerHuntApplication.getInstance().initializeParse();
 			return null;
 		}
 
 		@Override
 		protected void onPostExecute(Object result) {
-			// Actually start/show LoginActivity
 			startActivity(new Intent(StartActivity.this, LoginActivity.class));
-			// Finish this SplashScreen activity
 			finish();
 		}
 	}
@@ -29,9 +26,7 @@ public class StartActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		// Set Splash screen layout
 		setContentView(R.layout.splash);
-		// Create new thread to initialize Parse
 		new InitializeParseTask().execute();
 	}
 
