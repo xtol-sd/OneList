@@ -61,7 +61,7 @@
     <string name="button_create">Create Game</string>
     <string name="cancel">Cancel</string>
     <string name="label_create">Create</string>
-    <string name="title_activity_date_time_picker">DateTimePicker</string>
+    <string name="title_activity_view_game">ViewGame</string>
     <string name="hello_world">Hello world!</string>
 
 </resources>

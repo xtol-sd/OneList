@@ -75,7 +75,6 @@
 
         <Button
             android:id="@+id/loginbutton_cancel"
-            android:style="?android:attr/buttonBarButtonStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

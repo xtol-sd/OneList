@@ -30,38 +30,41 @@ public final class R {
         public static final int splash_logo=0x7f020006;
     }
     public static final class id {
-        public static final int SplashLayout=0x7f08000d;
-        public static final int action_settings=0x7f080011;
-        public static final int button_CreateGame=0x7f080004;
-        public static final int editEndDate=0x7f080002;
-        public static final int editEndTime=0x7f080003;
-        public static final int editStartDate=0x7f080000;
-        public static final int editStartTime=0x7f080001;
-        public static final int loginbutton_cancel=0x7f080009;
-        public static final int loginbutton_continue=0x7f080008;
-        public static final int mainMenuButton_joinGame=0x7f08000b;
-        public static final int mainMenuButton_myGames=0x7f08000c;
-        public static final int mainMenuButton_newGame=0x7f08000a;
-        public static final int menuitem_logout=0x7f080012;
-        public static final int menuitem_prefs=0x7f080013;
-        public static final int splash_appver_text_view=0x7f080010;
-        public static final int splash_image_view=0x7f08000e;
-        public static final int splash_text_view=0x7f08000f;
-        public static final int textbox_loginEmail=0x7f080007;
-        public static final int textbox_loginPassword=0x7f080006;
-        public static final int textbox_loginUsername=0x7f080005;
+        public static final int SplashLayout=0x7f08000e;
+        public static final int action_settings=0x7f080012;
+        public static final int button_CreateGame=0x7f080005;
+        public static final int editEndDate=0x7f080003;
+        public static final int editEndTime=0x7f080004;
+        public static final int editGameName=0x7f080000;
+        public static final int editStartDate=0x7f080001;
+        public static final int editStartTime=0x7f080002;
+        public static final int loginbutton_cancel=0x7f08000a;
+        public static final int loginbutton_continue=0x7f080009;
+        public static final int mainMenuButton_joinGame=0x7f08000c;
+        public static final int mainMenuButton_myGames=0x7f08000d;
+        public static final int mainMenuButton_newGame=0x7f08000b;
+        public static final int menuitem_logout=0x7f080013;
+        public static final int menuitem_prefs=0x7f080014;
+        public static final int splash_appver_text_view=0x7f080011;
+        public static final int splash_image_view=0x7f08000f;
+        public static final int splash_text_view=0x7f080010;
+        public static final int textbox_loginEmail=0x7f080008;
+        public static final int textbox_loginPassword=0x7f080007;
+        public static final int textbox_loginUsername=0x7f080006;
     }
     public static final class layout {
         public static final int activity_create_game=0x7f030000;
-        public static final int login=0x7f030001;
-        public static final int mainmenu=0x7f030002;
-        public static final int splash=0x7f030003;
+        public static final int activity_view_game=0x7f030001;
+        public static final int login=0x7f030002;
+        public static final int mainmenu=0x7f030003;
+        public static final int splash=0x7f030004;
     }
     public static final class menu {
         public static final int create_game=0x7f070000;
         public static final int date_time=0x7f070001;
         public static final int date_time_picker=0x7f070002;
         public static final int mainmenu=0x7f070003;
+        public static final int view_game=0x7f070004;
     }
     public static final class string {
         public static final int action_settings=0x7f050022;
@@ -123,9 +126,9 @@ public final class R {
         public static final int parse_app_id=0x7f050003;
         public static final int parse_client_id=0x7f050004;
         public static final int reset=0x7f050030;
-        public static final int title_activity_date_time_picker=0x7f050034;
         public static final int title_activity_main_menu=0x7f050023;
         public static final int title_activity_start=0x7f050021;
+        public static final int title_activity_view_game=0x7f050034;
     }
     public static final class style {
         /** 

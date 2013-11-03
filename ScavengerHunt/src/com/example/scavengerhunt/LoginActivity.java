@@ -2,6 +2,7 @@ package com.example.scavengerhunt;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -10,10 +11,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
@@ -68,7 +69,7 @@ public class LoginActivity extends Activity {
     }
 
     
-    private final FindCallback userFindCallback = new FindUserCallback();
+    private final FindCallback <ParseUser> userFindCallback = new FindUserCallback();
 
     private void showToast(String message) {
         ScavengerHuntApplication.getInstance().showToast(LoginActivity.this,
@@ -139,17 +140,17 @@ public class LoginActivity extends Activity {
     private void queryForUser(){
         showLoginProgressDialog(getUserNameInput());
 
-        List<ParseQuery> parseUserQueryList = new ArrayList<ParseQuery>();
-        final ParseQuery parseUsernameQuery = ParseUser.getQuery();
+        List<ParseQuery<ParseUser>> parseUserQueryList = new ArrayList<ParseQuery<ParseUser>>();
+        final ParseQuery<ParseUser> parseUsernameQuery = ParseUser.getQuery();
         
         parseUsernameQuery.whereEqualTo("username", getUserNameInput());
         parseUserQueryList.add(parseUsernameQuery);
        
-        final ParseQuery parseEmailQuery = ParseUser.getQuery();
+        final ParseQuery<ParseUser> parseEmailQuery = ParseUser.getQuery();
         parseEmailQuery.whereEqualTo("email", getUserEmailInput());
         parseUserQueryList.add(parseEmailQuery);
         
-        final ParseQuery parseUserQuery = ParseQuery.or(parseUserQueryList);
+        final ParseQuery<ParseUser> parseUserQuery = ParseQuery.or(parseUserQueryList);
         parseUserQuery.findInBackground(userFindCallback);
     }
     
@@ -204,9 +205,9 @@ public class LoginActivity extends Activity {
         ParseUser.logInInBackground(getUserNameInput(), getUserPasswordInput(), loginCallback);
     }
 
-    class FindUserCallback extends FindCallback {
+    class FindUserCallback extends FindCallback <ParseUser> {
         @Override
-        public void done(List<ParseObject> userList, ParseException exception) {
+        public void done(List<ParseUser> userList, ParseException exception) {
             String username = getUserNameInput();
             String email = getUserEmailInput();
             EditText usernameEditText = (EditText) findViewById(R.id.textbox_loginUsername);
