@@ -16,8 +16,8 @@ public class ViewGame extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view_game);
         getGame();
+        setContentView(R.layout.activity_view_game);
     }
 
     @Override
@@ -26,7 +26,11 @@ public class ViewGame extends Activity {
         getMenuInflater().inflate(R.menu.view_game, menu);
         return true;
     }
-
+    
+    public void onResume() {
+        super.onResume();
+    }
+    
     public void setGameInfo(ParseObject game) {
         TextView gameName = (TextView) findViewById(R.id.editGameName);
         gameName.setText(game.getString("name"));
@@ -35,14 +39,17 @@ public class ViewGame extends Activity {
     public void getGame() {
         Bundle extras = getIntent().getExtras();
         String gameId = extras.getString("gameId");
+        Log.d("Game Info", "Game View ID is " + gameId);
 
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("game");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Game");
         query.getInBackground(gameId, new GetCallback<ParseObject>() {
             public void done(ParseObject game, ParseException e) {
                 if (e == null) {
+                    Log.d("Game Info", "Game name is " + game.getString("name"));
                     setGameInfo(game);
                 } else {
                     Log.w("error", "game retreival failure");
+                    setGameInfo(game);
                 }
             }
         });

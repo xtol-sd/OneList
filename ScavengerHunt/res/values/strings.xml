@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string-array name="colors_array">
+        <item>Blue</item>
+        <item>Green</item>
+        <item>Black</item>
+        <item>Red</item>
+    </string-array>
+
     <string name="hello">Welcome to Scavenger Hunt</string>
     <string name="app_name">Scavenger Hunt</string>
     <string name="app_version">1.0</string>
@@ -53,15 +60,13 @@
     <string name="hint_endTime">End Time</string>
     <string name="label_enddatetime">End Date/Time:</string>
     <string name="label_gamename">Game Name:</string>
-    <string name="label_userlist">User List:</string>
+    <string name="label_gameplayerlist">Player List:</string>
     <string name="label_itemlist">Item List:</string>
     <string name="hint_newgamename">Sample Game Name</string>
-    <string name="choose">Choose</string>
-    <string name="reset">Reset</string>
     <string name="button_create">Create Game</string>
-    <string name="cancel">Cancel</string>
     <string name="label_create">Create</string>
-    <string name="title_activity_view_game">ViewGame</string>
-    <string name="hello_world">Hello world!</string>
+
+    <!-- View Game Screen -->
+    <string name="title_activity_view_game">View Game</string>
 
 </resources>
