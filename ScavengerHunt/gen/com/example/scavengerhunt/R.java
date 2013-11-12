@@ -33,38 +33,37 @@ public final class R {
         public static final int splash_logo=0x7f020006;
     }
     public static final class id {
-        public static final int SplashLayout=0x7f090012;
-        public static final int action_settings=0x7f090016;
+        public static final int SplashLayout=0x7f090011;
+        public static final int action_settings=0x7f090015;
         public static final int button_CreateGame=0x7f090007;
-        public static final int check=0x7f090011;
         public static final int editEndDate=0x7f090003;
         public static final int editEndTime=0x7f090004;
         public static final int editGameName=0x7f090000;
+        public static final int editNewItem=0x7f090008;
         public static final int editStartDate=0x7f090001;
         public static final int editStartTime=0x7f090002;
-        public static final int label=0x7f090010;
         public static final int listview_items=0x7f090005;
         public static final int listview_players=0x7f090006;
-        public static final int loginbutton_cancel=0x7f09000c;
-        public static final int loginbutton_continue=0x7f09000b;
-        public static final int mainMenuButton_joinGame=0x7f09000e;
-        public static final int mainMenuButton_myGames=0x7f09000f;
-        public static final int mainMenuButton_newGame=0x7f09000d;
-        public static final int menuitem_logout=0x7f090017;
-        public static final int menuitem_prefs=0x7f090018;
-        public static final int splash_appver_text_view=0x7f090015;
-        public static final int splash_image_view=0x7f090013;
-        public static final int splash_text_view=0x7f090014;
-        public static final int textbox_loginEmail=0x7f09000a;
-        public static final int textbox_loginPassword=0x7f090009;
-        public static final int textbox_loginUsername=0x7f090008;
+        public static final int loginbutton_cancel=0x7f09000d;
+        public static final int loginbutton_continue=0x7f09000c;
+        public static final int mainMenuButton_joinGame=0x7f09000f;
+        public static final int mainMenuButton_myGames=0x7f090010;
+        public static final int mainMenuButton_newGame=0x7f09000e;
+        public static final int menuitem_logout=0x7f090016;
+        public static final int menuitem_prefs=0x7f090017;
+        public static final int splash_appver_text_view=0x7f090014;
+        public static final int splash_image_view=0x7f090012;
+        public static final int splash_text_view=0x7f090013;
+        public static final int textbox_loginEmail=0x7f09000b;
+        public static final int textbox_loginPassword=0x7f09000a;
+        public static final int textbox_loginUsername=0x7f090009;
     }
     public static final class layout {
         public static final int activity_create_game=0x7f030000;
         public static final int activity_view_game=0x7f030001;
-        public static final int login=0x7f030002;
-        public static final int mainmenu=0x7f030003;
-        public static final int rowbuttonlayout=0x7f030004;
+        public static final int dialog_add_item=0x7f030002;
+        public static final int login=0x7f030003;
+        public static final int mainmenu=0x7f030004;
         public static final int splash=0x7f030005;
     }
     public static final class menu {
@@ -78,8 +77,10 @@ public final class R {
         public static final int action_settings=0x7f060022;
         public static final int app_name=0x7f060001;
         public static final int app_version=0x7f060002;
+        public static final int button_addItem=0x7f060032;
         public static final int button_create=0x7f06002f;
         public static final int hello=0x7f060000;
+        public static final int hint_addItem=0x7f060031;
         public static final int hint_email=0x7f060011;
         public static final int hint_endDate=0x7f060028;
         public static final int hint_endTime=0x7f060029;
@@ -134,7 +135,7 @@ public final class R {
         public static final int title_activity_start=0x7f060021;
         /**  View Game Screen 
          */
-        public static final int title_activity_view_game=0x7f060031;
+        public static final int title_activity_view_game=0x7f060033;
     }
     public static final class style {
         /** 

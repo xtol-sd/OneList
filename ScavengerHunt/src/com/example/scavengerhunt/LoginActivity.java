@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
 
+import com.example.scavengerhunt.R;
 import com.parse.FindCallback;
 import com.parse.LogInCallback;
 import com.parse.ParseException;

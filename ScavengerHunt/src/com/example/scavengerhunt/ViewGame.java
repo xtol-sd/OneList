@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.scavengerhunt.R;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;

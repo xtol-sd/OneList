@@ -1,5 +1,6 @@
 package com.example.scavengerhunt;
 
+import com.example.scavengerhunt.R;
 import com.parse.Parse;
 import com.parse.ParseACL;
 import com.parse.ParseUser;

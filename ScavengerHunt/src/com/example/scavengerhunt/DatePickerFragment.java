@@ -2,6 +2,8 @@ package com.example.scavengerhunt;
 
 import java.util.Calendar;
 
+import com.example.scavengerhunt.R;
+
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;

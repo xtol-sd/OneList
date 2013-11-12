@@ -1,5 +1,7 @@
 package com.example.scavengerhunt;
 
+import com.example.scavengerhunt.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;

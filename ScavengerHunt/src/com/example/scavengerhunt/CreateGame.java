@@ -16,6 +16,7 @@ import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,13 +31,9 @@ import com.parse.SaveCallback;
 
 public class CreateGame extends Activity {
 
-    private ParseUser currentUser;
+    private ParseUser currentUser = ParseUser.getCurrentUser();;
     private ParseObject game = new ParseObject("Game");
-
-    // private ArrayList<String> itemList = new ArrayList<String>();
     private List<ParseUser> playerList = new ArrayList<ParseUser>();
-
-    private Button createGameButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +55,7 @@ public class CreateGame extends Activity {
     }
 
     private void setupButtonCallbacks() {
-        createGameButton = (Button) findViewById(R.id.button_CreateGame);
+        final Button createGameButton = (Button) findViewById(R.id.button_CreateGame);
         createGameButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 doCreateGame();
@@ -67,14 +64,13 @@ public class CreateGame extends Activity {
     }
 
     private void launchGameView(String gameId) {
-        Intent intent = new Intent(CreateGame.this, ViewGame.class);
+        final Intent intent = new Intent(CreateGame.this, ViewGame.class);
         intent.putExtra("gameId", gameId);
         Log.d("GameId", "game id is " + gameId);
         startActivity(intent);
     }
 
     private void doCreateGame() {
-
         game.put("name", getGameName());
         game.put("creator_id", currentUser);
         game.put("start_datetime", getStartDateTime());
@@ -84,6 +80,7 @@ public class CreateGame extends Activity {
                 if (e == null) {
                     Log.d("Game Creation", "Game Created!");
                     saveGamePlayers(getChosenPlayerList());
+                    saveGameItems(getItemList());
                     showToast("Game Created!");
                     launchGameView(game.getObjectId());
                 } else {
@@ -93,9 +90,39 @@ public class CreateGame extends Activity {
         });
     }
 
+    private ArrayList<String> getItemList() {
+        final ArrayList<String> itemList = new ArrayList<String>();
+        final ArrayAdapter<String> adapter = getItemAdapter();
+        for(int i=1; i< (adapter.getCount()); i++){
+            itemList.add(adapter.getItem(i));
+        }
+        return itemList;
+
+    }
+
+    private void saveGameItems(ArrayList<String> itemList) {
+        for (int i = 0; i < itemList.size(); i++) {
+            final String item = itemList.get(i);
+            Log.d("Item", item);
+            final ParseObject gameItem = new ParseObject("GameItem");
+            gameItem.put("name", item);
+            gameItem.put("gameId", game);
+            gameItem.saveInBackground(new SaveCallback() {
+                public void done(ParseException e) {
+                    if (e == null) {
+                        Log.d("Save", "Item Saved");
+                    } else {
+                        Log.d("Save", "Error saving gameItem: " + e);
+                    }
+                }
+
+            });
+        }
+    }
+
     private List<ParseUser> getChosenPlayerList() {
-        List<ParseUser> chosenPlayers = new ArrayList<ParseUser>();
-        ListView playerListView = (ListView) findViewById(R.id.listview_players);
+        final List<ParseUser> chosenPlayers = new ArrayList<ParseUser>();
+        final ListView playerListView = (ListView) findViewById(R.id.listview_players);
         SparseBooleanArray checkedItems = playerListView
                 .getCheckedItemPositions();
         if (checkedItems != null) {
@@ -110,9 +137,9 @@ public class CreateGame extends Activity {
 
     private void saveGamePlayers(List<ParseUser> chosenPlayerList) {
         for (int i = 0; i < chosenPlayerList.size(); i++) {
-            ParseUser user = chosenPlayerList.get(i);
+            final ParseUser user = chosenPlayerList.get(i);
             Log.d("Player", user.toString());
-            ParseObject gamePlayer = new ParseObject("GamePlayer");
+            final ParseObject gamePlayer = new ParseObject("GamePlayer");
             gamePlayer.put("userId", user);
             gamePlayer.put("gameId", game);
             gamePlayer.saveInBackground(new SaveCallback() {
@@ -138,7 +165,7 @@ public class CreateGame extends Activity {
     }
 
     private static Date convertToDateTime(String dateString) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy h:mm a",
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy h:mm a",
                 Locale.US);
         Date convertedDate = new Date();
         try {
@@ -160,49 +187,88 @@ public class CreateGame extends Activity {
     }
 
     private String getUserInput(int id) {
-        EditText input = (EditText) findViewById(id);
+        final EditText input = (EditText) findViewById(id);
         return input.getText().toString();
     }
 
     public void showStartDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
+        final DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "startDatePicker");
     }
 
     public void showStartTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        final DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "startTimePicker");
     }
 
     public void showEndDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
+        final DialogFragment newFragment = new DatePickerFragment();
         newFragment.show(getFragmentManager(), "endDatePicker");
     }
 
     public void showEndTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
+        final DialogFragment newFragment = new TimePickerFragment();
         newFragment.show(getFragmentManager(), "endTimePicker");
     }
 
     private void setupListViews() {
+        setupItemListView();
         setParseUserList();
     }
 
+    private void setupItemListView() {
+        final ArrayAdapter<String> itemAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1);
+        final ListView itemListView = (ListView) findViewById(R.id.listview_items);
+        itemListView.setAdapter(itemAdapter);
+        addItemToList("Add Item", itemAdapter);
+        itemListView
+                .setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent,
+                            final View view, int position, long id) {
+                        showItemAddDialog();
+                    }
+                });
+    }
+
+    private void showItemAddDialog() {
+        final DialogFragment newFragment = new ItemAddDialogFragment();
+        newFragment.show(getFragmentManager(), "gameItems");
+    }
+
+    private void addItemToList(String item, ArrayAdapter<String> adapter) {
+        adapter.add(item);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void onFinishItemDialog(String item) {
+        addItemToList(item, getItemAdapter());
+    }
+
+    private ArrayAdapter<String> getItemAdapter() {
+        final ListView itemListView = (ListView) findViewById(R.id.listview_items);
+        final ArrayAdapter<String> adapter = (ArrayAdapter<String>) itemListView
+                .getAdapter();
+        return adapter;
+    }
+
     private void setUsernameListView(String[] usernameList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, usernameList);
-        ListView playerListView = (ListView) findViewById(R.id.listview_players);
+        final ListView playerListView = (ListView) findViewById(R.id.listview_players);
         playerListView.setAdapter(adapter);
         playerListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
     }
 
     private void setParseUserList() {
-        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        final ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.selectKeys(Arrays.asList("username"));
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> userList, ParseException e) {
                 if (e == null) {
-                    String[] usernameList = new String[userList.size()];
+                    final String[] usernameList = new String[userList.size()];
                     Log.d("User List", "Retrieved " + userList.size());
                     for (int i = 0; i < userList.size(); i++) {
                         Log.d("data", "Retrieved User: "
