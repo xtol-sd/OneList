@@ -56,13 +56,38 @@ public class CreateGame extends Activity {
 
     private void setupButtonCallbacks() {
         final Button createGameButton = (Button) findViewById(R.id.button_CreateGame);
+        final Button resetGameButton = (Button) findViewById(R.id.button_ResetCreateGame);
+        final Button addItemButton = (Button) findViewById(R.id.button_AddItem);
         createGameButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 doCreateGame();
             }
         });
+        resetGameButton.setOnClickListener(new OnClickListener(){
+            public void onClick(View v){
+               resetAllFields();  
+            }
+        });
+        addItemButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                showItemAddDialog();
+            }
+        });
     }
 
+    private void resetAllFields(){
+        clearEditText(R.id.editStartTime);
+        clearEditText(R.id.editEndDate);
+        clearEditText(R.id.editEndTime);
+        clearEditText(R.id.editStartDate);
+        getItemAdapter().clear();
+        // TODO uncheck boxes for GamePlayers
+    }
+    
+    private void clearEditText(int i){
+        ((EditText)findViewById(i)).setText("");
+    }
+    
     private void launchGameView(String gameId) {
         final Intent intent = new Intent(CreateGame.this, ViewGame.class);
         intent.putExtra("gameId", gameId);
@@ -93,7 +118,7 @@ public class CreateGame extends Activity {
     private ArrayList<String> getItemList() {
         final ArrayList<String> itemList = new ArrayList<String>();
         final ArrayAdapter<String> adapter = getItemAdapter();
-        for(int i=1; i< (adapter.getCount()); i++){
+        for (int i = 0; i < (adapter.getCount()); i++) {
             itemList.add(adapter.getItem(i));
         }
         return itemList;
@@ -165,8 +190,8 @@ public class CreateGame extends Activity {
     }
 
     private static Date convertToDateTime(String dateString) {
-        final SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy h:mm a",
-                Locale.US);
+        final SimpleDateFormat dateFormat = new SimpleDateFormat(
+                "MM-dd-yyyy h:mm a", Locale.US);
         Date convertedDate = new Date();
         try {
             convertedDate = dateFormat.parse(dateString);
@@ -221,16 +246,21 @@ public class CreateGame extends Activity {
                 android.R.layout.simple_list_item_1);
         final ListView itemListView = (ListView) findViewById(R.id.listview_items);
         itemListView.setAdapter(itemAdapter);
-        addItemToList("Add Item", itemAdapter);
         itemListView
                 .setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
                     public void onItemClick(AdapterView<?> parent,
                             final View view, int position, long id) {
-                        showItemAddDialog();
+                        final String item = (String) parent
+                                .getItemAtPosition(position);
+
+                        itemAdapter.remove(item);
+                        itemAdapter.notifyDataSetChanged();
+                        view.setAlpha(1);
                     }
                 });
+
     }
 
     private void showItemAddDialog() {

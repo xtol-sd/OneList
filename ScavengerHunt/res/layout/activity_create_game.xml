@@ -1,6 +1,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     style="?android:attr/buttonBarStyle"
+    android:id="@+id/layout_createGame"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="10dp"
@@ -121,12 +122,29 @@
         android:baselineAligned="false"
         android:orientation="horizontal" >
 
-        <ListView
-            android:id="@+id/listview_items"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-        </ListView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/button_AddItem"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add Item" >
+            </Button>
+
+            <ListView
+                android:id="@+id/listview_items"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_weight="1" >
+            </ListView>
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listview_players"
@@ -136,11 +154,37 @@
         </ListView>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/button_CreateGame"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_create" >
-    </Button>
+        android:layout_gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/button_ResetCreateGame"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_reset" >
+        </Button>
+
+        <View
+            android:id="@+id/ViewColorPickerHelper"
+            android:layout_width="1dip"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="4dip"
+            android:layout_marginTop="4dip"
+            android:background="?android:attr/dividerVertical" />
+
+        <Button
+            android:id="@+id/button_CreateGame"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/button_create" >
+        </Button>
+    </LinearLayout>
 
 </LinearLayout>

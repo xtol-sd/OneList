@@ -63,7 +63,8 @@
     <string name="label_gameplayerlist">Player List:</string>
     <string name="label_itemlist">Item List:</string>
     <string name="hint_newgamename">Sample Game Name</string>
-    <string name="button_create">Create Game</string>
+    <string name="button_create">Create</string>
+    <string name="button_reset">Reset</string>
     <string name="label_create">Create</string>
     <string name="hint_addItem">Sample Item Name</string>
     <string name="button_addItem">Add Item</string>
