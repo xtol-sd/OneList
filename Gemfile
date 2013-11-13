@@ -35,3 +35,7 @@ group :test do
   gem 'database_cleaner', '1.0.1'
   gem 'email_spec'
 end
+group :production do
+  gem 'pg', '0.15.1'
+  gem 'rails_12factor', '0.0.2'
+end
