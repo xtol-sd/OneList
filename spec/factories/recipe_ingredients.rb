@@ -2,8 +2,8 @@
 
 FactoryGirl.define do
   factory :recipe_ingredient do
-    recipe_id ""
-    ingredient_id ""
-    amount ""
+    recipe_id 1
+    ingredient_id 1
+    amount 1
   end
 end
