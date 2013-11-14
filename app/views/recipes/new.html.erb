@@ -1,2 +1,11 @@
-<h1>Recipes#new</h1>
-<p>Find me in app/views/recipes/new.html.erb</p>
+<h1>New Recipe</h1>
+<%= simple_form_for (@recipe) do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :name, :label => 'Recipe Name:' %>
+  <%= f.input :comment, :as => :text, :input_html => {:rows => "3", :class => "span4" } %>
+  <% @recipe.ingredients.build %>
+  <%= f.fields_for :ingredients do |i| %>
+    <%= i.input :name, :label => 'Ingredient' %>
+  <% end %>
+  <%= f.button :submit, :class => "btn btn-primary" %>
+<% end %>
