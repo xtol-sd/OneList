@@ -1,5 +1,6 @@
 require 'spec_helper'
 
 describe Ingredient do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it {should respond_to(:recipes)}
+  it {should respond_to(:recipe_ingredients)}
 end
