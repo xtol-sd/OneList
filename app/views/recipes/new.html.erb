@@ -1,11 +1,26 @@
 <h1>New Recipe</h1>
-<%= simple_form_for (@recipe) do |f| %>
-  <%= f.error_notification %>
-  <%= f.input :name, :label => 'Recipe Name:' %>
-  <%= f.input :comment, :as => :text, :input_html => {:rows => "3", :class => "span4" } %>
-  <% @recipe.ingredients.build %>
-  <%= f.fields_for :ingredients do |i| %>
-    <%= i.input :name, :label => 'Ingredient' %>
-  <% end %>
-  <%= f.button :submit, :class => "btn btn-primary" %>
+<%= form_for @recipe do |recipe_form| %>
+  <%= recipe_form.label :name,'Recipe Name:' %>
+  <%= recipe_form.text_field :name %>
+  <%= recipe_form.label :comment, 'Comments on Recipe'%>
+  <%= recipe_form.text_field :comment %> 
+  </br>
+
+  <%= recipe_form.fields_for :recipe_ingredients do |rec_ing_field| %>
+    <%= rec_ing_field.label :amount, 'Ingredient Amount' %>
+    <%= rec_ing_field.number_field :amount %>
+
+      <%= rec_ing_field.fields_for :ingredient do |ingredient| %>
+        <%= ingredient.label :name,'Ingredient Name' %>
+        <%= ingredient.text_field :name%>
+        <%= ingredient.label :comment, 'Comments on Ingredient' %>
+        <%= ingredient.text_field :comment %> 
+      <% end %>  
+
+  <% end %> 
+  </br>
+
+  <%= recipe_form.button :submit, :class => "btn btn-primary" %>
 <% end %>
+
+

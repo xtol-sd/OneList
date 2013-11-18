@@ -5,7 +5,12 @@
     <%= recipe.name %>
   </h4>
   <%= recipe.comment %>
-  <% recipe.ingredients.each do |ing| %>
-    <%= ing.name %>
+  </br>
+  <% recipe.recipe_ingredients.each do |ing| %>
+    <%= ing.ingredient.name %></br>
+    <%= ing.amount %>
+
   <% end %>
 <% end %>
+
+  

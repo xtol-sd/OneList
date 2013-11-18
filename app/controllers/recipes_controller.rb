@@ -5,11 +5,11 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
+    @recipe.recipe_ingredients.build.build_ingredient
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
-
+    @recipe = Recipe.create(recipe_params)
     if @recipe.save
       flash[:notice] = "Recipe Created!"
       redirect_to recipes_path
@@ -24,6 +24,8 @@ class RecipesController < ApplicationController
   private
   
     def recipe_params
-      params.require(:recipe).permit(:name, :comment, :ingredients_attributes => [:name, :comment])
+      params.require(:recipe).permit(:name, :comment, :recipe_ingredients_attributes => [:amount, :ingredient_attributes => [:name, :comment]])
     end
 end
+
+
