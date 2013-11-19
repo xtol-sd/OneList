@@ -1,16 +1,22 @@
 <h1>Recipe Index</h1>
-<%= link_to 'Create a Recipe', new_recipe_path, class: "btn btn-primary" %>
-<% @recipes.each do | recipe | %>
-  <h4>
-    <%= recipe.name %>
-  </h4>
-  <%= recipe.comment %>
-  </br>
-  <% recipe.recipe_ingredients.each do |ing| %>
-    <%= ing.ingredient.name %></br>
-    <%= ing.amount %>
-
+<!-- This page (root) will be a checklist of recipes, and will include
+	a link to a page to select additional items, so this page is 'step 1'
+	for the user -->
+<%= link_to 'Add a Recipe', new_recipe_path, class: "btn btn-primary" %>
+  <% @recipes.each do | recipe | %>
+    <h4>
+      <%= recipe.name %>
+    </h4>
+    <%= recipe.comment %>
+    </br>
+    <% recipe.recipe_items.each do |recipe_item| %>
+      <%= recipe_item.item.name %></br>
+      <%= recipe_item.item_amount %>
   <% end %>
 <% end %>
+
+<!--At bottom will be 'Review Shopping List' option to immediately go to
+	final review of overall list (w/out adding more items) 
+	before printing, list_item index -->
 
   

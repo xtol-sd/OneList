@@ -6,15 +6,15 @@
   <%= recipe_form.text_field :comment %> 
   </br>
 
-  <%= recipe_form.fields_for :recipe_ingredients do |rec_ing_field| %>
-    <%= rec_ing_field.label :amount, 'Ingredient Amount' %>
-    <%= rec_ing_field.number_field :amount %>
+  <%= recipe_form.fields_for :recipe_items do |rec_item_field| %>
+    <%= rec_item_field.label :item_amount, 'Ingredient Amount' %>
+    <%= rec_item_field.number_field :item_amount %>
 
-      <%= rec_ing_field.fields_for :ingredient do |ingredient| %>
-        <%= ingredient.label :name,'Ingredient Name' %>
-        <%= ingredient.text_field :name%>
-        <%= ingredient.label :comment, 'Comments on Ingredient' %>
-        <%= ingredient.text_field :comment %> 
+      <%= rec_item_field.fields_for :item do |item| %>
+        <%= item.label :name,'Ingredient Name' %>
+        <%= item.text_field :name%>
+        <%= item.label :comment, 'Comments on Ingredient' %>
+        <%= item.text_field :comment %> 
       <% end %>  
 
   <% end %> 
