@@ -1,11 +1,20 @@
 class ListsController < ApplicationController
   def index
+    @lists = List.all
+    @list = List.new 
   end
 
-  def new
-  end
+  # def new
+  #   @list = List.new
+  # end
 
   def create
+    @list = List.new 
+     if @list.save
+       redirect_to recipes_path
+     else
+       render 'index'
+     end   
   end
 
   def edit
@@ -16,4 +25,12 @@ class ListsController < ApplicationController
 
   def destroy
   end
+
+  private
+    def list_params
+      #params.require(:list).permit!
+      #Update to correct permission once controller complete:
+      params.require(:list).permit(:name, :comment)
+    end
+     
 end

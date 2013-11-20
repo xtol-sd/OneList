@@ -1,2 +1,12 @@
-<h1>Items#new</h1>
-<p>Find me in app/views/items/new.html.erb</p>
+<h1>New Item</h1>
+<%= form_for @item do |item_form| %>
+  <%= item_form.label :name,'Item Name:' %>
+  <%= item_form.text_field :name %>
+  <%= item_form.label :comment, 'Notes on Item:'%>
+  <%= item_form.text_field :comment %> 
+ </br> 
+ <%= item_form.button :submit, :class => "btn btn-primary" %>
+<% end %>
+
+
+<!-- We could make this Page 1 for the user, then have options to go to Choose Recipes (recipe index) or Choose Items (items index) directly- or have those as tabs like the wireframes we mocked up -->

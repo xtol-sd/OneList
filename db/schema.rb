@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119204736) do
+ActiveRecord::Schema.define(version: 20131120144337) do
 
   create_table "items", force: true do |t|
     t.string   "name"
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "selected"
   end
 
   create_table "list_items", force: true do |t|
@@ -48,6 +49,7 @@ ActiveRecord::Schema.define(version: 20131119204736) do
     t.string   "comment"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "selected"
   end
 
   create_table "roles", force: true do |t|

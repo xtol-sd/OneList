@@ -1,2 +1,21 @@
-<h1>Lists#new</h1>
-<p>Find me in app/views/lists/new.html.erb</p>
+<h1>New List</h1>
+<!-- We could make this Page 1 for the user, then have options to go to Choose Recipes (recipe index) or Choose Items (items index) as tabs -->
+
+<%= link_to 'Choose Recipes', recipes_path, class: "btn btn-primary" %> 
+<%= link_to 'Choose Items', items_path, class: "btn btn-primary" %> 
+<%#= link_to 'Review Shopping List', _path, class: "btn btn-primary" %> 
+
+<%= form_for @list do |list_form| %>
+  </br>
+  <%= list_form.label :name,'List Name:' %>
+  <%= list_form.text_field :name %>
+  <%= list_form.label :comment, 'Notes on List:'%>
+  <%= list_form.text_field :comment %> 
+  </br> 
+  <%= list_form.button :submit, :class => "btn btn-primary" %>
+<% end %>   
+
+
+
+
+

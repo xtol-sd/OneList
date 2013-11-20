@@ -1,2 +1,12 @@
-<h1>Lists#index</h1>
-<p>Find me in app/views/lists/index.html.erb</p>
+<h1>Your Lists</h1>
+
+<% @lists.each do | list | %>
+    <h4>
+      <%= list.name %>
+    </h4>
+      <%= list.comment %>
+<% end %>
+
+<%= form_for @list do |f| %>
+  <%= f.submit 'Make a New List', :class => "btn btn-primary" %>
+<% end %>

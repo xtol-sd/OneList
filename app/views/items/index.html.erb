@@ -1,6 +1,28 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
-<!-- Code for 'Add an Item' button or link -->
-<!-- This page will be a checklist of items so this page is 'step 2'
-	for the user. At bottom will be 'Review Shopping List' option to go to
-	final review of overall list before printing, list_item index -->
+<h1>Choose Items</h1>
+<!-- We want Choose Recipes and Choose Items and Review Shopping List as tabs across the top all pages. -->
+
+<%= link_to 'Choose Recipes', recipes_path, class: "btn btn-primary" %>
+
+<%#= link_to 'Review Shopping List', _path, class: "btn btn-primary" %> 
+
+</br>
+</br>
+
+<% @items.each do | item | %>
+  
+  <%= check_box :item, :selected, {class: 'pull-left'} %>
+  <h4>
+    <%= item.name %>
+  </h4>
+<% end %>
+
+</br>
+
+<%= link_to 'Add a New Item', new_item_path, class: "btn btn-primary" %>
+
+
+
+
+
+
+
