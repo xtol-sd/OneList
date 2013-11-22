@@ -1,41 +1,18 @@
 <% if user_signed_in? %>
-  <nav>
-<ul class="nav">
-  <%= nav_link "Home", root_path, :class => 'brand' %>
-
-    <%= nav_link 'Logout', destroy_user_session_path, :method=>'delete' %>
-    </ul>
+  <nav class="nav nav-tabs">
+      <%= nav_link "Home", root_path %>
+      <% if current_user.has_role? :admin %>
+        <%= nav_link 'Admin', users_path %>
+      <% end %>
+        <%= link_to 'Logout', destroy_user_session_path, :class => "pull-right", :method => :delete %>
+        <%= link_to 'Edit account', edit_user_registration_path, :class => "pull-right" %>      
   </nav>  
-
-
-  <% else %>
-    <nav>  
-<ul class="nav">
-    <%= nav_link 'Login', new_user_session_path %>
-    <%= nav_link 'Sign up', new_user_registration_path %>
-    </ul>
+<% else %>
+  <nav class="nav nav-tabs">
+      <%= nav_link 'Login', new_user_session_path %>
+      <%= nav_link 'Sign up', new_user_registration_path %>
   </nav>  
-    <% end %>
+<% end %>
 
 
-  <% if user_signed_in? %>
-    <li>
-    <%= nav_link 'Edit account', edit_user_registration_path %>
-    </li>
-    <% if current_user.has_role? :admin %>
-      <li>
-      <%= nav_link 'Admin', users_path %>
-      </li>
-    <% end %>
-
-  <% else %>
-  <ul class="nav pull-right">
-<!--     <li>
-    <%= link_to 'Login', new_user_session_path %>
-    </li>
-    <li>
-    <%= link_to 'Sign up', new_user_registration_path %>
-    </li>
-  </ul> -->
-</ul>
-  <% end %>
+ 
