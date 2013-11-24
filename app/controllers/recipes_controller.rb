@@ -18,6 +18,16 @@ class RecipesController < ApplicationController
     end
   end
 
+  def show
+    @recipe = Recipe.find(params[:id])
+    
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @recipe }
+    end
+
+  end
+
   def edit
   end
 

@@ -1,0 +1,44 @@
+ 
+<div class="row">
+
+  <div class="span12">
+    <h2><%= @recipe.name.capitalize %></h2>
+  </div>
+
+</div> 
+
+
+
+<div class="row">
+  <div class="span2">
+    <%= "Comment: " %>
+  </div>    
+
+  <div class="span10">
+    <%= @recipe.comment %>
+  </div>    
+</div> 
+
+
+</br>
+<div class="row">
+
+  <div class="span2">
+    </h3><%= "Ingredients: " %></h3>
+  </div>    
+
+  <div class="span10">          
+    <% @recipe.items.each do |item| %>              
+    <%= item.name %>           
+    <% end %>            
+  </div>
+
+</div> 
+
+<div class="row">
+  <hr />
+  <div class="span12">  
+    <%= link_to 'Back to Recipes List', recipes_path, class: "btn btn-primary" %>
+  </div>
+</div> 
+</div>
