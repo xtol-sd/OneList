@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131120144337) do
+ActiveRecord::Schema.define(version: 20131125161531) do
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20131120144337) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "selected"
+  end
+
+  create_table "joinmenurecipes", force: true do |t|
+    t.integer  "menu_id"
+    t.integer  "recipe_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "list_items", force: true do |t|
@@ -31,6 +38,15 @@ ActiveRecord::Schema.define(version: 20131120144337) do
   create_table "lists", force: true do |t|
     t.string   "name"
     t.string   "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "menus", force: true do |t|
+    t.string   "name"
+    t.string   "comment"
+    t.integer  "recipe_id"
+    t.integer  "list_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
