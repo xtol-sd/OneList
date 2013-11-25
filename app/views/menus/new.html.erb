@@ -1,7 +1,7 @@
 <h1>New Menu</h1>
 
 <%= form_for @menu do |menu_form| %>
-  
+<%= hidden_field_tag "menu[selected_recipe_ids][]"%>
 
   <div class="form-inputs">
     <%= menu_form.label 'Menu name'%>
@@ -12,7 +12,12 @@
 
     <%= menu_form.fields_for :recipes do |recipe_form| %>
       <% @recipes.each do |recipe| %>
-        <%= recipe.name %></br>
+        </br> 
+
+        <%= check_box_tag "menu[selected_recipe_ids][]", recipe.id %>
+        
+        </br>
+        <%= recipe.name %>
       <% end %>  
     <% end %>
 
@@ -25,3 +30,6 @@
 <% end %>
 
 <%= link_to 'Back', menus_path %>
+
+<!-- pseudo-code for previously selected recipes to default to checked; would use for editing an existing menu
+	 <%#= check_box_tag "menu[selected_recipe_ids][]", recipe.id, @menu.recipes.compact.include?(recipe) %> -->
