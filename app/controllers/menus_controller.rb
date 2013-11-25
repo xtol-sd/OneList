@@ -19,26 +19,19 @@ class MenusController < ApplicationController
     @recipes = Recipe.all
   end
 
-    #@recipe = Recipe.new
-    #@recipe.recipe_items.build.build_item 
-
-  # GET /menus/1/edit
   def edit
+    @menu = Menu.find(params[:id])
+    @recipes = Recipe.all
   end
 
-  # POST /menus
-  # POST /menus.json
   def create
     @menu = Menu.new(menu_params)
-
-    respond_to do |format|
-      if @menu.save
-        format.html { redirect_to @menu, notice: 'Menu was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @menu }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
-      end
+    #raise params.inspect
+    if @menu.save
+      flash[:notice] = "Menu Created!" 
+      redirect_to @menu
+    else
+      render 'new'
     end
   end
 
@@ -74,6 +67,8 @@ class MenusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def menu_params
-      params.require(:menu).permit(:name, :comment, :recipe_id, :list_id)
+      params.require(:menu).permit!
     end
 end
+
+#params.require(:menu).permit(:name, :comment, :recipe_id, :list_id)

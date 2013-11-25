@@ -1,6 +1,32 @@
-<h1>Editing menu</h1>
+<h1>Edit menu</h1>
 
-<%= render 'form' %>
+<%= form_for @menu do |menu_form| %>
+<%= hidden_field_tag "menu[selected_recipes][]" %>
 
-<%= link_to 'Show', @menu %> |
-<%= link_to 'Back', menus_path %>
+  <div class="form-inputs">
+    <%= menu_form.label 'Menu name'%>
+    <%= menu_form.text_field :name %>
+    <%= menu_form.label :comment %>
+    <%= menu_form.text_field :comment %>
+    </br>
+
+	<%= menu_form.fields_for :recipe do |recipe_form| %>
+	  <% @recipes.each do |recipe| %>
+	    </br> 
+
+	    <%= check_box_tag "menu[selected_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
+
+	    </br>
+	    <%= recipe.name %>
+	  <% end %>  
+	<% end %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= menu_form.button :submit %>
+  </div>
+
+<% end %>
+
+
