@@ -15,7 +15,12 @@ class MenusController < ApplicationController
   # GET /menus/new
   def new
     @menu = Menu.new
+    @menu.recipes.build
+    @recipes = Recipe.all
   end
+
+    #@recipe = Recipe.new
+    #@recipe.recipe_items.build.build_item 
 
   # GET /menus/1/edit
   def edit

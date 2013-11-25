@@ -11,7 +11,7 @@ class ListsController < ApplicationController
   def create
     @list = List.new 
      if @list.save
-       redirect_to recipes_path
+       redirect_to new_menu_path
      else
        render 'index'
      end   
