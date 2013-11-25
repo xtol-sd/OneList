@@ -21,17 +21,7 @@ belongs_to :list
 end
 
 
-  # def desired_skill_ids
-  #   self.desired_skills.map {|ds| ds.skill_id}
-  # end
-  
-  # def desired_skills= (ids_with_levels)
-  #   self.employee_desired_skills = make_desired_skill_array(ids_with_levels)
-  # end
-  
-  # def make_desired_skill_array(ids_with_levels)
-  #   ids_with_levels.map {|skill_id, interest_number| EmployeeDesiredSkill.create(:skill_id => skill_id, :interest_level => interest_number)}
-  # end
+ 
 
 
 

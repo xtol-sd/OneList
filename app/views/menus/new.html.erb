@@ -20,15 +20,17 @@
         <%= recipe.name %>
       <% end %>  
     <% end %>
-
+  </br>
+ 
   </div>
-
+ 
   <div class="form-actions">
     <%= menu_form.button :submit %>
   </div>
 
 <% end %>
 
+<div class="span4">
+<%= link_to 'Add a New Recipe', new_recipe_path, class: "btn btn-primary" %>
+</div>
 
-<!-- pseudo-code for previously selected recipes to default to checked; would use for editing an existing menu
-   <%#= check_box_tag "menu[selected_recipe_ids][]", recipe.id, @menu.recipes.compact.include?(recipe) %> -->

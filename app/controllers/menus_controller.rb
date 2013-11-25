@@ -71,4 +71,4 @@ class MenusController < ApplicationController
     end
 end
 
-#params.require(:menu).permit(:name, :comment, :recipe_id, :list_id)
+#params.require(:menu).permit(:name, :comment, :list_id, :selected_recipes)
