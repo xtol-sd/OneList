@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
   def index
     @items = Item.all
+    @list = List.last
   end
 
   def new
@@ -28,7 +29,7 @@ class ItemsController < ApplicationController
 
   private
     def item_params
-      params.require(:item).permit(:name, :comment)
+      params.require(:item).permit(:name, :comment, :selected)
     end
     
 

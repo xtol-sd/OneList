@@ -1,4 +1,15 @@
-<h1>New Menu</h1>
+
+
+<!-- We want Choose Recipes and Choose Items and Review Shopping List as tabs across the top all pages.
+  -->
+<div class="nav nav-tabs">
+<%= nav_link 'New Menu', new_menu_path %> 
+<%= nav_link 'Choose Items', items_path %> 
+<%= nav_link 'Review Shopping List', list_path(@list) %>
+</div>
+
+<%#= link_to 'Review Shopping List', _path, class: "btn btn-primary" %> 
+<%= link_to 'Add a New Recipe', new_recipe_path, class: "btn btn-primary" %> 
 
 <%= form_for @menu do |menu_form| %>
 <%= menu_form.hidden_field :list_id, value: @list.id %>
@@ -22,7 +33,7 @@
       <% end %>  
     <% end %>
   </br>
- 
+  
   </div>
  
   <div class="form-actions">
@@ -31,7 +42,7 @@
 
 <% end %>
 
-<div class="span4">
-<%= link_to 'Add a New Recipe', new_recipe_path, class: "btn btn-primary" %>
-</div>
+
+
+
 

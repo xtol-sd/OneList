@@ -1,0 +1,23 @@
+<p>
+  <strong>List:</strong>
+  <%= @list.id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @list.name %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @list.comment %>
+</p>
+
+<p>
+  <strong>Items:</strong>
+  <% @list.list_items.each do |item| %>
+    <%= item.name %>
+  <% end %>
+</p>    
+
+
