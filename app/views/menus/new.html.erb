@@ -1,6 +1,7 @@
 <h1>New Menu</h1>
 
 <%= form_for @menu do |menu_form| %>
+<%= menu_form.hidden_field :list_id, value: @list.id %>
 <%= hidden_field_tag "menu[selected_recipes][]" %>
 
   <div class="form-inputs">

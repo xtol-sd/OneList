@@ -17,6 +17,7 @@ class MenusController < ApplicationController
     @menu = Menu.new
     @menu.recipes.build
     @recipes = Recipe.all
+    @list = List.last
   end
 
   def edit
