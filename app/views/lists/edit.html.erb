@@ -1,2 +1,30 @@
-<h1>Lists#edit</h1>
-<p>Find me in app/views/lists/edit.html.erb</p>
+<div class="nav nav-tabs">
+<%= nav_link '1. Choose Recipes', new_menu_path %> 
+<%= nav_link '2. Choose Items', items_path %> 
+<%= nav_link '3. Review Shopping List', list_path(@list) %>
+</div>
+
+<p>
+  <strong>List:</strong>
+  <%= @list.id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @list.name %>
+</p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @list.comment %>
+</p>
+
+<p>
+  <strong>Items:</strong>
+  <% @list.list_items.each do |item| %>
+    <%= item.name %>
+  <% end %>
+</p>    
+
+
+
