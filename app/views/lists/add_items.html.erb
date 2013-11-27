@@ -1,0 +1,29 @@
+<div class="nav nav-tabs">
+<%= nav_link '1. Choose Recipes', new_menu_path %> 
+<%= nav_link '2. Choose Items', add_items_path %> 
+<%= nav_link '3. Review Shopping List', edit_list_path(@list) %>
+</div>
+
+<%= link_to 'Add a New Item', new_item_path, class: "btn btn-primary" %>
+</br>
+
+<%= form_for @list do |list_form| %>
+<%= hidden_field_tag "list[selected_items][]" %>
+  <div class="form-inputs">
+    <%= list_form.fields_for :item do |item_form| %>
+      <% @items.each do |item| %>
+        </br>
+        <%= check_box_tag "list[selected_items][]", item.id %>
+        </br>
+        <%= item.name %>
+      <% end %>  
+    <% end %>
+  </br>
+    
+  </div>
+
+  <div class="form-actions">
+    <%= list_form.button :submit, :name => 'add_items_button' %>
+  </div>
+
+<% end %>

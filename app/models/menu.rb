@@ -6,7 +6,7 @@ accepts_nested_attributes_for :recipes
 belongs_to :list
 
   def selected_recipe_ids
-	self.recipes.map {|recipe| recipe.id}
+	self.selected_recipes.map {|recipe| recipe.id}
   end
 
   def selected_recipes= (ids)

@@ -1,32 +1,6 @@
-<!-- We want Choose Recipes and Choose Items and Review Shopping List as tabs across the top all pages. -->
-
-<div class="nav nav-tabs">
-<%= nav_link '1. Choose Recipes', new_menu_path %> 
-<%= nav_link '2. Choose Items', items_path %> 
-<%= nav_link '3. Review Shopping List', list_path(@list) %>
-</div>
-
-<%#= link_to 'Review Shopping List', _path, class: "btn btn-primary" %> 
-
-<%= link_to 'Add a New Item', new_item_path, class: "btn btn-primary" %>
-</br>
-<% @items.each do | item | %>
+<% @items.each do |item| %>
   
-  <%= check_box :item, :selected, {class: 'pull-left'} %>
-  <h4>
-    <%= item.name %>
-  </h4>
-<% end %>
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <%= item.name %></br>
+      
+<% end %>  
+    
