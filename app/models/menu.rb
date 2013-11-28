@@ -6,23 +6,33 @@ accepts_nested_attributes_for :recipes
 belongs_to :list
 
   def selected_recipe_ids
-	self.selected_recipes.map {|recipe| recipe.id}
+	  self.selected_recipes.map {|recipe| recipe.id}
   end
 
   def selected_recipes= (ids)
-	self.join_menu_recipes = make_selected_recipe_array(ids)
+	  self.join_menu_recipes = make_selected_recipe_array(ids)
   end
 
   def make_selected_recipe_array(ids)
-	ids.map {|recipe_id| JoinMenuRecipe.create(:recipe_id => recipe_id)}  
+	  ids.map {|recipe_id| JoinMenuRecipe.create(:recipe_id => recipe_id)}  
   end
 
-
+  def add_items_to_list
+    self.recipes.each do |recipe|
+      recipe.items.map {|item| ListItem.create(:list_id => self.list_id, :item_id => item.id)} 
+    end
+  end
+    
 end
 
 
  
 
+	
 
-
+# {"utf8"=>"✓", "_method"=>"patch", 
+# "authenticity_token"=>"EGzTNfU6eDBdm2R6ID1HmAQOCTwC1e8r+5rT0crykpY=", 
+# "list"=>{"selected_items"=>["", "1", "2", "3", "4", "5"]}, 
+# "add_items_button"=>"", "action"=>"update", "controller"=>"lists", 
+# "id"=>"11"}
 

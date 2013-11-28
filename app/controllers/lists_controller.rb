@@ -35,7 +35,7 @@ class ListsController < ApplicationController
   def update
     @list = List.find(params[:id])
     #raise params.inspect
-    if params[:add_items_button] 
+    if params[:add_items_button]
       @list.update(list_params)
       flash[:notice] = "Step 2 complete: Items chosen!" 
       redirect_to edit_list_path(@list)
