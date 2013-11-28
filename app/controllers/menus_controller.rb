@@ -27,11 +27,12 @@ class MenusController < ApplicationController
 
   def create
     @menu = Menu.new(menu_params)
+    @list = List.last
     #raise params.inspect
     if @menu.save
       flash[:notice] = "Step 1 complete: Recipes chosen!" 
       @menu.add_items_to_list
-      redirect_to add_items_path
+      redirect_to add_items_path(@list)
     else
       render 'new'
     end

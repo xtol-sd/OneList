@@ -1,29 +1,32 @@
 <div class="nav nav-tabs">
-<%= nav_link '1. Choose Recipes', new_menu_path %> 
-<%= nav_link '2. Choose Items', add_items_path(@list) %> 
-<%= nav_link '3. Review Shopping List', edit_list_path(@list) %>
+  <%= nav_link '1. Choose Recipes', new_menu_path %> 
+  <%= nav_link '2. Choose Items', add_items_path(@list) %> 
+  <%= nav_link '3. Review Shopping List', edit_list_path(@list) %>
+  <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
-<p>
-  <strong>List:</strong>
-  <%= @list.id %>
-</p>
+<%= form_for @list do |list_form| %>
+<%= hidden_field_tag "list[selected_items][]" %>
+  
+  <div class="form-inputs">
+    <%= list_form.label 'Name your shopping list:' %>
+    <%= list_form.text_field :name %>
+    <%= list_form.label 'Any notes about this list?' %>
+    <%= list_form.text_field :comment %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @list.name %>
-</p>
+    <p> Review your shopping list. (Uncheck to remove items.) </p>
+    <%= list_form.fields_for :item do |item_form| %>
+      <% @list.items.each do |item| %> 
+        </br>
+        <%= check_box_tag "list[selected_items][]", item.id, @list.items.compact.include?(item) %>
+        </br>
+        <%= item.name %>
+      <% end %>  
+    <% end %>
+  </br> 
+  </div> 
 
-<p>
-  <strong>Comment:</strong>
-  <%= @list.comment %>
-</p>
-
-<p>
-  <strong>Items:</strong>
-  <% @list.items.each do |item| %>
-    <%= item.name %>
-  </br>
-  <% end %>
-</p> 
-
+  <div class="form-actions">
+    <%= list_form.button 'Finish', class: " btn btn-primary" %>
+  </div>  
+<% end %>  

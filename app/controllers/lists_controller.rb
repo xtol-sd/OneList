@@ -23,7 +23,7 @@ class ListsController < ApplicationController
        render 'index'
      end   
   end
-
+3
   def show
     @list = List.find(params[:id])
   end
@@ -39,8 +39,9 @@ class ListsController < ApplicationController
       @list.update(list_params)
       flash[:notice] = "Step 2 complete: Items chosen!" 
       redirect_to edit_list_path(@list)
-    else
-      render add_items_path
+    elsif @list.update(list_params)
+      flash[:notice] = "List complete!" 
+      redirect_to list_path(@list)
     end
   end
 
