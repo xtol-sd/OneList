@@ -1,26 +1,30 @@
 <h1>New Recipe</h1>
-<%= form_for @recipe do |recipe_form| %>
-  <%= recipe_form.label :name,'Recipe Name:' %>
-  <%= recipe_form.text_field :name %>
-  <%= recipe_form.label :comment, 'Comments on Recipe'%>
-  <%= recipe_form.text_field :comment %> 
-  </br>
 
-  <%= recipe_form.fields_for :recipe_items do |rec_item_field| %>
-    <%= rec_item_field.label :item_amount, 'Ingredient Amount' %>
-    <%= rec_item_field.number_field :item_amount %>
-
-      <%= rec_item_field.fields_for :item do |item| %>
-        <%= item.label :name,'Ingredient Name' %>
-        <%= item.text_field :name%>
-        <%= item.label :comment, 'Comments on Ingredient' %>
-        <%= item.text_field :comment %> 
-      <% end %>  
-
-  <% end %> 
-  </br>
-
-  <%= recipe_form.button :submit, :class => "btn btn-primary" %>
+ 
+<%= form_for @recipe, html: {class: "form-horizontal"} do |f| %>
+  <fieldset id="recipe-meta">
+    <ol>
+      <li class="control-group">
+        <%= f.label :name, "Recipe Name", class: "control-label" %>
+        <div class="controls"><%= f.text_field :name %></div>
+      </li>
+      <li class="control-group">
+        <%= f.label :comment, "A brief description of this recipe", class: "control-label" %>
+        <div class="controls"><%= f.text_area :comment, rows: 5 %></div>
+      </li>
+     
+    </ol> 
+  </fieldset> 
+ 
+  <fieldset id="recipe-ingredients"> 
+    <ol> 
+      <%= f.fields_for :recipe_items do |recipe_item| %> 
+        <%= render 'recipe_item_fields', f: recipe_item %> 
+      <% end %> 
+    </ol> 
+     <%= link_to_add_association 'add ingredient', f, :recipe_items, 'data-association-insertion-node' => "#recipe-ingredients ol", 'data-association-insertion-method' => "append", :wrap_object => Proc.new {|recipe_item| recipe_item.build_item; recipe_item } %>
+  </fieldset> 
+ 
+  <%= f.submit %> 
 <% end %>
-
-
+ 

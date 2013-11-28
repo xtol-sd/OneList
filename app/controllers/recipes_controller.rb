@@ -5,7 +5,7 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @recipe.recipe_items.build.build_item 
+    #@recipe.recipe_items.build.build_item 
   end
 
   def create
