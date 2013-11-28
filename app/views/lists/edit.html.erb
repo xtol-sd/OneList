@@ -1,6 +1,6 @@
 <div class="nav nav-tabs">
 <%= nav_link '1. Choose Recipes', new_menu_path %> 
-<%= nav_link '2. Choose Items', add_items_path %> 
+<%= nav_link '2. Choose Items', add_items_path(@list) %> 
 <%= nav_link '3. Review Shopping List', edit_list_path(@list) %>
 </div>
 
@@ -22,6 +22,8 @@
 <p>
   <strong>Items:</strong>
   <% @list.items.each do |item| %>
-    <%= item.name %></br>
+    <%= item.name %>
+  </br>
   <% end %>
 </p> 
+

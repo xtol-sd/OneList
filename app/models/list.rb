@@ -7,15 +7,15 @@ class List < ActiveRecord::Base
   has_one :menu 
 
   def selected_item_ids
-	self.selected_items.map {|item| item.id}
+	  self.selected_items.map {|item| item.id}
   end
 
   def selected_items= (ids)
-	self.list_items = make_selected_item_array(ids)
+	  self.list_items = make_selected_item_array(ids)
   end
 
   def make_selected_item_array(ids)
-	ids.map {|item_id| ListItem.create(:item_id => item_id)}  
+	  ids.map {|item_id| ListItem.create(:item_id => item_id)}  
   end
    
 end
