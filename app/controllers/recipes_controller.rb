@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.create(recipe_params)
     if @recipe.save
       flash[:notice] = "Recipe Created!"
-      redirect_to recipes_path
+      redirect_to new_menu_path
     else
       render 'new'
     end

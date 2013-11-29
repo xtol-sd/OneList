@@ -10,9 +10,10 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.create(item_params)
+    @list = List.last
     if @item.save
       flash[:notice] = "Item Created!"
-      redirect_to items_path
+      redirect_to add_items_path(@list)
     else
       render 'new'
     end
