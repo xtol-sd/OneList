@@ -5,23 +5,18 @@
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
-<p>
+<!-- <p>
   <strong>List:</strong>
   <%= @list.id %>
 </p>
+ -->
 
-<p>
-  <strong>Name:</strong>
-  <%= @list.name %>
-</p>
-
-<p>
-  <strong>Comment:</strong>
+<i>
   <%= @list.comment %>
-</p>
+</i>
 
 <p>
-  <strong>Items:</strong>
+  <h3><%= @list.name %>:</h3>
   <% @list.items.each do |item| %>
     <%= item.name %></br>
   <% end %>
