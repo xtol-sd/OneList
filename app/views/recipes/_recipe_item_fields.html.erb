@@ -2,7 +2,7 @@
 <li class="control-group nested-fields">
   <div class="controls">
     <%= f.label :item_amount, "Amount:" %>
-    <%= f.text_field :item_amount %>
+    <%= f.text_field :item_amount, :value => 0 %>
  
     <%= f.fields_for :item do |recipe_item_item| %>
 
