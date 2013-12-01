@@ -2,6 +2,14 @@
 
  
 <%= form_for @recipe, html: {class: "form-horizontal"} do |f| %>
+  <% if @recipe.errors.any? %>
+      <h2>Errors</h2>
+      <ul>
+      <% @recipe.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+  <% end %>
   <fieldset id="recipe-meta">
     <ol>
       <li class="control-group">
