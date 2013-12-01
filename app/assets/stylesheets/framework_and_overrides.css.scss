@@ -1,28 +1,84 @@
 // import the CSS framework
 @import "bootstrap";
+body {
+  padding-top: 50px;
+  background: url(background.png);
+}
 @import "bootstrap-responsive";
 
-ul.nav
-{
-list-style-type:none;
-margin:3em;
-padding:0;
-overflow:hidden;
-}
-li
-{
-float:left;
-}
-a
-{
-display:block;
-width:4em;
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Ubuntu', Georgia, Times, serif;
 }
 
-a.btn.btn-primary {
-  color: white;
-  background-color: rgb(0, 68, 204);	
+h1 { 
+  text-shadow: 1px 1px 1px #ccc;
 }
 
+.navbar{
+  .brand{
+    color: black;
+    font-family: Ubuntu;
+  }
+}
 
+.content{
+  background-color:rgba(255,255,255,0.80);
+  padding: 20px;
+  margin: 20px -20px;
+  -webkit-border-radius: 6px 6px 6px 6px;
+  -moz-border-radius: 6px 6px 6px 6px;
+  border-radius: 6px 6px 6px 6px;
+  -webkit-box-shadow: 0 1px 20px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 0 1px 20px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+  hr {
+    width: 100%;
+  }
+}
 
+.navbar-simple{
+  .container{
+    margin-left: 40px;
+    margin-right: 40px;
+  } 
+  .brand {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  }
+  .brand:hover{
+    background: transparent;
+  }
+  
+  .navbar-inner {
+    background: #F6F8F8;
+    filter: none !important;
+    box-shadow: 0 2px 15px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0 2px 15px rgba(0,0,0,0.25);
+    -webkit-box-shadow: 0 2px 15px rgba(0,0,0,0.25);
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+    .nav {
+      float: right;
+      li a {
+        background: none;
+        -webkit-box-shadow: none;
+        -moz-box-shadow: none;
+        box-shadow: none;
+        color: #777;
+        font-size: 13px;
+        padding-top: 15px;
+        padding-bottom: 15px;
+        font-weight: 600;
+      } 
+      li a:hover {
+          background: none;
+          -webkit-box-shadow: none;
+          -moz-box-shadow: none;
+          box-shadow: none;
+          color: #bf3604;
+      }  
+      li.active a {
+        color: #bf3604;
+      }
+    }
+  }
+}

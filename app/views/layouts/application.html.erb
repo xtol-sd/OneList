@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= content_for?(:title) ? yield(:title) : "Onelist" %></title>
-    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Onelist" %>">
+    <title><%= content_for?(:title) ? yield(:title) : "OneList" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "OneList" %>">
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= csrf_meta_tags %>
   </head>
   <body>
+    <div class="navbar navbar-simple navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <%= render 'layouts/navigation' %>
+        </div>
+      </div>
+    </div>
     <%# application layout styled for Twitter Bootstrap 2.3 %>
-    <header>
-      <%= render 'layouts/navigation' %>
-    </header>
     <main role="main">
       <div class="container">
         <div class="content">

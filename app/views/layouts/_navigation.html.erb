@@ -1,17 +1,19 @@
+<a class="brand" href="/">OneList</a>
 <% if user_signed_in? %>
-  <nav class="nav nav-tabs">
-      <%= nav_link "Home", root_path %>
-      <% if current_user.has_role? :admin %>
-        <%= nav_link 'Admin', users_path %>
-      <% end %>
-        <%= link_to 'Logout', destroy_user_session_path, :class => "pull-right", :method => :delete %>
-        <%= link_to 'Edit account', edit_user_registration_path, :class => "pull-right" %>      
-  </nav>  
+  <ul class="nav pull-right">
+    <%= nav_link "Home", root_path %>
+    <% if current_user.has_role? :admin %>
+      <li><%= nav_link 'Admin', users_path %></li>
+    <% end %>
+      <li><%= link_to 'Account Settings', edit_user_registration_path, :class => "pull-right" %></li>    
+
+      <li><%= link_to 'Logout', destroy_user_session_path, :class => "pull-right", :method => :delete %></li>
+  </ul>  
 <% else %>
-  <nav class="nav nav-tabs">
-      <%= nav_link 'Login', new_user_session_path %>
-      <%= nav_link 'Sign up', new_user_registration_path %>
-  </nav>  
+  <ul class="nav pull-right">
+    <li><%= link_to 'Login', new_user_session_path, :class => "pull-right" %></li>
+    <li><%= link_to 'Sign Up', new_user_registration_path, :class => "pull-right" %></li>
+  </ul>  
 <% end %>
 
 
