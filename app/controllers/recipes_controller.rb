@@ -23,6 +23,10 @@ class RecipesController < ApplicationController
   def edit
   end
 
+  def show
+    @recipe = Recipe.find(params[:id])
+  end  
+
   def update
   end
 
@@ -31,7 +35,7 @@ class RecipesController < ApplicationController
 
   private
     def recipe_params
-      params.require(:recipe).permit(:name, :comment, :recipe_items_attributes => [:item_amount, :comment, :item_attributes => [:name, :comment]])
+      params.require(:recipe).permit(:name, :comment, :recipe_items_attributes => [:item_amount, :comment, :unit, :item_attributes => [:name, :comment]])
     end
     
 end
