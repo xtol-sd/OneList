@@ -229,6 +229,7 @@ DEPENDENCIES
   guard-rspec
   jbuilder (~> 1.2)
   jquery-rails
+  nokogiri
   pg (= 0.15.1)
   quiet_assets
   rails (= 4.0.1)
