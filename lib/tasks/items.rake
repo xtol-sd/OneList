@@ -15,7 +15,6 @@ task :items => :environment do
 		instructions = recipe.xpath("instructions").text
 		Recipe.create(:id => r, :name => title, :comment => instructions)
 
-		# itemname = "", amount = "", unit = ""
 		ingredients = recipe.xpath("*/ingredient")
 		ingredients.each do |ingredient|
 			itemname = ingredient.xpath("item").text
