@@ -36,7 +36,8 @@ class RecipesController < ApplicationController
 
   private
     def recipe_params
-      params.require(:recipe).permit(:name, :comment, :recipe_items_attributes => [:item_amount, :comment, :unit, :item_attributes => [:name, :comment]])
+      params.require(:recipe).permit!
+      # may be incomplete: params.require(:recipe).permit(:name, :comment, :recipe_items_attributes => [:item_amount, :comment, :unit, :item_attributes => [:name, :comment]])
     end
     
 end

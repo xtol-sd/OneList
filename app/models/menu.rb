@@ -19,7 +19,9 @@ belongs_to :list
 
   def add_items_to_list
     self.recipes.each do |recipe|
-      recipe.items.map {|item| ListItem.create(:list_id => self.list_id, :item_id => item.id)} 
+      recipe.recipe_items.map {|recipe_item| ListItem.create(
+        :list_id => self.list_id, :item_id => recipe_item.item_id, 
+        :item_amount => recipe_item.item_amount, :unit => recipe_item.unit )} 
     end
   end
     

@@ -71,10 +71,10 @@ class ListsController < ApplicationController
 
       #params from add_items, tab 2: params[:list]
    
-    def list_params
-      params.require(:list).permit!
+    # def list_params
+      # params.require(:list).permit!
       #Update to correct permission once controller complete:
       #params.require(:list).permit(:name, :comment, :selected_items)
-    end
+    # end
      
 end

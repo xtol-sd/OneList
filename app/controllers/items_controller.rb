@@ -30,7 +30,8 @@ class ItemsController < ApplicationController
 
   private
     def item_params
-      params.require(:item).permit(:name, :comment, :selected)
+      params.require(:item).permit!
+      # params.require(:item).permit(:name, :comment, :selected)
     end
     
 
