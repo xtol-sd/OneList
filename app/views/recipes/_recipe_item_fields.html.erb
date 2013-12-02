@@ -2,16 +2,23 @@
 <li class="control-group nested-fields">
   <div class="controls">
     <%= f.label :item_amount, "Amount:" %>
-    <%= f.text_field :item_amount, :value => 0 %>
+    <%= f.text_field :item_amount, :value => 1 %>
+
+    <%= f.label :unit, "Unit:" %>
+    <%= f.select :unit, options_for_select(%w[bag bunch clove cup dash dozen gallon handful pinch pound tablespoon teaspoon quart]) %>
+
  
     <%= f.fields_for :item do |recipe_item_item| %>
-
+      <%= f.label :name, "Ingredient:" %>
       <%= recipe_item_item.text_field :name %>
-
-
     <% end %>
  
-     <%= link_to_remove_association "remove", f %>
+     <%= link_to_remove_association "remove ingredient", f %>
   </div>
 
 </li>
+
+<!--   <div id="employee_location_dropdown">
+        <%#= f.label :location, 'Office' %>
+        <%#= collection_select(:employee, :location_id, @locations, :id, :name, :prompt => true) %>
+      </div>  -->
