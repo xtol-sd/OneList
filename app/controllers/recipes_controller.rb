@@ -5,8 +5,9 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    #  @units = ["bags", "bunches", "cloves", "cups", "dashes", "dozens", "gallons", "handfuls", 
-    #   "pinches", "pounds", "tablespoons", "teaspoons", "quarts"]
+    @units = %w[bottle bunch can cup dash jigger large liter medium
+           ounce package piece pinch pint pound quart slice small
+           tablespoon teaspoon unit whole]
     #@recipe.recipe_items.build.build_item 
   end
 

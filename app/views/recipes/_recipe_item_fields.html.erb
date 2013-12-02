@@ -5,7 +5,7 @@
     <%= f.text_field :item_amount, :value => 1 %>
 
     <%= f.label :unit, "Unit:" %>
-    <%= f.select :unit, options_for_select(%w[bag bunch clove cup dash dozen gallon handful pinch pound tablespoon teaspoon whole quart]) %>
+    <%= f.select :unit, options_for_select(@units) %>
  
     <%= f.fields_for :item do |recipe_item_item| %>
       <%= f.label :name, "Ingredient:" %>
