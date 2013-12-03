@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   
   def add_items
     @list = List.last
-    @list.items.build
+    # @list.items.build
     @items = Item.all
   end
 
@@ -34,10 +34,9 @@ class ListsController < ApplicationController
 
   def update
     @list = List.find(params[:id])
-    # raise params.inspect
     if params[:add_items_button]
-      @list.update(expanded_list_params(@list))
-      flash[:notice] = "Step 2 complete: Items chosen!" 
+      @list.update(list_params)
+      flash[:notice] = "Step 2 complete: Items chosen!"
       redirect_to edit_list_path(@list)
     elsif @list.update(list_params)
       flash[:notice] = "List complete!" 
@@ -62,19 +61,17 @@ class ListsController < ApplicationController
         params.require(:list).permit!
     end 
 
+    def list_params
+      params.require(:list).permit!
+      # Update to correct permission once controller complete:
+      # params.require(:list).permit(:name, :comment, :selected_items)
+    end
+
 # {"utf8"=>"✓", "_method"=>"patch", 
 # "authenticity_token"=>"Cc207N8Aq8DfXUzorjCTii0eGaPIB4uqdByu8A2xH4k=", 
 # "list"=>{"selected_items"=>["", "3", "4", "5"]}, 
 # "add_items_button"=>"", 
 # "action"=>"update", "controller"=>"lists", 
 # "id"=>"26"}
-
-      #params from add_items, tab 2: params[:list]
-   
-    # def list_params
-      # params.require(:list).permit!
-      #Update to correct permission once controller complete:
-      #params.require(:list).permit(:name, :comment, :selected_items)
-    # end
      
 end

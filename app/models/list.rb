@@ -15,6 +15,7 @@ class List < ActiveRecord::Base
   end
 
   def make_selected_item_array(ids)
+    ids = ids.reject{ |i| i.empty? }
 	  ids.map {|item_id| ListItem.create(:item_id => item_id)}  
   end
    

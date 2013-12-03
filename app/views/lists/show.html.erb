@@ -17,8 +17,10 @@
 
 <p>
   <h3><%= @list.name %>:</h3>
-  <% @list.items.each do |item| %>
-    <%= item.name %></br>
+  <% @list.list_items.each do |list_item| %>
+    <%= list_item.item_amount %>
+    <%= list_item.unit %>
+    <%= list_item.item.name %></br>
   <% end %>
 </p>    
 
