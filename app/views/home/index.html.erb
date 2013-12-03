@@ -1,5 +1,34 @@
 <div class="jumbotron">
   <h1>Welcome to <br>simple shopping.</h1>
-  <p class="lead">Writing shopping lists too tedious? <br>Just choose a recipe and OneList will do the hard work for you. <br> You won't remember how you ever wrote those silly lists before.</p>
-  <a class="btn btn-large btn-success" href="/users/sign_up">Sign Up Today</a>
+  <p class="lead">Writing out shopping lists too tedious? OneList can help.</p>
+  <div class = "row">
+    <div class="center"> 
+      <div class="span2 offset1">
+        <div class="img-polaroid">
+          <%= image_tag "recipe.gif"%>
+        </div>
+        <small>Select from our collection of recipes or add your own.</small>
+      </div>
+      <div class="span2">
+        <div class="symbol"> + </div>  
+      </div>
+      <div class="span2 ">
+        <div class="img-polaroid">
+          <%= image_tag "ingredients.jpg"%>
+        </div> 
+        <small>Add any extra items you want to buy.</small>
+      </div>
+      <div class="span2 ">
+        <div class="symbol"> = </div>  
+      </div>
+      <div class="span2 ">  
+        <div class="img-polaroid">
+          <%= image_tag "shopping_list.jpg"%> 
+        </div>
+        <small><em>Voila!</em> OneList combines the recipe ingredients and extra items into one beautiful list.</small>
+      </div>
+    </div>
+  </div>
+  <br>
+  <a class="btn btn-large btn-success" href="/users/sign_up">Sign Up for Free</a>
 </div>

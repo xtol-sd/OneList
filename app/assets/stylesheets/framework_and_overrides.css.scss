@@ -86,12 +86,23 @@ h1 {
 .jumbotron {
   text-align: center;
   h1 {
-    font-size: 72px;
+    font-size: 5em;
     line-height: 1;
   }
   .btn {
     font-size: 21px;
     padding: 14px 24px;
+  }
+  .symbol{
+    font-size: 7em;
+    line-height: 1;
+    vertical-align: middle;
+  }
+  .center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto; 
+
   }
 }
 
@@ -100,4 +111,12 @@ h1 {
   p + h4 {
   margin-top: 28px;
   }
+}
+
+.img-polaroid{
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  width: 10em;
+  height: 10em;
 }
