@@ -1,20 +1,27 @@
 <a class="brand" href="/">OneList</a>
-<% if user_signed_in? %>
-  <ul class="nav pull-right">
-    <%= nav_link "Home", root_path %>
-    <% if current_user.has_role? :admin %>
-      <li><%= nav_link 'Admin', users_path %></li>
-    <% end %>
-      <li><%= link_to 'Account Settings', edit_user_registration_path, :class => "pull-right" %></li>    
+<a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+  <span class="icon-bar"></span>
+</a>
+<div class="nav-collapse collapse">
+  <% if user_signed_in? %>
+    <ul class="nav pull-right">
+      <%= nav_link "Home", root_path %>
+      <% if current_user.has_role? :admin %>
+        <li><%= nav_link 'Admin', users_path %></li>
+      <% end %>
+        <li><%= link_to 'Account Settings', edit_user_registration_path, :class => "pull-right" %></li>    
 
-      <li><%= link_to 'Logout', destroy_user_session_path, :class => "pull-right", :method => :delete %></li>
-  </ul>  
-<% else %>
-  <ul class="nav pull-right">
-    <li><%= link_to 'Login', new_user_session_path, :class => "pull-right" %></li>
-    <li><%= link_to 'Sign Up', new_user_registration_path, :class => "pull-right" %></li>
-  </ul>  
-<% end %>
+        <li><%= link_to 'Logout', destroy_user_session_path, :class => "pull-right", :method => :delete %></li>
+    </ul>  
+  <% else %>
+    <ul class="nav pull-right">
+      <li><%= link_to 'Login', new_user_session_path, :class => "pull-right" %></li>
+      <li><%= link_to 'Sign Up', new_user_registration_path, :class => "pull-right" %></li>
+    </ul>  
+  <% end %>
+</div>
 
 
  
