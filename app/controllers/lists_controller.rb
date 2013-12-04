@@ -38,7 +38,8 @@ class ListsController < ApplicationController
       @list.update(list_params)
       flash[:notice] = "Step 2 complete: Items chosen!"
       redirect_to edit_list_path(@list)
-    elsif @list.update(list_params)
+    else
+      @list.update(list_params)
       flash[:notice] = "List complete!" 
       redirect_to list_path(@list)
     end
@@ -54,19 +55,13 @@ class ListsController < ApplicationController
 
   private
     
-    def expanded_list_params(list) #list is @list from update action above
-        former_items = ListItem.where(:list_id => list.id)
-        former_items_ids = former_items.map {|list_item| list_item.item_id.to_s}
-        params[:list][:selected_items] = params[:list][:selected_items] + former_items_ids
-        params.require(:list).permit!
-    end 
-
     def list_params
       params.require(:list).permit!
       # Update to correct permission once controller complete:
-      # params.require(:list).permit(:name, :comment, :selected_items)
+      # params.require(:list).permit(:name, :comment, :list_item_ids, :selected_items)
     end
 
+#from view lists add_items page (tab 2: choose items)
 # {"utf8"=>"✓", "_method"=>"patch", 
 # "authenticity_token"=>"Cc207N8Aq8DfXUzorjCTii0eGaPIB4uqdByu8A2xH4k=", 
 # "list"=>{"selected_items"=>["", "3", "4", "5"]}, 
@@ -75,3 +70,14 @@ class ListsController < ApplicationController
 # "id"=>"26"}
      
 end
+
+#update action code I wrote to update by hand, in else section
+#turns out just using update works!
+# ids = params[:list][:list_item_ids].reject{|i| i.empty?}
+#       if ids.present?
+#         @list.list_items = ListItem.find(ids) 
+#       else
+#         @list.list_items = []
+#       end  
+#       flash[:notice] = "List complete!" 
+#       redirect_to list_path(@list)
