@@ -6,7 +6,7 @@
 </div>
 
 <%= form_for @list do |list_form| %>
-<%= hidden_field_tag "list[selected_items][]" %>
+<%= hidden_field_tag "list[list_item_ids][]" %>
   
   <div class="form-inputs">
     <%= list_form.label 'Name your shopping list:' %>
@@ -16,15 +16,19 @@
 
     <p> Review your shopping list. (Uncheck to remove items.) </p>
     <%= list_form.fields_for :item do |item_form| %>
-      <% @list.items.each do |item| %> 
+      <% @list.list_items.each do |list_item| %> 
         </br>
-        <%= check_box_tag "list[selected_items][]", item.id, @list.items.compact.include?(item) %>
-        </br>
-        <% item.list_items.each do |list_item| %>
+        <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
+        <% if list_item.item_amount %>
           <%= list_item.item_amount %>
           <%= list_item.unit %>
-        <% end %>  
-        <%= item.name %>
+        <% else %>
+          <%= list_item.item.default_amount %>
+          <%= list_item.item.default_unit %>
+        <% end %>    
+        <%= list_item.item.name %>
+        </br>
+         
       <% end %>  
     <% end %>
   </br> 
@@ -34,3 +38,8 @@
     <%= list_form.button 'Finish', class: " btn btn-primary" %>
   </div>  
 <% end %>  
+
+  
+
+
+

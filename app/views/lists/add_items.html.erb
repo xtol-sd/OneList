@@ -16,6 +16,8 @@
         </br>
         <%= check_box_tag "list[selected_items][]", item.id %>
         </br>
+        <%= item.default_amount %>
+        <%= item.default_unit %>
         <%= item.name %>
       <% end %>  
     <% end %>

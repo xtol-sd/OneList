@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131202155659) do
+ActiveRecord::Schema.define(version: 20131202170334) do
 
   create_table "items", force: true do |t|
     t.string   "name"
@@ -19,6 +19,8 @@ ActiveRecord::Schema.define(version: 20131202155659) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "selected"
+    t.float    "default_amount"
+    t.string   "default_unit"
   end
 
   create_table "join_menu_recipes", force: true do |t|
