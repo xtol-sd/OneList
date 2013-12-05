@@ -1,11 +1,11 @@
 package com.example.scavengerhunt;
 
-import com.example.scavengerhunt.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import com.parse.ParseAnalytics;
 
 public class StartActivity extends Activity {
 
@@ -22,6 +22,8 @@ public class StartActivity extends Activity {
 			startActivity(new Intent(StartActivity.this, LoginActivity.class));
 			finish();
 		}
+		
+		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -30,6 +32,7 @@ public class StartActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.splash);
 		new InitializeParseTask().execute();
+
 	}
 
 }

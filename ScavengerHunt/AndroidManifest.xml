@@ -11,6 +11,9 @@
         tools:ignore="OldTargetApi" />
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name="com.example.scavengerhunt.ScavengerHuntApplication"
@@ -29,7 +32,7 @@
         </activity>
         <!--
         Login activity is started when the StartActivity is done with
-        Parse.com initialization
+        Parse.com initialization
         -->
         <activity
             android:name="com.example.scavengerhunt.LoginActivity"
@@ -55,6 +58,15 @@
             android:name="com.example.scavengerhunt.MyGamesList"
             android:label="@string/title_activity_my_games_list" >
         </activity>
+
+        <service android:name="com.parse.PushService" />
+
+        <receiver android:name="com.parse.ParseBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.USER_PRESENT" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

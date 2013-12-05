@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.example.scavengerhunt.R;
+import com.parse.ParseAnalytics;
 import com.parse.ParseUser;
 
 public class MainMenuActivity extends Activity {
@@ -26,6 +26,7 @@ public class MainMenuActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainmenu);
+		ParseAnalytics.trackAppOpened(getIntent());
 		setupButtonCallbacks();
 	}
 
