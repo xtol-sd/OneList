@@ -25,8 +25,15 @@ public class ItemAddDialogFragment extends DialogFragment {
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int id) {
-                                ((CreateGame) getActivity()).onFinishItemDialog(mEditText
-                                        .getText().toString());
+                                if (getTag() == "editGameItems") {
+                                    ((EditGame) getActivity()).onFinishItemDialog(mEditText
+                                            .getText().toString());
+                                }
+                                else if (getTag() == "createGameItems") {
+                                    ((CreateGame) getActivity()).onFinishItemDialog(mEditText
+                                            .getText().toString());
+                                }
+
                             }
                         })
                 .setNegativeButton("Cancel",

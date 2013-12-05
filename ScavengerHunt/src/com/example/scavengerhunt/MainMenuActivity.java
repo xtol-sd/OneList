@@ -57,9 +57,7 @@ public class MainMenuActivity extends Activity {
 		myGamesButton = (Button) findViewById(R.id.mainMenuButton_myGames);
 		myGamesButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				// XXX open MyGamesActivity
-				// Intent i = new Intent(mThisActivity, MyGamesActivity.class);
-				// mThisActivity.startActivity(i);
+	             startActivity(new Intent(MainMenuActivity.this, MyGamesList.class));
 			}
 		});
 

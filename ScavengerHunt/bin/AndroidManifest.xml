@@ -29,7 +29,7 @@
         </activity>
         <!--
         Login activity is started when the StartActivity is done with
-        Parse.com initialization
+        Parse.com initialization
         -->
         <activity
             android:name="com.example.scavengerhunt.LoginActivity"
@@ -45,7 +45,15 @@
         </activity>
         <activity
             android:name="com.example.scavengerhunt.ViewGame"
-            android:label="@string/title_activity_view_game" >
+            android:label="@string/title_viewGame" >
+        </activity>
+        <activity
+            android:name="com.example.scavengerhunt.EditGame"
+            android:label="@string/title_activity_edit_game" >
+        </activity>
+        <activity
+            android:name="com.example.scavengerhunt.MyGamesList"
+            android:label="@string/title_activity_my_games_list" >
         </activity>
     </application>
 

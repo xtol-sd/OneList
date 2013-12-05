@@ -1,190 +1,179 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="?android:attr/buttonBarStyle"
     android:id="@+id/layout_createGame"
+    style="?android:attr/buttonBarStyle"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_margin="10dp"
     android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp"
-    android:orientation="vertical" >
+    android:layout_marginRight="5dp" >
 
     <TextView
+        android:id="@+id/label_gameName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_gamename"
+        android:text="@string/label_gameName"
         android:textSize="14.0sp"
         android:textStyle="bold"
         android:visibility="visible" />
 
     <EditText
-        android:id="@+id/editGameName"
+        android:id="@+id/edit_gameName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/hint_newgamename"
+        android:layout_below="@+id/label_gameName"
+        android:hint="@string/hint_newGameName"
         android:inputType="text" />
 
     <TextView
+        android:id="@+id/label_startDatetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_startdatetime"
+        android:layout_below="@+id/edit_gameName"
+        android:text="@string/label_startDatetime"
         android:textSize="14.0sp"
         android:textStyle="bold"
         android:visibility="visible" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <EditText
+        android:id="@+id/editStartDate"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal" >
-
-        <EditText
-            android:id="@+id/editStartDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/hint_startDate"
-            android:inputType="date"
-            android:onClick="showStartDatePickerDialog" />
-
-        <EditText
-            android:id="@+id/editStartTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/hint_startTime"
-            android:inputType="time"
-            android:onClick="showStartTimePickerDialog" />
-    </LinearLayout>
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/editEndDate"
+        android:layout_below="@+id/label_startDatetime"
+        android:hint="@string/hint_startDate"
+        android:inputType="date"
+        android:onClick="showStartDatePickerDialog" />
 
     <TextView
+        android:id="@+id/label_endDatetime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/label_enddatetime"
+        android:layout_below="@+id/editStartDate"
+        android:text="@string/label_endDatetime"
         android:textSize="14.0sp"
         android:textStyle="bold"
         android:visibility="visible" />
 
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <EditText
+        android:id="@+id/editEndDate"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal" >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/label_endDatetime"
+        android:layout_toLeftOf="@+id/editEndTime"
+        android:hint="@string/hint_endDate"
+        android:inputType="date"
+        android:onClick="showEndDatePickerDialog" />
 
-        <EditText
-            android:id="@+id/editEndDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/hint_endDate"
-            android:inputType="date"
-            android:onClick="showEndDatePickerDialog" />
-
-        <EditText
-            android:id="@+id/editEndTime"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/hint_endTime"
-            android:inputType="date"
-            android:onClick="showEndTimePickerDialog" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <TextView
+        android:id="@+id/label_itemList"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal" >
+        android:layout_below="@+id/editEndDate"
+        android:text="@string/label_itemList"
+        android:textSize="14.0sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/label_itemlist"
-            android:textSize="14.0sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/label_gameplayerlist"
-            android:textSize="14.0sp"
-            android:textStyle="bold"
-            android:visibility="visible" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="190dp"
-        android:layout_gravity="center"
-        android:baselineAligned="false"
-        android:orientation="horizontal" >
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:orientation="vertical" >
-
-            <Button
-                android:id="@+id/button_AddItem"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Add Item" >
-            </Button>
-
-            <ListView
-                android:id="@+id/listview_items"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1" >
-            </ListView>
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/listview_players"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:layout_weight="1" >
-        </ListView>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <Button
+        android:id="@+id/button_addItem"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:orientation="horizontal" >
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/label_itemList"
+        android:drawableRight="@drawable/ic_new"
+        android:text="@string/button_addItem" >
 
-        <Button
-            android:id="@+id/button_ResetCreateGame"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_reset" >
-        </Button>
+    </Button>
 
-        <View
-            android:id="@+id/ViewColorPickerHelper"
-            android:layout_width="1dip"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="4dip"
-            android:layout_marginTop="4dip"
-            android:background="?android:attr/dividerVertical" />
+    <ListView
+        android:id="@+id/listview_items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_ResetCreateGame"
+        android:layout_alignRight="@+id/button_ResetCreateGame"
+        android:layout_below="@+id/button_addItem" >
+    </ListView>
 
-        <Button
-            android:id="@+id/button_CreateGame"
-            style="?android:attr/buttonBarButtonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/button_create" >
-        </Button>
-    </LinearLayout>
+    <Button
+        android:id="@+id/button_CreateGame"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/label_gamePlayerList"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="@string/button_create" />
 
-</LinearLayout>
+    <Button
+        android:id="@+id/button_ResetCreateGame"
+        style="?android:attr/buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/editEndDate"
+        android:text="@string/button_reset" />
+
+    <ListView
+        android:id="@+id/listview_players"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignBottom="@+id/listview_items"
+        android:layout_alignTop="@+id/button_addItem"
+        android:layout_toRightOf="@+id/editEndDate" >
+    </ListView>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="0.5dp"
+        android:layout_alignBottom="@+id/listview_items"
+        android:layout_alignParentLeft="true"
+        android:background="@android:color/darker_gray" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="0.5dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@+id/button_CreateGame"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/darker_gray" />
+
+    <EditText
+        android:id="@+id/editStartTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/view1"
+        android:layout_below="@+id/label_startDatetime"
+        android:ems="10"
+        android:hint="@string/hint_startTime"
+        android:inputType="time"
+        android:onClick="showStartTimePickerDialog" />
+
+    <EditText
+        android:id="@+id/editEndTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editStartTime"
+        android:layout_below="@+id/label_endDatetime"
+        android:ems="10"
+        android:hint="@string/hint_endTime"
+        android:inputType="date"
+        android:onClick="showEndTimePickerDialog" />
+
+    <TextView
+        android:id="@+id/label_gamePlayerList"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editEndTime"
+        android:layout_toRightOf="@+id/view1"
+        android:text="@string/label_gamePlayerList"
+        android:textSize="14.0sp"
+        android:textStyle="bold"
+        android:visibility="visible" />
+
+</RelativeLayout>

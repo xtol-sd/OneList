@@ -31,8 +31,6 @@ import com.parse.SaveCallback;
 
 public class CreateGame extends Activity {
 
-    private ParseUser currentUser = ParseUser.getCurrentUser();;
-    private ParseObject game = new ParseObject("Game");
     private List<ParseUser> playerList = new ArrayList<ParseUser>();
 
     @Override
@@ -45,7 +43,6 @@ public class CreateGame extends Activity {
 
     public void onResume() {
         super.onResume();
-        currentUser = ParseUser.getCurrentUser();
     }
 
     @Override
@@ -57,15 +54,15 @@ public class CreateGame extends Activity {
     private void setupButtonCallbacks() {
         final Button createGameButton = (Button) findViewById(R.id.button_CreateGame);
         final Button resetGameButton = (Button) findViewById(R.id.button_ResetCreateGame);
-        final Button addItemButton = (Button) findViewById(R.id.button_AddItem);
+        final Button addItemButton = (Button) findViewById(R.id.button_addItem);
         createGameButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 doCreateGame();
             }
         });
-        resetGameButton.setOnClickListener(new OnClickListener(){
-            public void onClick(View v){
-               resetAllFields();  
+        resetGameButton.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+                resetAllFields();
             }
         });
         addItemButton.setOnClickListener(new OnClickListener() {
@@ -75,7 +72,7 @@ public class CreateGame extends Activity {
         });
     }
 
-    private void resetAllFields(){
+    private void resetAllFields() {
         clearEditText(R.id.editStartTime);
         clearEditText(R.id.editEndDate);
         clearEditText(R.id.editEndTime);
@@ -83,29 +80,31 @@ public class CreateGame extends Activity {
         getItemAdapter().clear();
         // TODO uncheck boxes for GamePlayers
     }
-    
-    private void clearEditText(int i){
-        ((EditText)findViewById(i)).setText("");
+
+    private void clearEditText(int i) {
+        ((EditText) findViewById(i)).setText("");
     }
-    
+
     private void launchGameView(String gameId) {
-        final Intent intent = new Intent(CreateGame.this, ViewGame.class);
+        Intent intent = new Intent(CreateGame.this, ViewGame.class);
         intent.putExtra("gameId", gameId);
         Log.d("GameId", "game id is " + gameId);
         startActivity(intent);
     }
 
     private void doCreateGame() {
+        final ParseObject game = new ParseObject("Game");
+        final ParseUser currentUser = ParseUser.getCurrentUser();
         game.put("name", getGameName());
-        game.put("creator_id", currentUser);
+        game.put("creator", currentUser);
         game.put("start_datetime", getStartDateTime());
         game.put("end_datetime", getEndDateTime());
         game.saveInBackground(new SaveCallback() {
             public void done(ParseException e) {
                 if (e == null) {
                     Log.d("Game Creation", "Game Created!");
-                    saveGamePlayers(getChosenPlayerList());
-                    saveGameItems(getItemList());
+                    saveGamePlayers(getChosenPlayerList(), game);
+                    saveGameItems(getItemList(), game);
                     showToast("Game Created!");
                     launchGameView(game.getObjectId());
                 } else {
@@ -116,8 +115,8 @@ public class CreateGame extends Activity {
     }
 
     private ArrayList<String> getItemList() {
-        final ArrayList<String> itemList = new ArrayList<String>();
-        final ArrayAdapter<String> adapter = getItemAdapter();
+        ArrayList<String> itemList = new ArrayList<String>();
+        ArrayAdapter<String> adapter = getItemAdapter();
         for (int i = 0; i < (adapter.getCount()); i++) {
             itemList.add(adapter.getItem(i));
         }
@@ -125,13 +124,13 @@ public class CreateGame extends Activity {
 
     }
 
-    private void saveGameItems(ArrayList<String> itemList) {
+    private void saveGameItems(ArrayList<String> itemList, ParseObject game) {
         for (int i = 0; i < itemList.size(); i++) {
             final String item = itemList.get(i);
             Log.d("Item", item);
             final ParseObject gameItem = new ParseObject("GameItem");
             gameItem.put("name", item);
-            gameItem.put("gameId", game);
+            gameItem.put("game", game);
             gameItem.saveInBackground(new SaveCallback() {
                 public void done(ParseException e) {
                     if (e == null) {
@@ -148,7 +147,7 @@ public class CreateGame extends Activity {
     private List<ParseUser> getChosenPlayerList() {
         final List<ParseUser> chosenPlayers = new ArrayList<ParseUser>();
         final ListView playerListView = (ListView) findViewById(R.id.listview_players);
-        SparseBooleanArray checkedItems = playerListView
+        final SparseBooleanArray checkedItems = playerListView
                 .getCheckedItemPositions();
         if (checkedItems != null) {
             for (int i = 0; i < checkedItems.size(); i++) {
@@ -160,13 +159,14 @@ public class CreateGame extends Activity {
         return chosenPlayers;
     }
 
-    private void saveGamePlayers(List<ParseUser> chosenPlayerList) {
+    private void saveGamePlayers(List<ParseUser> chosenPlayerList,
+            ParseObject game) {
         for (int i = 0; i < chosenPlayerList.size(); i++) {
-            final ParseUser user = chosenPlayerList.get(i);
+            ParseUser user = chosenPlayerList.get(i);
             Log.d("Player", user.toString());
-            final ParseObject gamePlayer = new ParseObject("GamePlayer");
-            gamePlayer.put("userId", user);
-            gamePlayer.put("gameId", game);
+            ParseObject gamePlayer = new ParseObject("GamePlayer");
+            gamePlayer.put("user", user);
+            gamePlayer.put("game", game);
             gamePlayer.saveInBackground(new SaveCallback() {
                 public void done(ParseException e) {
                     if (e == null) {
@@ -186,7 +186,7 @@ public class CreateGame extends Activity {
     }
 
     private String getGameName() {
-        return getUserInput(R.id.editGameName);
+        return getUserInput(R.id.edit_gameName);
     }
 
     private static Date convertToDateTime(String dateString) {
@@ -212,7 +212,7 @@ public class CreateGame extends Activity {
     }
 
     private String getUserInput(int id) {
-        final EditText input = (EditText) findViewById(id);
+        EditText input = (EditText) findViewById(id);
         return input.getText().toString();
     }
 
@@ -265,7 +265,7 @@ public class CreateGame extends Activity {
 
     private void showItemAddDialog() {
         final DialogFragment newFragment = new ItemAddDialogFragment();
-        newFragment.show(getFragmentManager(), "gameItems");
+        newFragment.show(getFragmentManager(), "createGameItems");
     }
 
     private void addItemToList(String item, ArrayAdapter<String> adapter) {
@@ -284,7 +284,7 @@ public class CreateGame extends Activity {
         return adapter;
     }
 
-    private void setUsernameListView(String[] usernameList) {
+    private void setupUsernameListView(String[] usernameList) {
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_multiple_choice, usernameList);
         final ListView playerListView = (ListView) findViewById(R.id.listview_players);
@@ -293,12 +293,12 @@ public class CreateGame extends Activity {
     }
 
     private void setParseUserList() {
-        final ParseQuery<ParseUser> query = ParseUser.getQuery();
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.selectKeys(Arrays.asList("username"));
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> userList, ParseException e) {
                 if (e == null) {
-                    final String[] usernameList = new String[userList.size()];
+                    String[] usernameList = new String[userList.size()];
                     Log.d("User List", "Retrieved " + userList.size());
                     for (int i = 0; i < userList.size(); i++) {
                         Log.d("data", "Retrieved User: "
@@ -306,13 +306,13 @@ public class CreateGame extends Activity {
                         usernameList[i] = userList.get(i).getString("username");
                     }
                     playerList = userList;
-                    setUsernameListView(usernameList);
+                    setupUsernameListView(usernameList);
                 } else {
                     Log.w("error", "game retreival failure");
-                    /* setGameInfo(game); */
                 }
             }
         });
 
     }
+    
 }

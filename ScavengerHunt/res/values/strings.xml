@@ -52,17 +52,17 @@
     <string name="title_activity_main_menu">MainMenuActivity</string>
 
     <!-- Game Creation Screen -->
-    <string name="label_creategame">Create New Game</string>
-    <string name="label_startdatetime">Start Date/Time:</string>
+    <string name="label_createGame">Create New Game</string>
+    <string name="label_startDatetime">Start Date/Time:</string>
     <string name="hint_startDate">Start Date</string>
     <string name="hint_startTime">Start Time</string>
     <string name="hint_endDate">End Date</string>
     <string name="hint_endTime">End Time</string>
-    <string name="label_enddatetime">End Date/Time:</string>
-    <string name="label_gamename">Game Name:</string>
-    <string name="label_gameplayerlist">Player List:</string>
-    <string name="label_itemlist">Item List:</string>
-    <string name="hint_newgamename">Sample Game Name</string>
+    <string name="label_endDatetime">End Date/Time:</string>
+    <string name="label_gameName">Game Name:</string>
+    <string name="label_gamePlayerList">Player List:</string>
+    <string name="label_itemList">Item List:</string>
+    <string name="hint_newGameName">Sample Game Name</string>
     <string name="button_create">Create</string>
     <string name="button_reset">Reset</string>
     <string name="label_create">Create</string>
@@ -70,6 +70,16 @@
     <string name="button_addItem">Add Item</string>
 
     <!-- View Game Screen -->
-    <string name="title_activity_view_game">View Game</string>
+    <string name="title_viewGame">View Game</string>
+    <string name="button_joinGame">Join</string>
+    <string name="button_back">Back</string>
+    <string name="label_currentGamePlayers">Current Players</string>
+    <string name="button_edit">Edit</string>
+    <string name="title_activity_edit_game">EditGame</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- Edit Game Screen -->
+    <string name="button_save">Save</string>
+    <string name="title_activity_my_games_list">MyGamesList</string>
 
 </resources>
