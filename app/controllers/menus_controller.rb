@@ -16,7 +16,8 @@ class MenusController < ApplicationController
   def new
     @menu = Menu.new
     @menu.recipes.build
-    @recipes = Recipe.all
+   # @recipes = Recipe.all
+    @recipes = Recipe.search(params[:search])
     @list = List.last
   end
 
