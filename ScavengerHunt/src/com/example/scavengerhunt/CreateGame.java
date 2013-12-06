@@ -24,7 +24,9 @@ import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -32,6 +34,7 @@ import com.parse.SaveCallback;
 public class CreateGame extends Activity {
 
     private List<ParseUser> playerList = new ArrayList<ParseUser>();
+    private ParseUser parsePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,7 @@ public class CreateGame extends Activity {
                     Log.d("Game Creation", "Game Created!");
                     saveGamePlayers(getChosenPlayerList(), game);
                     saveGameItems(getItemList(), game);
+                    sendPushInvitation(game, currentUser);
                     showToast("Game Created!");
                     launchGameView(game.getObjectId());
                 } else {
@@ -112,6 +116,25 @@ public class CreateGame extends Activity {
                 }
             }
         });
+    }
+
+    private void sendPushInvitation(ParseObject game, ParseUser currentUser) {
+
+        for (ParseUser player : getChosenPlayerList()) {
+            ParseQuery<ParseInstallation> pushQuery = ParseInstallation
+                    .getQuery();
+            pushQuery.whereEqualTo("owner", player);
+
+            Log.d("push player", player.getString("username"));
+
+            // Send push notification to query
+            ParsePush push = new ParsePush();
+            push.setQuery(pushQuery);
+            push.setMessage("You've been invited to play in the game "
+                    + game.getString("name") + " by "
+                    + currentUser.getString("username") + ".");
+            push.sendInBackground();
+        }
     }
 
     private ArrayList<String> getItemList() {
@@ -161,11 +184,10 @@ public class CreateGame extends Activity {
 
     private void saveGamePlayers(List<ParseUser> chosenPlayerList,
             ParseObject game) {
-        for (int i = 0; i < chosenPlayerList.size(); i++) {
-            ParseUser user = chosenPlayerList.get(i);
-            Log.d("Player", user.toString());
+        for (ParseUser chosenPlayer : chosenPlayerList) {
+            Log.d("Player", chosenPlayer.toString());
             ParseObject gamePlayer = new ParseObject("GamePlayer");
-            gamePlayer.put("user", user);
+            gamePlayer.put("user", chosenPlayer);
             gamePlayer.put("game", game);
             gamePlayer.saveInBackground(new SaveCallback() {
                 public void done(ParseException e) {
@@ -314,5 +336,5 @@ public class CreateGame extends Activity {
         });
 
     }
-    
+
 }

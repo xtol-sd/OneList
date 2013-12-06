@@ -25,7 +25,9 @@ import android.widget.ListView;
 import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
+import com.parse.ParseInstallation;
 import com.parse.ParseObject;
+import com.parse.ParsePush;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
@@ -85,7 +87,7 @@ public class EditGame extends Activity {
         Bundle extras = getIntent().getExtras();
         final String gameId = extras.getString("gameId");
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Game");
-
+        final ParseUser currentUser = ParseUser.getCurrentUser();
         // Retrieve the object by id
         query.getInBackground(gameId, new GetCallback<ParseObject>() {
             public void done(final ParseObject game, ParseException e) {
@@ -99,6 +101,7 @@ public class EditGame extends Activity {
                                 Log.d("Game Update", "Game Updated!");
                                 updateGamePlayers(getChosenPlayerList(), game);
                                 updateGameItems(getItemList(), game);
+                                sendPushInvitation(game, currentUser);
                                  showToast("Game Updated!");
                                  launchGameView(game.getObjectId());
                             } else {
@@ -349,6 +352,25 @@ public class EditGame extends Activity {
         setParseUserList(players);
     }
 
+    private void sendPushInvitation(ParseObject game, ParseUser currentUser) {
+
+        for (ParseUser player : getChosenPlayerList()) {
+            ParseQuery<ParseInstallation> pushQuery = ParseInstallation
+                    .getQuery();
+            pushQuery.whereEqualTo("owner", player);
+
+            Log.d("push player", player.getString("username"));
+
+            // Send push notification to query
+            ParsePush push = new ParsePush();
+            push.setQuery(pushQuery);
+            push.setMessage("You've been invited to play in the game "
+                    + game.getString("name") + " by "
+                    + currentUser.getString("username") + ".");
+            push.sendInBackground();
+        }
+    }
+    
     private void setParseUserList(final ArrayList<ParseUser> gamePlayerList) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.selectKeys(Arrays.asList("username"));

@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.parse.ParseAnalytics;
+import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
 public class MainMenuActivity extends Activity {
@@ -26,6 +27,9 @@ public class MainMenuActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.mainmenu);
+        ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+        installation.put("owner", ParseUser.getCurrentUser());
+        installation.saveInBackground();
 		ParseAnalytics.trackAppOpened(getIntent());
 		setupButtonCallbacks();
 	}

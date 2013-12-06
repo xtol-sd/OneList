@@ -48,9 +48,9 @@ public class ScavengerHuntApplication extends Application {
 				// add some delay, to show the splash screen
 				wait(START_WAIT_TIME);
 				PushService.setDefaultPushCallback(this, MainMenuActivity.class);
-                ParseInstallation.getCurrentInstallation().saveInBackground();
+                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+                installation.saveInBackground();
                 Log.i(TAG, "Parse.initialize - done");
-
 			}
 		} catch (Exception ex) {
 			Log.e(TAG + "." + "Exception in initializeParse", ex.getMessage());
