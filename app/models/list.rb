@@ -12,10 +12,7 @@ class List < ActiveRecord::Base
 
   def selected_items= (ids)
 	  ids = ids.reject{ |i| i.empty? }
-    former_items = []
-    ids.each do |id|
-      former_items << ListItem.where(:list_id => self.id, :item_id => id)
-    end
+    former_items = ListItem.find_all_by_list_id(self.id)
     additional_items = make_selected_item_array(ids)
 
     self.list_items = [former_items + additional_items].flatten

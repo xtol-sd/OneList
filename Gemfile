@@ -13,6 +13,7 @@ gem 'devise'
 gem 'figaro'
 gem 'rolify'
 gem 'simple_form'
+gem 'nokogiri'
 gem 'cocoon'
 group :development do
   gem 'sqlite3'
