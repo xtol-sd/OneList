@@ -5,6 +5,7 @@
       <%= list.name %>
     </h4>
       <%= list.comment %>
+      Last Updated on <%= list.updated_at.strftime("%B %e, %Y") %>
 <% end %>
 
 <%= form_for @list do |f| %>
