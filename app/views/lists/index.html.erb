@@ -2,7 +2,7 @@
 
 <% @lists.each do | list | %>
     <h4>
-      <%= list.name %>
+      <%= link_to list.name, edit_list_path(list) %>
     </h4>
       <%= list.comment %>
       Last Updated on <%= list.updated_at.strftime("%B %e, %Y") %>
@@ -11,3 +11,4 @@
 <%= form_for @list do |f| %>
   <%= f.submit 'Make a New List', :class => "btn btn-primary" %>
 <% end %>
+
