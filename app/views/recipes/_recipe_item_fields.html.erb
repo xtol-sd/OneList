@@ -9,15 +9,28 @@
  
     <%= f.fields_for :item do |recipe_item_item| %>
       <%= f.label :name, "Ingredient:" %>
-      <%= recipe_item_item.text_field :name %>
+     
+      <%= recipe_item_item.text_field :name, data: {autocomplete_source: Item.order(:name).map(&:name)}, :class =>"item_name" %>
+   
     <% end %>
  
      <%= link_to_remove_association "remove ingredient", f %>
   </div>
 
 </li>
+<script>
+$(function() {
+    $(document).on("focus",".item_name", function() {
+        $('.item_name').autocomplete({
+            source: $('.item_name').data('autocomplete-source')
+        }); 
+    });
+})
+</script>
 
 <!--   <div id="employee_location_dropdown">
         <%#= f.label :location, 'Office' %>
         <%#= collection_select(:employee, :location_id, @locations, :id, :name, :prompt => true) %>
+        
+  
       </div>  -->

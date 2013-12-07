@@ -15,6 +15,7 @@ gem 'rolify'
 gem 'simple_form'
 gem 'nokogiri'
 gem 'cocoon'
+gem 'jquery-ui-rails'
 group :development do
   gem 'sqlite3'
   gem 'better_errors'
