@@ -11,6 +11,8 @@ task :items => :environment do
 	ingredients = recipe.xpath("*/ingredient")
 	if ingredients.count >= 1  	
 	   	title = recipe.xpath("title").text
+	   	category = recipe.xpath("category").text
+	   	yields = recipe.xpath("yields").text	   		   	
 		instructions = recipe.xpath("instructions").text
 		r = Recipe.create(:name => title, 
 			:comment => instructions)
