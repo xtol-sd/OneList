@@ -19,4 +19,13 @@ module ApplicationHelper
     link_to link_text, link_path
     end
   end
+
+  def new_or_edit_menu_path(menu)
+    if menu
+      edit_menu_path(menu)
+    else
+      new_menu_path  
+    end
+  end 
+
 end

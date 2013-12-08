@@ -21,9 +21,10 @@ class MenusController < ApplicationController
     @list = List.last
   end
 
-  def edit
+  def edit 
     @menu = Menu.find(params[:id])
-    @recipes = Recipe.all
+    @recipes = Recipe.search(params[:search])
+    @list = List.last
   end
 
   def create
@@ -32,24 +33,23 @@ class MenusController < ApplicationController
     #raise params.inspect
     if @menu.save
       flash[:notice] = "Step 1 complete: Recipes chosen!" 
-      @menu.add_items_to_list
+      @menu.update_list_items
       redirect_to add_items_path(@list)
     else
       render 'new'
     end
   end
 
-  # PATCH/PUT /menus/1
-  # PATCH/PUT /menus/1.json
   def update
-    respond_to do |format|
-      if @menu.update(menu_params)
-        format.html { redirect_to @menu, notice: 'Menu was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @menu.errors, status: :unprocessable_entity }
-      end
+    @menu = Menu.find(params[:id])
+    @list = List.last
+    
+    if @menu.update(menu_params)
+      flash[:notice] = 'Recipe selections were successfully updated.'
+      @menu.update_list_items 
+      redirect_to add_items_path(@list)
+    else
+      render 'edit' 
     end
   end
 

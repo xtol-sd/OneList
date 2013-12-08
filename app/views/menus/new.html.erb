@@ -5,8 +5,6 @@
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
-
-
 <%= form_tag new_menu_path, :method => 'get' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
@@ -14,27 +12,13 @@
   </p>
 <% end %>
 
-
-
 <%= link_to 'Add a New Recipe', new_recipe_path, class: "btn btn-primary" %> 
 
 <%= form_for @menu do |menu_form| %>
 <%= menu_form.hidden_field :list_id, value: @list.id %>
 <%= hidden_field_tag "menu[selected_recipes][]" %>
 
-  <div class="form-inputs">
-    <%= menu_form.fields_for :recipes do |recipe_form| %>
-
-      <% @recipes.each do |recipe| %>
-        </br> 
-        <%= check_box_tag "menu[selected_recipes][]", recipe.id %>
-        </br>
-        <%= link_to recipe.name, recipe_path(recipe.id) %>
-      <% end %>  
-    <% end %>
-  </br>
-  
-  </div>
+  <%= render 'form', :menu_form => menu_form %> </br>
  
   <div class="form-actions">
     <%= menu_form.button 'Continue', class: " btn btn-primary" %>

@@ -2,6 +2,7 @@ class ListsController < ApplicationController
   
   def add_items
     @list = List.last
+    @menu = Menu.last
     # @list.items.build
     @items = Item.all
   end
@@ -23,13 +24,15 @@ class ListsController < ApplicationController
        render 'index'
      end   
   end
-3
+
   def show
     @list = List.find(params[:id])
+    @menu = Menu.last
   end
   
   def edit
     @list = List.find(params[:id])
+    @menu = Menu.last
   end
 
   def update

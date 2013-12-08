@@ -1,32 +1,27 @@
-<h1>Edit menu</h1>
+<div class="nav nav-tabs">
+  <%= nav_link '1. Choose Recipes', edit_menu_path(@menu) %> 
+  <%= nav_link '2. Choose Items', add_items_path(@list) %> 
+  <%= nav_link '3. Review Shopping List', edit_list_path(@list) %>
+  <%= nav_link 'Your Shopping List', list_path(@list) %>
+</div>
+
+<%= form_tag edit_menu_path(@menu), :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>
+
+<%= link_to 'Add a New Recipe', new_recipe_path, class: "btn btn-primary" %> 
 
 <%= form_for @menu do |menu_form| %>
+<%= menu_form.hidden_field :list_id, value: @list.id %>
 <%= hidden_field_tag "menu[selected_recipes][]" %>
 
-  <div class="form-inputs">
-    <%= menu_form.label 'Menu name'%>
-    <%= menu_form.text_field :name %>
-    <%= menu_form.label :comment %>
-    <%= menu_form.text_field :comment %>
-    </br>
-
-	<%= menu_form.fields_for :recipe do |recipe_form| %>
-	  <% @recipes.each do |recipe| %>
-	    </br> 
-
-	    <%= check_box_tag "menu[selected_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
-
-	    </br>
-	    <%= recipe.name %>
-	  <% end %>  
-	<% end %>
-
-  </div>
-
+  <%= render 'form', :menu_form => menu_form %> </br>
+ 
   <div class="form-actions">
-    <%= menu_form.button :submit %>
+    <%= menu_form.button 'Continue', class: " btn btn-primary" %>
   </div>
 
 <% end %>
-
-
