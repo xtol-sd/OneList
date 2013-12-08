@@ -24,7 +24,7 @@ class MenusController < ApplicationController
   def edit 
     @menu = Menu.find(params[:id])
     @recipes = Recipe.search(params[:search])
-    @list = List.last
+    @list = List.find(@menu.list_id)
   end
 
   def create
@@ -42,7 +42,7 @@ class MenusController < ApplicationController
 
   def update
     @menu = Menu.find(params[:id])
-    @list = List.last
+    @list = List.find(@menu.list_id)
     
     if @menu.update(menu_params)
       flash[:notice] = 'Recipe selections were successfully updated.'
