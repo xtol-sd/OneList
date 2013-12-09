@@ -16,8 +16,9 @@ class MenusController < ApplicationController
   def new
     @menu = Menu.new
     @menu.recipes.build
-   # @recipes = Recipe.all
-    @recipes = Recipe.search(params[:search])
+    @categories = ["Breakfast", "Lunch", "Dinner", "Dessert"]
+    @recipes = Recipe.paginate :page => params[:page], :per_page => 20
+    @recipes = @recipes.search(params[:search])
     @list = List.last
   end
 

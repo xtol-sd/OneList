@@ -5,20 +5,25 @@
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
-<%= form_tag new_menu_path, :method => 'get' do %>
-  <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  </p>
-<% end %>
 
+
+<div>
 <%= link_to 'Add a New Recipe', new_recipe_path, class: "btn btn-primary" %> 
-
-  <div class="form-actions">
+<row>
+<div class="form-actions">
+  <div class="textarea">
+  <%= form_tag new_menu_path, :method => 'get' do %>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+  <% end %>
     <form>
-      <input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Hide Recipe Descriptions?
-    </form> 
-  </div> 
+        <input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Hide Recipe Descriptions?
+    </form>   
+  </div>
+
+
+</div>   
+</row> 
 
 <%= form_for @menu do |menu_form| %>
 <%= menu_form.hidden_field :list_id, value: @list.id %>
@@ -31,6 +36,8 @@
   </div>
 
 <% end %>
+
+</div>
 
 <script>
   var short_view = (localStorage.getItem("short_view")=="true");
