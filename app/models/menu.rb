@@ -29,7 +29,7 @@ belongs_to :list
         :recipe_id => recipe.id, :menu_id => self.id )} 
     end
   end
-    
+   
 end
 
 

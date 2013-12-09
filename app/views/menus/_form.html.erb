@@ -3,8 +3,12 @@
       <% @recipes.each do |recipe| %>
         </br> 
         <%= check_box_tag "menu[selected_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
-        </br>
+
         <%= link_to recipe.name, recipe_path(recipe.id) %>
+        </br>
+        <div class="instructions">
+        	<%= recipe.comment %>
+        </div>
       <% end %>  
 
   </br>
