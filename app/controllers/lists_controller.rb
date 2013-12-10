@@ -1,10 +1,17 @@
 class ListsController < ApplicationController
   
-  def add_items
+  # def add_items
+  #   @list = List.last
+  #   @menu = Menu.find_by_list_id(@list.id)
+  #   # @list.items.build
+  #   @items = Item.all
+  # end
+
+  def add_others
     @list = List.last
     @menu = Menu.find_by_list_id(@list.id)
     # @list.items.build
-    @items = Item.all
+    @others = Other.all
   end
 
   def index

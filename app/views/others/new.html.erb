@@ -1,0 +1,9 @@
+<h1>New Item</h1>
+<%= form_for @other do |other_form| %>
+  <%= other_form.label :name,'Item Name:' %>
+  <%= other_form.text_field :name %>
+  <%= other_form.label :comment, 'Notes on Item:'%>
+  <%= other_form.text_field :comment %> 
+ </br> 
+ <%= other_form.button :submit, :class => "btn btn-primary" %>
+<% end %>
