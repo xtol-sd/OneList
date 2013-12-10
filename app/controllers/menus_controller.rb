@@ -17,14 +17,16 @@ class MenusController < ApplicationController
     @menu = Menu.new
     @menu.recipes.build
     @categories = ["Breakfast", "Lunch", "Dinner", "Dessert"]
-    @recipes = Recipe.paginate :page => params[:page], :per_page => 20
+    @recipes = Recipe.paginate :page => params[:page], :per_page => 10
     @recipes = @recipes.search(params[:search])
     @list = List.last
   end
 
   def edit 
     @menu = Menu.find(params[:id])
-    @recipes = Recipe.search(params[:search])
+    @categories = ["Breakfast", "Lunch", "Dinner", "Dessert"]
+    @recipes = Recipe.paginate :page => params[:page], :per_page => 10
+    @recipes = @recipes.search(params[:search])
     @list = List.find(@menu.list_id)
   end
 

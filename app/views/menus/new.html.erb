@@ -5,39 +5,23 @@
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
+<input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Hide Recipe Descriptions? </input> | 
+<%= link_to 'Add a New Recipe', new_recipe_path %>
 
-
-<div>
-<%= link_to 'Add a New Recipe', new_recipe_path, class: "btn btn-primary" %> 
-<row>
-<div class="form-actions">
-  <div class="textarea">
+<div class="form-actions">  
   <%= form_tag new_menu_path, :method => 'get' do %>
-      <%= text_field_tag :search, params[:search] %>
-      <%= submit_tag "Search", :name => nil %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
   <% end %>
-    <form>
-        <input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Hide Recipe Descriptions?
-    </form>   
-  </div>
 
-
-</div>   
-</row> 
-
-<%= form_for @menu do |menu_form| %>
-<%= menu_form.hidden_field :list_id, value: @list.id %>
-<%= hidden_field_tag "menu[selected_recipes][]" %>
-
-  <%= render 'form', :menu_form => menu_form %> </br>
- 
-  <div class="form-actions">
+  <%= form_for @menu do |menu_form| %>
+    <%= menu_form.hidden_field :list_id, value: @list.id %>
+    <%= hidden_field_tag "menu[selected_recipes][]" %>
+    <%= render 'form', :menu_form => menu_form %> </br>
+    <p>Done choosing recipes?</p>
     <%= menu_form.button 'Continue', class: " btn btn-primary" %>
-  </div>
-
-<% end %>
-
-</div>
+  <% end %>
+</div>  
 
 <script>
   var short_view = (localStorage.getItem("short_view")=="true");
@@ -48,6 +32,4 @@
     localStorage.setItem("short_view","" + !short_view);
     $(".instructions").toggle(); 
   };
-</script>  
-
- 
+</script> 

@@ -4,7 +4,7 @@
         </br> 
         <%= check_box_tag "menu[selected_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
 
-        <%= link_to recipe.name, recipe_path(recipe.id) %>
+        <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
         </br>
         <div class="instructions">
         	<%= recipe.comment %>
@@ -12,7 +12,7 @@
       <% end %>  
 
   </br>
-  <%= will_paginate(@recipes) %>
+  <%= will_paginate @recipes%>
   </div>
 
 
