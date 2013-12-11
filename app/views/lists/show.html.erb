@@ -8,49 +8,39 @@
 <i>
   <%= @list.comment %>
 </i>
-
-<p>
-  <h3><%= @list.name %></h3>
-  <table class="table list_items">
-    <tr>
-      <th> List Item </th>
-      <th> Recipe/Item </th>
-    </tr>
-    <% @list.list_items.each do |list_item| %>
-      <tr>
-        <td>
-          <% if list_item.item_amount %>
-            <% if (list_item.item_amount % 1) == 0 %>
-              <%= list_item.item_amount.to_i %>
-            <% else %>
-                <%= list_item.item_amount.to_r.to_s %>
-            <% end %>
-
-            <%= list_item.unit %>
-          <% else %>
-            <%= list_item.item.default_amount %>
-            <%= list_item.item.default_unit %>
-          <% end %>    
-          <%= list_item.item.name %>
-          </br>
-        </td>
-        <td>
-          <% if list_item.recipe_id %>
-            <%= Recipe.find(list_item.recipe_id).name%> 
-          <% else %>
-            Selected Item
-          <% end %>
-        </td>  
-      </tr>
+<h3><%= @list.name %></h3>
+<h4>Recipe Ingredients</h4>
+<% @list_ingredients.each do |list_item| %>
+  <% if list_item.item_amount %>
+    <% if (list_item.item_amount % 1) == 0 %>
+      <%= list_item.item_amount.to_i %>
+    <% else %>
+        <%= list_item.item_amount.to_r.to_s %>
     <% end %>
-  </table>
-</p>    
 
-<p>
-  <h3>Other Items</h3>
-  <% @list.list_others.each do |list_other| %> 
-    <%= list_other.other.name %>
-    </br>
-  <% end %>
-</p>    
+    <%= list_item.unit %>
+  <% else %>
+    <%= list_item.item.default_amount %>
+    <%= list_item.item.default_unit %>
+  <% end %>    
+  <%= list_item.item.name %>
+  <em> (<%= Recipe.find(list_item.recipe_id).name%>) </em>
+  </br>
+<% end %>
+<h4> Other Items </h4>
+<% @list_other_items.each do |list_item| %>
+  <% if list_item.item_amount %>
+    <% if (list_item.item_amount % 1) == 0 %>
+      <%= list_item.item_amount.to_i %>
+    <% else %>
+        <%= list_item.item_amount.to_r.to_s %>
+    <% end %>
 
+    <%= list_item.unit %>
+  <% else %>
+    <%= list_item.item.default_amount %>
+    <%= list_item.item.default_unit %>
+  <% end %>    
+  <%= list_item.item.name %>
+  </br>
+<% end %>

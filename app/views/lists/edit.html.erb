@@ -15,34 +15,37 @@
     <%= list_form.text_field :comment %>
 
     <p> Review your shopping list. (Uncheck to remove items.) </p>
-
-    <%= list_form.fields_for :item do |item_form| %>
-      <% @list.list_items.each do |list_item| %> 
-        </br>
-        <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
-        <% if list_item.item_amount %>
-          <%= list_item.item_amount %>
-          <%= list_item.unit %>
-        <% else %>
-          <%= list_item.item.default_amount %>
-          <%= list_item.item.default_unit %>
-        <% end %>    
-        <%= list_item.item.name %>
-        </br>
-         
-      <% end %>  
-
-      <h4>Other Items</h4>
-      <%= list_form.fields_for :other do |other_form| %>   
-        <% @list.list_others.each do |list_other| %> 
-          </br>
-          <%= check_box_tag "list[list_other_ids][]", list_other.id, @list.list_others.compact.include?(list_other) %>
-          <%= list_other.other.name %>
-          </br>         
-        <% end %>       
+      <%= list_form.fields_for :item do |item_form| %>
+        <h4> Recipe Ingredients </h4>
+        <% @list_ingredients.each do |list_item| %> 
+          <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
+          <% if list_item.item_amount %>
+            <%= list_item.item_amount %>
+            <%= list_item.unit %>
+          <% else %>
+            <%= list_item.item.default_amount %>
+            <%= list_item.item.default_unit %>
+          <% end %>    
+          <%= list_item.item.name %>
+          <% if list_item.recipe_id %>
+            <em>(<%= Recipe.find(list_item.recipe_id).name%>)</em> 
+          <% end %>
+          <br />  
+        <% end %> 
+        <h4> Other Items </h4> 
+        <% @list_other_items.each do |list_item| %> 
+          <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
+          <% if list_item.item_amount %>
+            <%= list_item.item_amount %>
+            <%= list_item.unit %>
+          <% else %>
+            <%= list_item.item.default_amount %>
+            <%= list_item.item.default_unit %>
+          <% end %>    
+          <%= list_item.item.name %>
+          <br />  
+        <% end %>  
       <% end %>
-    <% end %>
-  </br> 
   </div> 
 
   <div class="form-actions">
