@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
     @list = List.last
     if @item.save
       flash[:notice] = "Item Created!"
-      redirect_to add_items_path(@list)
+      redirect_to add_others_path(@list)
     else
       render 'new'
     end

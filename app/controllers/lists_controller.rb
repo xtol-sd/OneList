@@ -68,13 +68,13 @@ class ListsController < ApplicationController
     def list_params
       params.require(:list).permit!
       # Update to correct permission once controller complete:
-      # params.require(:list).permit(:name, :comment, :list_item_ids, :selected_items)
+      # params.require(:list).permit(:name, :comment, :list_item_ids, :selected_others)
     end
 
 #from view lists add_items page (tab 2: choose items)
 # {"utf8"=>"✓", "_method"=>"patch", 
 # "authenticity_token"=>"Cc207N8Aq8DfXUzorjCTii0eGaPIB4uqdByu8A2xH4k=", 
-# "list"=>{"selected_items"=>["", "3", "4", "5"]}, 
+# "list"=>{"selected_others"=>["", "3", "4", "5"]}, 
 # "add_items_button"=>"", 
 # "action"=>"update", "controller"=>"lists", 
 # "id"=>"26"}

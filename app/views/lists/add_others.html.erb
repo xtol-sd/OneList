@@ -12,13 +12,17 @@
 <%= hidden_field_tag "list[selected_others][]" %>
   <div class="form-inputs">
     <%= list_form.fields_for :other do |other_form| %>
+    <% previous_category = "" %>
       <% @others.each do |other| %>
-        </br>
+        <% if other.category != previous_category %>
+          <h4><%= other.category %></h4>
+        <% end %>
         <%= check_box_tag "list[selected_others][]", other.id %>
-        </br>
         <%= other.default_amount %>
         <%= other.default_unit %>
         <%= other.name %>
+        </br></br>         
+        <% previous_category = other.category %>
       <% end %>  
     <% end %>
   </br>

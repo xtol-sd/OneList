@@ -37,7 +37,7 @@ class MenusController < ApplicationController
     if @menu.save
       flash[:notice] = "Step 1 complete: Recipes chosen!" 
       @menu.update_list_items
-      redirect_to add_items_path(@list)
+      redirect_to add_others_path(@list)
     else
       render 'new'
     end
@@ -50,7 +50,7 @@ class MenusController < ApplicationController
     if @menu.update(menu_params)
       flash[:notice] = 'Recipe selections were successfully updated.'
       @menu.update_list_items 
-      redirect_to add_items_path(@list)
+      redirect_to add_others_path(@list)
     else
       render 'edit' 
     end

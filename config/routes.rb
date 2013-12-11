@@ -1,6 +1,6 @@
 Onelist::Application.routes.draw do
 
-  get "lists/:id/add_items" => "lists#add_items", as: "add_items"
+  get "lists/:id/add_others" => "lists#add_others", as: "add_others"
   authenticated :user do
     root :to => "lists#index", as: :authenticated_root
   end
@@ -12,5 +12,5 @@ Onelist::Application.routes.draw do
   end
 
   resources :users
-  resources :recipes, :items, :lists, :menus
+  resources :recipes, :items, :lists, :menus, :others
 end
