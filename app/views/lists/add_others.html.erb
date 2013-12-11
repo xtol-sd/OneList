@@ -6,7 +6,8 @@
 </div>
 
 <%= link_to 'Add a New Item', new_other_path, class: "btn btn-primary" %>
-</br>
+</br></br>
+<input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Collapse Categories? </input>
 
 <%= form_for @list do |list_form| %>
 <%= hidden_field_tag "list[selected_others][]" %>
@@ -17,11 +18,13 @@
         <% if other.category != previous_category %>
           <h4><%= other.category %></h4>
         <% end %>
-        <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
-        <%= other.default_amount %>
-        <%= other.default_unit %>
-        <%= other.name %>
-        </br></br>         
+        <div class="subcategory">
+          <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
+          <%= other.default_amount %>
+          <%= other.default_unit %>
+          <%= other.name %>
+          </br></br>
+        </div>           
         <% previous_category = other.category %>
       <% end %>  
     <% end %>
@@ -36,4 +39,13 @@
 
 <% end %>
 
- 
+<script>
+  var short_view = (localStorage.getItem("short_view")=="true");
+  $(".visibility_checkbox").prop('checked', short_view);
+  $(".subcategory").toggle(!short_view);
+
+  function toggle_visibility() {
+    localStorage.setItem("short_view","" + !short_view);
+    $(".subcategory").toggle(); 
+  };
+</script> 
