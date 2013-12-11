@@ -1,17 +1,17 @@
-class ItemsController < ApplicationController
+class OthersController < ApplicationController
   def index
-    @items = Item.all
+    @others = Other.all
     @list = List.last
   end
 
   def new
-    @item = Item.new
+    @other = Other.new
   end
 
   def create
-    @item = Item.create(item_params)
+    @other = Other.create(other_params)
     @list = List.last
-    if @item.save
+    if @other.save
       flash[:notice] = "Item Created!"
       redirect_to add_others_path(@list)
     else
@@ -29,10 +29,9 @@ class ItemsController < ApplicationController
   end
 
   private
-    def item_params
-      params.require(:item).permit!
-      # params.require(:item).permit(:name, :comment, :selected)
+    def other_params
+      params.require(:other).permit!
+      # params.require(:other).permit(:name, :comment, :selected)
     end
     
-
 end
