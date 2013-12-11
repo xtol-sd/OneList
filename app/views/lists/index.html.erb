@@ -1,13 +1,15 @@
 <h1>Your Lists</h1>
-
+<ol>
 <% @lists.each do | list | %>
-    <h4>
-      <%= link_to list.name, edit_list_path(list) %>
-    </h4>
-      <%= list.comment %>
-      Last Updated on <%= list.updated_at.strftime("%B %e, %Y") %>
+      <h4>
+        <li>
+        <%= link_to list.name, edit_list_path(list) %>
+      </h4>
+      <strong> Notes:</strong> <%= list.comment %>
+      <br />Last Updated on <%= list.updated_at.strftime("%B %e, %Y") %>
+    </li>  
 <% end %>
-
+<hr>
 <%= form_for @list do |f| %>
   <%= f.submit 'Make a New List', :class => "btn btn-primary" %>
 <% end %>
