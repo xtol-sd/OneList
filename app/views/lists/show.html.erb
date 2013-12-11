@@ -9,6 +9,7 @@
   <%= @list.comment %>
 </i>
 <h3><%= @list.name %></h3>
+
 <h4>Recipe Ingredients</h4>
 <% @list_ingredients.each do |list_item| %>
   <% if list_item.item_amount %>
@@ -27,20 +28,9 @@
   <em> (<%= Recipe.find(list_item.recipe_id).name%>) </em>
   </br>
 <% end %>
-<h4> Other Items </h4>
-<% @list_other_items.each do |list_item| %>
-  <% if list_item.item_amount %>
-    <% if (list_item.item_amount % 1) == 0 %>
-      <%= list_item.item_amount.to_i %>
-    <% else %>
-        <%= list_item.item_amount.to_r.to_s %>
-    <% end %>
 
-    <%= list_item.unit %>
-  <% else %>
-    <%= list_item.item.default_amount %>
-    <%= list_item.item.default_unit %>
-  <% end %>    
-  <%= list_item.item.name %>
+<h4> Other Items </h4>
+<% @list_other_items.each do |list_other| %>
+  <%= list_other.other.name %>
   </br>
 <% end %>

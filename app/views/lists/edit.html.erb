@@ -33,16 +33,9 @@
           <br />  
         <% end %> 
         <h4> Other Items </h4> 
-        <% @list_other_items.each do |list_item| %> 
-          <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
-          <% if list_item.item_amount %>
-            <%= list_item.item_amount %>
-            <%= list_item.unit %>
-          <% else %>
-            <%= list_item.item.default_amount %>
-            <%= list_item.item.default_unit %>
-          <% end %>    
-          <%= list_item.item.name %>
+        <% @list_other_items.each do |list_other| %> 
+          <%= check_box_tag "list[list_other_ids][]", list_other.id, @list.list_others.compact.include?(list_other) %>   
+          <%= list_other.other.name %>
           <br />  
         <% end %>  
       <% end %>

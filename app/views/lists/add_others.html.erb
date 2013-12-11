@@ -17,7 +17,7 @@
         <% if other.category != previous_category %>
           <h4><%= other.category %></h4>
         <% end %>
-        <%= check_box_tag "list[selected_others][]", other.id %>
+        <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
         <%= other.default_amount %>
         <%= other.default_unit %>
         <%= other.name %>

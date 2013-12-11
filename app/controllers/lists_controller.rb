@@ -30,15 +30,15 @@ class ListsController < ApplicationController
 
   def show
     @list = List.find(params[:id])
-    @list_ingredients = @list.list_items.where.not(recipe_id: nil).order(item_id: :asc)
-    @list_other_items = @list.list_items.where(recipe_id: nil).order(item_id: :asc)
+    @list_ingredients = @list.list_items.order(item_id: :asc)
+    @list_other_items = @list.list_others.order(other_id: :asc)
     @menu = Menu.find_by_list_id(@list.id)
   end
   
   def edit
     @list = List.find(params[:id])
-    @list_ingredients = @list.list_items.where.not(recipe_id: nil).order(item_id: :asc)
-    @list_other_items = @list.list_items.where(recipe_id: nil).order(item_id: :asc)
+    @list_ingredients = @list.list_items.order(item_id: :asc)
+    @list_other_items = @list.list_others.order(other_id: :asc)
     @menu = Menu.find_by_list_id(@list.id)
   end
 
