@@ -15,22 +15,36 @@
     <%= list_form.text_field :comment %>
 
     <p> Review your shopping list. (Uncheck to remove items.) </p>
-    <%= list_form.fields_for :item do |item_form| %>
-      <% @list.list_items.each do |list_item| %> 
-        </br>
-        <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
-        <% if list_item.item_amount %>
-          <%= list_item.item_amount %>
-          <%= list_item.unit %>
-        <% else %>
-          <%= list_item.item.default_amount %>
-          <%= list_item.item.default_unit %>
-        <% end %>    
-        <%= list_item.item.name %>
-        </br>
-         
-      <% end %>  
-    <% end %>
+    <table class="table list_items table-hover">
+      <tr>
+        <th> List Item </th>
+        <th> Recipe/Item </th>
+      </tr>
+      <%= list_form.fields_for :item do |item_form| %>
+        <% @list.list_items.each do |list_item| %> 
+          <tr>
+            <td>
+              <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
+              <% if list_item.item_amount %>
+                <%= list_item.item_amount %>
+                <%= list_item.unit %>
+              <% else %>
+                <%= list_item.item.default_amount %>
+                <%= list_item.item.default_unit %>
+              <% end %>    
+              <%= list_item.item.name %>
+            <td>
+              <% if list_item.recipe_id %>
+                <%= Recipe.find(list_item.recipe_id).name%> 
+              <% else %>
+                Selected Item
+              <% end %>  
+              
+            </td>
+          </tr>
+        <% end %>  
+      <% end %>
+    </table>
   </br> 
   </div> 
 

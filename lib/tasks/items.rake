@@ -3,7 +3,7 @@ require 'nokogiri'
 require 'rubygems'
 task :items => :environment do
 
-  doc = Nokogiri::XML(File.open("/home/kevin/rails_projects/OneList/recipes.xml")) 
+  doc = Nokogiri::XML(File.open("recipes.xml")) 
 
   recipes = doc.xpath("//recipe")
 @itemnames = doc.xpath("//key")
