@@ -1,20 +1,17 @@
 class MenusController < ApplicationController
   before_action :set_menu, only: [:show, :edit, :update, :destroy]
 
-  # GET /menus
-  # GET /menus.json
   def index
     @menus = Menu.all
   end
 
-  # GET /menus/1
-  # GET /menus/1.json
   def show
+    @menu = Menu.find(params[:id])
+    @list = List.find(@menu.list_id)
   end
 
-  # GET /menus/new
   def new
-    @menu = Menu.new
+    @menu = Menu.create
     @menu.recipes.build
     @categories = ["Breakfast", "Lunch", "Dinner", "Dessert"]
     @recipes = Recipe.paginate :page => params[:page], :per_page => 10
@@ -36,7 +33,7 @@ class MenusController < ApplicationController
     #raise params.inspect
     if @menu.save
       flash[:notice] = "Step 1 complete: Recipes chosen!" 
-      @menu.update_list_items
+      @menu.add_list_items
       redirect_to add_items_path(@list)
     else
       render 'new'
@@ -46,14 +43,16 @@ class MenusController < ApplicationController
   def update
     @menu = Menu.find(params[:id])
     @list = List.find(@menu.list_id)
-    
-    if @menu.update(menu_params)
+    # raise params.inspect
+    if params[:final_menu_button]
+      @menu.update(menu_params)
       flash[:notice] = 'Recipe selections were successfully updated.'
-      @menu.update_list_items 
+      @menu.add_list_items 
       redirect_to add_items_path(@list)
     else
-      render 'edit' 
-    end
+     @menu.update(menu_params)
+     @menu.add_list_items 
+    end 
   end
 
   def destroy

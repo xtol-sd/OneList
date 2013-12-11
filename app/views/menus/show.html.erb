@@ -1,24 +1,28 @@
-<p>
-  <strong>List:</strong>
-  <%= @menu.list_id %>
-</p>
+<%= form_for @menu, :url => 
+  {:controller => "menus", :action => "update"} do |menu_form| %>
+<%= hidden_field_tag "menu[update_recipes][]" %>
+  
+  <div class="form-inputs">
+<!--     <%#= list_form.label 'Name your menu:' %>
+    <%#= list_form.text_field :name %>
+    <%#= list_form.label 'Any notes about this menu?' %>
+    <%#= list_form.text_field :comment %>
+ -->
+    <p> Review your chosen recipes. (Uncheck to remove recipes.) </p>
+    <%= menu_form.fields_for :recipe do |recipe_form| %>
+      <% @menu.recipes.each do |recipe| %> 
+        </br>
+        <%= check_box_tag "menu[update_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
+        <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
+        </br>
+         
+      <% end %>  
+    <% end %>
+    </br> 
+  </div> 
 
-<p>
-  <strong>Name:</strong>
-  <%= @menu.name %>
-</p>
+  <div class="form-actions">
+    <%= menu_form.button 'Continue', :name => "final_menu_button", class: " btn btn-primary" %>
+  </div>  
+<% end %> 
 
-<p>
-  <strong>Comment:</strong>
-  <%= @menu.comment %>
-</p>
-
-<p>
-  <strong>Recipes:</strong></br>
-  <% @menu.recipes.each do |recipe| %>
-    <%= recipe.name %></br>
-  <% end %>  
-</p> 
-
-<%= link_to 'Edit', edit_menu_path(@menu) %> |
-<%= link_to 'Back', new_menu_path %>

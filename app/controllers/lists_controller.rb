@@ -1,7 +1,7 @@
 class ListsController < ApplicationController
   
   def add_items
-    @list = List.last
+    @list = List.find(params[:id])
     @menu = Menu.find_by_list_id(@list.id)
     # @list.items.build
     @items = Item.all
@@ -19,7 +19,8 @@ class ListsController < ApplicationController
   def create
     @list = List.new 
      if @list.save
-       redirect_to new_menu_path
+       @menu = Menu.create(:list_id => @list.id)
+       redirect_to edit_menu_path(@menu)
      else
        render 'index'
      end   

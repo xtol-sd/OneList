@@ -8,19 +8,10 @@
 <input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Hide Recipe Descriptions? </input> | 
 <%= link_to 'Add a New Recipe', new_recipe_path %>
 
-<div class="form-actions">  
-  <%= form_tag new_menu_path, :method => 'get' do %>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-  <% end %>
+<div id="choose_recipes">
+  
+  <%= render 'choose_recipes'%>
 
-  <%= form_for @menu do |menu_form| %>
-    <%= menu_form.hidden_field :list_id, value: @list.id %>
-    <%= hidden_field_tag "menu[selected_recipes][]" %>
-    <%= render 'form', :menu_form => menu_form %> </br>
-    <p>Done choosing recipes?</p>
-    <%= menu_form.button 'Continue', class: " btn btn-primary" %>
-  <% end %>
 </div>  
 
 <script>

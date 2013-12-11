@@ -5,19 +5,33 @@ accepts_nested_attributes_for :recipes
 
 belongs_to :list
 
-  def selected_recipe_ids
+  def add_recipe_ids
 	  self.selected_recipes.map {|recipe| recipe.id}
   end
 
-  def selected_recipes= (ids)
-	  self.join_menu_recipes = make_selected_recipe_array(ids)
+  def add_recipes= (ids)
+	  self.join_menu_recipes = all_recipes_array(ids)
   end
 
-  def make_selected_recipe_array(ids)
-	  ids.map {|recipe_id| JoinMenuRecipe.create(:recipe_id => recipe_id)}  
+  def all_recipes_array(ids)
+	  previous_recipes = JoinMenuRecipe.where(:menu_id => self.id)
+    new_recipes = ids.map {|recipe_id| JoinMenuRecipe.create(:recipe_id => recipe_id)}  
+    all_recipes = previous_recipes + new_recipes
   end
 
-  def update_list_items
+  def update_recipe_ids
+    self.selected_recipes.map {|recipe| recipe.id}
+  end
+
+  def update_recipes= (ids)
+    self.join_menu_recipes = updated_recipe_array(ids)
+  end
+
+  def updated_recipe_array(ids)
+    ids.map {|recipe_id| JoinMenuRecipe.create(:recipe_id => recipe_id)}  
+  end
+
+  def add_list_items
     #first clear any list items previously associated with this menu,
     #in case of update
     ListItem.where(:menu_id => self.id).destroy_all
