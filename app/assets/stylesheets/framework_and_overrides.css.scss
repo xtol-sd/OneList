@@ -45,9 +45,11 @@ form {
   .brand {
   padding-top: 15px;
   padding-bottom: 15px;
-  color: black;
-  font-size: 2em;
   font-family: Ubuntu;
+  color: darkgreen;
+  font-size: 2.5em;
+  font-weight: bold;
+  font-style: italic;
   }
   .brand:hover{
     background: transparent;
@@ -173,3 +175,23 @@ div {
 .list_items{
   width:60%;
 }
+
+ol {
+  font-weight: bold;
+
+    .title {
+    font-weight: bold;
+    color: blue;
+    font-size: 1.3em;
+    }
+    .note {
+      font-weight: normal;
+    }
+    .footnote {
+    font-weight: normal;    
+    font-style: italic;
+    font-size: .7em;
+    }
+
+}
+

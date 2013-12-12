@@ -1,13 +1,28 @@
-<h1>Your Lists</h1>
+<h3>Your Lists</h3>
 <ol>
 <% @lists.each do | list | %>
-      <h4>
-        <li>
-        <%= link_to list.name, edit_list_path(list) %>
-      </h4>
-      <strong> Notes:</strong> <%= list.comment %>
-      <br />Last Updated on <%= list.updated_at.strftime("%B %e, %Y") %>
+      <li >
+
+	    <span class="title">
+	        <%= link_to list.name, edit_list_path(list) %>    
+	    </span>
+
+	    <span class="note">    
+	    <%= link_to 'delete', list_path(list.id), :confirm => 'Are you sure?', method: :delete %> 
+	    </span>
+
+      <% if list.comment != nil %><br />
+	     <span class="note"> 
+	     	Notes: <%= list.comment %>
+	     </span>
+      <% end %>
+
+      <br />
+      <span class="footnote">
+      	Last Updated <%= list.updated_at.strftime("%b %e, %Y") %>
+      </span>
     </li>  
+    <br />
 <% end %>
 <hr>
 <%= form_for @list do |f| %>

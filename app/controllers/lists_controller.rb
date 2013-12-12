@@ -56,11 +56,9 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    @list = List.find(params[:id])
     @list.destroy
-    respond_to do |format|
-      format.html { redirect_to lists_url }
-      format.json { head :no_content }
-    end
+    redirect_to :action => 'index'
   end
 
   private
