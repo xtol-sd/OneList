@@ -1,13 +1,31 @@
 <h1><%= @recipe.name %></h1>
 
 <p><%= @recipe.comment %></p>
+
+<% if @recipe.yields %>
+  <p><em>Recipe makes <%= @recipe.yields %></em></p>
+<% end %> 
+
+<div>
+	<ul>
+		<% @recipe.recipe_items.each do |ingredient| %>
+			<li>
+				<% if ingredient.item_amount == 0.33 %>
+					<%= item_amount = "1/3" %>
+				<% elsif ingredient.item_amount == 1.33 %>
+					<%= item_amount = "1 1/3" %>
+				<% elsif ingredient.item_amount == 0.67 %>
+					<%= item_amount = "2/3" %>
+				<% elsif ingredient.item_amount == 1.67 %>
+					<%= item_amount = "1 2/3" %>
+				<% else %>	
+				  <%= Math::Fraction.new(ingredient.item_amount) %>
+			  <% end %>
+			  <%= ingredient.unit %> 
+			  <%= ingredient.item.name %>
+			</li>
+		<% end %>  
+	</ul>
+</div>
 </br>
-<% @recipe.recipe_items.each do |ingredient| %>
-  <p><%= ingredient.item_amount %>
-  <%= ingredient.unit %>
-  <%= ingredient.item.name %></p>
-  </br>
-<% end %>  
-
-<%= link_to 'Choose Recipes', new_menu_path %> 
-
+<p><%= link_to 'Return to Choose Recipes', new_menu_path %> </p>
