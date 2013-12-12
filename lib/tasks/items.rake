@@ -37,7 +37,7 @@ end
 		  amount = ingredient.xpath("amount").text
 		  unit = ingredient.xpath("unit").text
 		  RecipeItem.create(:recipe_id => r.id, 
-		  	:item_id => item_id, :item_amount => amount)
+		  	:item_id => item_id, :item_amount => amount, :unit => unit)
 		end
 	end
 
