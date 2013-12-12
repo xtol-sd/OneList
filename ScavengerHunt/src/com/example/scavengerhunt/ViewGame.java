@@ -1,6 +1,11 @@
 package com.example.scavengerhunt;
 
+import java.util.Arrays;
 import java.util.List;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -80,14 +85,12 @@ public class ViewGame extends Activity {
     }
 
     private void setPlayerList(ParseObject game) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GamePlayer");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GamePlayers");
         query.whereEqualTo("game", game);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> playerList, ParseException e) {
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject gamePlayers, ParseException e) {
                 if (e == null) {
-                    Log.d("User List", "Retrieved " + playerList.size()
-                            + " player(s)");
-                    getUsernameList(playerList);
+                    getUsernameList(gamePlayers);
                 } else {
                     Log.w("Parse Error", "game retreival failure");
                 }
@@ -95,39 +98,65 @@ public class ViewGame extends Activity {
         });
     }
 
-    private void getUsernameList(List<ParseObject> playerList) {
-        for (int i = 0; i < playerList.size(); i++) {
-            playerList.get(i).getParseObject("user")
-                    .fetchIfNeededInBackground(new GetCallback<ParseUser>() {
-                        public void done(ParseUser user, ParseException e) {
-                            if (e == null) {
-                                Log.d("Parse Username", "Retrieved User "
-                                        + user.getString("username"));
-                                addToListView(user.getString("username"),
-                                        getPlayerAdapter());
-                            } else {
-                                Log.w("Parse Error", "game retreival failure");
-
-                            }
-                        }
-                    });
+    private void getUsernameList(ParseObject gamePlayers) {
+        String[] gamePlayerIds = new String[gamePlayers.getJSONArray("users")
+                .length()];
+        JSONArray userInfo =  gamePlayers.getJSONArray("users");
+        for (int i = 0; i < userInfo.length(); i++) {
+            JSONObject user = null;
+            try {
+                user = userInfo.getJSONObject(i);
+            } catch (JSONException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            String userId = null;
+            try {
+                userId = user.getString("objectId");
+            } catch (JSONException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            gamePlayerIds[i] = userId;
         }
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereContainedIn("objectId",
+                Arrays.asList(gamePlayerIds));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> users, ParseException e) {
+                if (e == null) {
+                    for (ParseUser user : users) {
+                        Log.d("Parse Username",
+                                "Retrieved User " + user.getString("username"));
+                        addToListView(user.getString("username"),
+                                getPlayerAdapter());
+                    }
+                } else {
+                    Log.w("Parse Error", "player username retreival failure");
+                }
+            }
+        });
     }
 
     private void setItemList(ParseObject game) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameItem");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameItems");
         query.whereEqualTo("game", game);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> itemList, ParseException e) {
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject gameItems, ParseException e) {
                 if (e == null) {
-                    Log.d("Parse Item", "Retrieved " + itemList.size()
-                            + " item(s)");
-                    for (int i = 0; i < itemList.size(); i++) {
-                        addToListView(itemList.get(i).getString("name"),
-                                getItemAdapter());
+                    for (int i = 0; i < gameItems.getJSONArray("items")
+                            .length(); i++) {
+                        try {
+                            addToListView(gameItems.getJSONArray("items")
+                                    .getString(i), getItemAdapter());
+                        } catch (JSONException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
                     }
                 } else {
-                    Log.w("Parse Error", "game retreival failure");
+                    Log.w("Parse Error", "game items retreival failure");
                 }
             }
         });

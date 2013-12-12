@@ -34,7 +34,6 @@ import com.parse.SaveCallback;
 public class CreateGame extends Activity {
 
     private List<ParseUser> playerList = new ArrayList<ParseUser>();
-    private ParseUser parsePlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,10 +123,7 @@ public class CreateGame extends Activity {
             ParseQuery<ParseInstallation> pushQuery = ParseInstallation
                     .getQuery();
             pushQuery.whereEqualTo("owner", player);
-
-            Log.d("push player", player.getString("username"));
-
-            // Send push notification to query
+            
             ParsePush push = new ParsePush();
             push.setQuery(pushQuery);
             push.setMessage("You've been invited to play in the game "
@@ -148,23 +144,20 @@ public class CreateGame extends Activity {
     }
 
     private void saveGameItems(ArrayList<String> itemList, ParseObject game) {
-        for (int i = 0; i < itemList.size(); i++) {
-            final String item = itemList.get(i);
-            Log.d("Item", item);
-            final ParseObject gameItem = new ParseObject("GameItem");
-            gameItem.put("name", item);
-            gameItem.put("game", game);
-            gameItem.saveInBackground(new SaveCallback() {
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("Save", "Item Saved");
-                    } else {
-                        Log.d("Save", "Error saving gameItem: " + e);
-                    }
+        final ParseObject gameItem = new ParseObject("GameItems");
+        gameItem.put("items", itemList);
+        gameItem.put("game", game);
+        gameItem.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("Save", "Item Saved");
+                } else {
+                    Log.d("Save", "Error saving gameItem: " + e);
                 }
+            }
 
-            });
-        }
+        });
+
     }
 
     private List<ParseUser> getChosenPlayerList() {
@@ -184,22 +177,20 @@ public class CreateGame extends Activity {
 
     private void saveGamePlayers(List<ParseUser> chosenPlayerList,
             ParseObject game) {
-        for (ParseUser chosenPlayer : chosenPlayerList) {
-            Log.d("Player", chosenPlayer.toString());
-            ParseObject gamePlayer = new ParseObject("GamePlayer");
-            gamePlayer.put("user", chosenPlayer);
-            gamePlayer.put("game", game);
-            gamePlayer.saveInBackground(new SaveCallback() {
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("Save", "gamePlayer data saved!");
-                    } else {
-                        Log.d("Save", "Error saving gamePlayer: " + e);
-                    }
+        ParseObject gamePlayer = new ParseObject("GamePlayers");
+        gamePlayer.put("users", chosenPlayerList);
+        gamePlayer.put("game", game);
+        gamePlayer.saveInBackground(new SaveCallback() {
+            public void done(ParseException e) {
+                if (e == null) {
+                    Log.d("Save", "gamePlayer data saved!");
+                } else {
+                    Log.d("Save", "Error saving gamePlayer: " + e);
                 }
+            }
 
-            });
-        }
+        });
+
     }
 
     private void showToast(String message) {

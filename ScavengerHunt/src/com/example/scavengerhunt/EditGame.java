@@ -7,6 +7,10 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Intent;
@@ -34,8 +38,6 @@ import com.parse.SaveCallback;
 
 public class EditGame extends Activity {
 
-    private List<ParseObject> gamePlayers = new ArrayList<ParseObject>();
-    private List<ParseObject> gameItems = new ArrayList<ParseObject>();
     private List<ParseUser> playerList = new ArrayList<ParseUser>();
 
     @Override
@@ -48,7 +50,6 @@ public class EditGame extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.edit_game, menu);
         return true;
     }
@@ -88,7 +89,6 @@ public class EditGame extends Activity {
         final String gameId = extras.getString("gameId");
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Game");
         final ParseUser currentUser = ParseUser.getCurrentUser();
-        // Retrieve the object by id
         query.getInBackground(gameId, new GetCallback<ParseObject>() {
             public void done(final ParseObject game, ParseException e) {
                 if (e == null) {
@@ -99,11 +99,11 @@ public class EditGame extends Activity {
                         public void done(ParseException e) {
                             if (e == null) {
                                 Log.d("Game Update", "Game Updated!");
-                                updateGamePlayers(getChosenPlayerList(), game);
-                                updateGameItems(getItemList(), game);
+                                updateGamePlayers(game);
+                                updateGameItems(game);
                                 sendPushInvitation(game, currentUser);
-                                 showToast("Game Updated!");
-                                 launchGameView(game.getObjectId());
+                                showToast("Game Updated!");
+                                launchGameView(game.getObjectId());
                             } else {
                                 Log.d("Game Creation", "Error creating game: "
                                         + e);
@@ -121,32 +121,28 @@ public class EditGame extends Activity {
         Log.d("GameId", "game id is " + gameId);
         startActivity(intent);
     }
-    
-    private void clearParseObjects(List<ParseObject> parseList) {
-        for (ParseObject item : parseList) {
-            item.deleteInBackground();
-        }
-    }
 
-    private void updateGameItems(ArrayList<String> itemList, ParseObject game) {
-        clearParseObjects(gameItems);
-        for (int i = 0; i < itemList.size(); i++) {
-            final String item = itemList.get(i);
-            Log.d("Item", item);
-            final ParseObject gameItem = new ParseObject("GameItem");
-            gameItem.put("name", item);
-            gameItem.put("game", game);
-            gameItem.saveInBackground(new SaveCallback() {
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("Save", "Item Saved");
-                    } else {
-                        Log.d("Save", "Error saving gameItem: " + e);
-                    }
+    private void updateGameItems(ParseObject game) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameItems");
+        query.whereEqualTo("game", game);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject gameItems, ParseException e) {
+                if (e == null) {
+                    gameItems.put("items", getItemList());
+                    gameItems.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Log.d("Save", "Items Saved");
+                            } else {
+                                Log.d("Save", "Error saving gameItem: " + e);
+                            }
+                        }
+
+                    });
                 }
+            }
 
-            });
-        }
+        });
     }
 
     private ArrayList<String> getItemList() {
@@ -159,26 +155,28 @@ public class EditGame extends Activity {
 
     }
 
-    private void updateGamePlayers(List<ParseUser> chosenPlayerList,
-            ParseObject game) {
-        clearParseObjects(gamePlayers);
-        for (int i = 0; i < chosenPlayerList.size(); i++) {
-            ParseUser user = chosenPlayerList.get(i);
-            Log.d("Player", user.toString());
-            ParseObject gamePlayer = new ParseObject("GamePlayer");
-            gamePlayer.put("user", user);
-            gamePlayer.put("game", game);
-            gamePlayer.saveInBackground(new SaveCallback() {
-                public void done(ParseException e) {
-                    if (e == null) {
-                        Log.d("Save", "gamePlayer data saved!");
-                    } else {
-                        Log.d("Save", "Error saving gamePlayer: " + e);
-                    }
-                }
+    private void updateGamePlayers(ParseObject game) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GamePlayers");
+        query.whereEqualTo("game", game);
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject gamePlayers, ParseException e) {
+                if (e == null) {
+                    gamePlayers.put("users", getChosenPlayerList());
+                    gamePlayers.saveInBackground(new SaveCallback() {
+                        public void done(ParseException e) {
+                            if (e == null) {
+                                Log.d("Save", "gamePlayer data saved!");
+                            } else {
+                                Log.d("Save", "Error saving gamePlayer: " + e);
+                            }
+                        }
 
-            });
-        }
+                    });
+                }
+            }
+
+        });
+
     }
 
     private void showToast(String message) {
@@ -316,15 +314,13 @@ public class EditGame extends Activity {
     }
 
     private void getGamePlayers(ParseObject game) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GamePlayer");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GamePlayers");
         query.whereEqualTo("game", game);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> playerList, ParseException e) {
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject players, ParseException e) {
                 if (e == null) {
-                    Log.d("User List", "Retrieved " + playerList.size()
-                            + " player(s)");
-                    getPlayers(playerList);
-                    gamePlayers = playerList;
+                    Log.d("User List", "Retrieved " + players.toString());
+                    getPlayers(players);
                 } else {
                     Log.w("Parse Error", "game retreival failure");
                 }
@@ -332,23 +328,45 @@ public class EditGame extends Activity {
         });
     }
 
-    private void getPlayers(List<ParseObject> playerList) {
-        final ArrayList<ParseUser> players = new ArrayList<ParseUser>();
-        for (int i = 0; i < playerList.size(); i++) {
-            playerList.get(i).getParseObject("user")
-                    .fetchIfNeededInBackground(new GetCallback<ParseUser>() {
-                        public void done(ParseUser user, ParseException e) {
-                            if (e == null) {
-                                Log.d("Parse User",
-                                        "Retrieved User "
-                                                + user.getString("username"));
-                                players.add(user);
-                            } else {
-                                Log.w("Parse Error", "game retreival failure");
-                            }
-                        }
-                    });
+    private void getPlayers(ParseObject gamePlayers) {
+        String[] gamePlayerIds = new String[gamePlayers.getJSONArray("users")
+                .length()];
+        JSONArray userInfo = gamePlayers.getJSONArray("users");
+        for (int i = 0; i < userInfo.length(); i++) {
+            JSONObject user = null;
+            try {
+                user = userInfo.getJSONObject(i);
+            } catch (JSONException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            String userId = null;
+            try {
+                userId = user.getString("objectId");
+            } catch (JSONException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            gamePlayerIds[i] = userId;
         }
+
+        final ArrayList<ParseUser> players = new ArrayList<ParseUser>();
+
+        ParseQuery<ParseUser> query = ParseUser.getQuery();
+        query.whereContainedIn("objectId", Arrays.asList(gamePlayerIds));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> users, ParseException e) {
+                if (e == null) {
+                    for (ParseUser user : users) {
+                        Log.d("Parse Username",
+                                "Retrieved User " + user.getString("username"));
+                        players.add(user);
+                    }
+                } else {
+                    Log.w("Parse Error", "player username retreival failure");
+                }
+            }
+        });
         setParseUserList(players);
     }
 
@@ -370,7 +388,7 @@ public class EditGame extends Activity {
             push.sendInBackground();
         }
     }
-    
+
     private void setParseUserList(final ArrayList<ParseUser> gamePlayerList) {
         ParseQuery<ParseUser> query = ParseUser.getQuery();
         query.selectKeys(Arrays.asList("username"));
@@ -378,39 +396,43 @@ public class EditGame extends Activity {
             public void done(List<ParseUser> userList, ParseException e) {
                 if (e == null) {
                     String[] usernameList = new String[userList.size()];
-                    int[] gamePlayerPositions = new int[gamePlayerList.size()];
                     Log.d("User List", "Retrieved " + userList.size());
                     for (int i = 0; i < userList.size(); i++) {
-                        Log.d("data", "Retrieved User: "
+                        Log.d("Username data", "Retrieved User: "
                                 + userList.get(i).getString("username"));
                         usernameList[i] = userList.get(i).getString("username");
                     }
                     playerList = userList;
-
-                    for (int a = 0; a < gamePlayerList.size(); a++) {
-                        for (int i = 0; i < userList.size(); i++) {
-                            String userId = userList.get(i).getObjectId();
-                            String playerId = gamePlayerList.get(a)
-                                    .getObjectId();
-                            Log.d("user comparison", gamePlayerList.get(a)
-                                    .getString("username")
-                                    + " : "
-                                    + userList.get(i).getString("username"));
-
-                            if (userId.equals(playerId)) {
-                                Log.d("user comparison", "match found");
-                                gamePlayerPositions[a] = i;
-                                continue;
-                            }
-                        }
-                    }
-                    setupUsernameListView(usernameList, gamePlayerPositions);
+                    setupUsernameListView(usernameList,
+                            findUserMatch(userList, gamePlayerList));
                 } else {
                     Log.w("error", "game retreival failure");
                 }
             }
         });
 
+    }
+
+    private int[] findUserMatch(final List<ParseUser> userList,
+            final ArrayList<ParseUser> gamePlayerList) {
+        Log.d("test1", "got to here");
+        int[] gamePlayerPositions = new int[gamePlayerList.size()];
+        for (int a = 0; a < gamePlayerList.size(); a++) {
+            for (int i = 0; i < userList.size(); i++) {
+                String userId = userList.get(i).getObjectId();
+                String playerId = gamePlayerList.get(a).getObjectId();
+                Log.d("user comparison",
+                        gamePlayerList.get(a).getString("username") + " : "
+                                + userList.get(i).getString("username"));
+
+                if (userId.equals(playerId)) {
+                    Log.d("user comparison", "match found");
+                    gamePlayerPositions[a] = i;
+                    continue;
+                }
+            }
+        }
+        return gamePlayerPositions;
     }
 
     private void setupUsernameListView(String[] usernameList,
@@ -426,23 +448,27 @@ public class EditGame extends Activity {
     }
 
     private void setItemList(ParseObject game) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameItem");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameItems");
         query.whereEqualTo("game", game);
-        query.findInBackground(new FindCallback<ParseObject>() {
-            public void done(List<ParseObject> itemList, ParseException e) {
+        query.getFirstInBackground(new GetCallback<ParseObject>() {
+            public void done(ParseObject gameItems, ParseException e) {
                 if (e == null) {
-                    Log.d("Parse Item", "Retrieved " + itemList.size()
-                            + " item(s)");
-                    for (int i = 0; i < itemList.size(); i++) {
-                        addToListView(itemList.get(i).getString("name"),
-                                getItemAdapter());
+                    for (int i = 0; i < gameItems.getJSONArray("items")
+                            .length(); i++) {
+                        try {
+                            addToListView(gameItems.getJSONArray("items")
+                                    .getString(i), getItemAdapter());
+                        } catch (JSONException e1) {
+                            // TODO Auto-generated catch block
+                            e1.printStackTrace();
+                        }
                     }
-                    gameItems = itemList;
                 } else {
-                    Log.w("Parse Error", "game retreival failure");
+                    Log.w("Parse Error", "game items retreival failure");
                 }
             }
         });
+
     }
 
     private void setupItemListView() {
@@ -471,15 +497,6 @@ public class EditGame extends Activity {
         adapter.add(item);
         adapter.notifyDataSetChanged();
     }
-
-    // private ArrayAdapter<String> getPlayerAdapter() {
-    // final ListView playerListView = (ListView)
-    // findViewById(R.id.listview_players);
-    // final ArrayAdapter<String> adapter = (ArrayAdapter<String>)
-    // playerListView
-    // .getAdapter();
-    // return adapter;
-    // }
 
     private ArrayAdapter<String> getItemAdapter() {
         final ListView itemListView = (ListView) findViewById(R.id.listview_items);

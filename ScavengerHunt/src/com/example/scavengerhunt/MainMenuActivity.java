@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.parse.ParseAnalytics;
 import com.parse.ParseInstallation;
 import com.parse.ParseUser;
 
@@ -18,9 +17,6 @@ public class MainMenuActivity extends Activity {
 	private Button newGameButton;
 	private Button joinGameButton;
 	private Button myGamesButton;
-	@SuppressWarnings("unused")
-	// This member will be used for actual game play, which is why it's
-	// but since no game play code exists yet, it's unused in this activity
 	private ParseUser currentUser;
 
 	@Override
@@ -30,7 +26,6 @@ public class MainMenuActivity extends Activity {
         ParseInstallation installation = ParseInstallation.getCurrentInstallation();
         installation.put("owner", ParseUser.getCurrentUser());
         installation.saveInBackground();
-		ParseAnalytics.trackAppOpened(getIntent());
 		setupButtonCallbacks();
 	}
 

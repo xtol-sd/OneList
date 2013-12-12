@@ -47,8 +47,8 @@ public class ScavengerHuntApplication extends Application {
 				ParseACL.setDefaultACL(defaultACL, true);
 				// add some delay, to show the splash screen
 				wait(START_WAIT_TIME);
-				PushService.setDefaultPushCallback(this, MainMenuActivity.class);
-                ParseInstallation installation = ParseInstallation.getCurrentInstallation();
+				PushService.setDefaultPushCallback(this, InvitedGamesList.class);
+				ParseInstallation installation = ParseInstallation.getCurrentInstallation();
                 installation.saveInBackground();
                 Log.i(TAG, "Parse.initialize - done");
 			}

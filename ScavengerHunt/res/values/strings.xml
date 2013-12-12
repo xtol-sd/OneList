@@ -10,7 +10,7 @@
 
     <string name="hello">Welcome to Scavenger Hunt</string>
     <string name="app_name">Scavenger Hunt</string>
-    <string name="app_version">1.0</string>
+    <string name="app_version">0.1</string>
     <string name="parse_app_id">TNm1pK7cw56kNSTRzCd07tARh1xWc2OM6lNUKzOB</string>
     <string name="parse_client_id">MIij3qFTMsxMRMapTsWyypXlSgaf1envE6vKuPHW</string>
 
@@ -23,6 +23,7 @@
     <string name="option_menu_prefs">Preferences</string>
     <string name="option_menu_refresh">Refresh</string>
     <string name="option_menu_logout">Log out</string>
+    <string name="title_activity_my_games_list">Games I\'ve Created</string>
 
     <!-- Login Screen -->
     <string name="label_enterUsernamePasswordEmail">Enter your username, password and email</string>
@@ -74,12 +75,16 @@
     <string name="button_joinGame">Join</string>
     <string name="button_back">Back</string>
     <string name="label_currentGamePlayers">Current Players</string>
-    <string name="button_edit">Edit</string>
-    <string name="title_activity_edit_game">EditGame</string>
-    <string name="hello_world">Hello world!</string>
 
     <!-- Edit Game Screen -->
     <string name="button_save">Save</string>
-    <string name="title_activity_my_games_list">MyGamesList</string>
+    <string name="button_edit">Edit</string>
+    <string name="title_activity_edit_game">Edit Game</string>
+
+    <!-- Invited Games Screen -->
+    <string name="title_activity_invited_game">Games I\'ve Joined</string>
+    <string name="invited_games_instructions">You\'ve been invited to the following games. Click to Play!</string>
+    <string name="title_activity_game_hub">Game Hub</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
