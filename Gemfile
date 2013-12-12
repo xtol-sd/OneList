@@ -18,6 +18,7 @@ gem 'cocoon'
 gem 'jquery-ui-rails'
 gem "will_paginate", "~> 3.0.5"
 gem 'bootstrap-will_paginate'
+gem 'frac'
 group :development do
   gem 'sqlite3'
   gem 'better_errors'

@@ -81,6 +81,7 @@ GEM
       bundler (~> 1.0)
       rails (>= 3, < 5)
     formatador (0.2.4)
+    frac (0.9.6)
     guard (2.2.3)
       formatador (>= 0.2.4)
       listen (~> 2.1)
@@ -232,6 +233,7 @@ DEPENDENCIES
   email_spec
   factory_girl_rails
   figaro
+  frac
   guard-bundler
   guard-rails
   guard-rspec

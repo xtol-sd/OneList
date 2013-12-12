@@ -20,7 +20,7 @@
         <% @list_ingredients.each do |list_item| %> 
           <%= check_box_tag "list[list_item_ids][]", list_item.id, @list.list_items.compact.include?(list_item) %>
           <% if list_item.item_amount %>
-            <%= list_item.item_amount %>
+            <%= Math::Fraction.new(list_item.item_amount) %>
             <%= list_item.unit %>
           <% else %>
             <%= list_item.item.default_amount %>

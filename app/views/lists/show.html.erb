@@ -13,12 +13,7 @@
 <h4>Recipe Ingredients</h4>
 <% @list_ingredients.each do |list_item| %>
   <% if list_item.item_amount %>
-    <% if (list_item.item_amount % 1) == 0 %>
-      <%= list_item.item_amount.to_i %>
-    <% else %>
-        <%= list_item.item_amount.to_r.to_s %>
-    <% end %>
-
+    <%= Math::Fraction.new(list_item.item_amount)%>
     <%= list_item.unit %>
   <% else %>
     <%= list_item.item.default_amount %>
