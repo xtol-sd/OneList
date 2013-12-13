@@ -19,8 +19,9 @@ gem 'jquery-ui-rails'
 gem "will_paginate", "~> 3.0.5"
 gem 'bootstrap-will_paginate'
 gem 'frac'
+gem "taps", "~> 0.3.24"
 group :development do
-  gem 'sqlite3'
+  gem 'pg'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'guard-bundler'
@@ -42,6 +43,6 @@ group :test do
   gem 'email_spec'
 end
 group :production do
-  gem 'pg', '0.15.1'
+  gem 'pg'
   gem 'rails_12factor', '0.0.2'
 end
