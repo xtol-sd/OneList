@@ -5,38 +5,54 @@
   <%= nav_link '4. Review Shopping List', edit_list_path(@list) %>
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
-<h5>Notes:</h5>
-<i>
-  <%= @list.comment %>
-</i>
-<h3><%= @list.name %></h3>
 
-<h4>Recipe Ingredients</h4>
-<% @list_ingredients.each do |list_item| %>
-  <% if list_item.item_amount %>
-    <% if list_item.item_amount == 0.33 %>
-      <%= item_amount = "1/3" %>
-    <% elsif list_item.item_amount == 1.33 %>
-      <%= item_amount = "1 1/3" %>
-    <% elsif list_item.item_amount == 0.67 %>
-      <%= item_amount = "2/3" %>
-    <% elsif list_item.item_amount == 1.67 %>
-      <%= item_amount = "1 2/3" %>
-    <% else %>  
-      <%= Math::Fraction.new(list_item.item_amount) %>
+<% if !@menu.recipes.empty? %>
+  <h5>Notes:</h5>
+  <i>
+    <%= @list.comment %>
+  </i>
+  <h3><%= @list.name %>:</h3>
+
+  <h4>Recipe Ingredients</h4>
+  <% @list_ingredients.each do |list_item| %>
+    <% if list_item.item_amount %>
+      <% if list_item.item_amount == 0.33 %>
+        <%= item_amount = "1/3" %>
+      <% elsif list_item.item_amount == 1.33 %>
+        <%= item_amount = "1 1/3" %>
+      <% elsif list_item.item_amount == 0.67 %>
+        <%= item_amount = "2/3" %>
+      <% elsif list_item.item_amount == 1.67 %>
+        <%= item_amount = "1 2/3" %>
+      <% else %>  
+        <%= Math::Fraction.new(list_item.item_amount) %>
+      <% end %>
+    <%= list_item.unit %>  
+    <% else %>
+      <%= list_item.item.default_amount %>
+      <%= list_item.item.default_unit %>
+    <% end %>    
+    <%= list_item.item.name %>
+    <em> (<%= Recipe.find(list_item.recipe_id).name%>) </em>
+    </br>
+  <% end %>
+  <% if !@list_other_items.empty? %>
+    <h4> Other Items </h4>
+    <% @list_other_items.each do |list_other| %>
+      <%= list_other.other.name %>
+      </br>
     <% end %>
-  <%= list_item.unit %>  
-  <% else %>
-    <%= list_item.item.default_amount %>
-    <%= list_item.item.default_unit %>
-  <% end %>    
-  <%= list_item.item.name %>
-  <em> (<%= Recipe.find(list_item.recipe_id).name%>) </em>
-  </br>
-<% end %>
-
-<h4> Other Items </h4>
-<% @list_other_items.each do |list_other| %>
-  <%= list_other.other.name %>
-  </br>
-<% end %>
+  <% end %>
+<% else %>
+  <% if !@list_other_items.empty? %>
+    <i><%= @list.comment %></i>
+    <h3><%= @list.name %>:</h3>
+    <h4> Other Items </h4>
+    <% @list_other_items.each do |list_other| %>
+      <%= list_other.other.name %>
+      </br>
+    <% end %>
+  <% else %>    
+    <div class="span3"><p><i>No recipes or items have been selected.</i></p></div>
+  <% end %>
+<% end %>  

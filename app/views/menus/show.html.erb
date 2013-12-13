@@ -6,30 +6,33 @@
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
-<%= form_for @menu, :url => 
-  {:controller => "menus", :action => "update"} do |menu_form| %>
-<%= hidden_field_tag "menu[update_recipes][]" %>
-  
-  <div class="form-inputs">
-<!--     <%#= list_form.label 'Name your menu:' %>
-    <%#= list_form.text_field :name %>
-    <%#= list_form.label 'Any notes about this menu?' %>
-    <%#= list_form.text_field :comment %>
- -->
-    <p> Review your chosen recipes. (Uncheck to remove recipes.) </p>
-    <%= menu_form.fields_for :recipe do |recipe_form| %>
-      <% @menu.recipes.each do |recipe| %> 
-        </br>
-        <%= check_box_tag "menu[update_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
-        <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
-        </br>
-      <% end %>  
-    <% end %>
-    </br> 
-  </div> 
+<% if !@menu.recipes.empty? %>
+  <%= form_for @menu, :url => 
+    {:controller => "menus", :action => "update"} do |menu_form| %>
+  <%= hidden_field_tag "menu[update_recipes][]" %>
+    
+    <div class="form-inputs">
+  <!--     <%#= list_form.label 'Name your menu:' %>
+      <%#= list_form.text_field :name %>
+      <%#= list_form.label 'Any notes about this menu?' %>
+      <%#= list_form.text_field :comment %>
+   -->
+      <p> Review your chosen recipes. (Uncheck to remove recipes.) </p>
+      <%= menu_form.fields_for :recipe do |recipe_form| %>
+        <% @menu.recipes.each do |recipe| %> 
+          </br>
+          <%= check_box_tag "menu[update_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
+          <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
+          </br>
+        <% end %>  
+      <% end %>
+      </br> 
+    </div> 
 
-  <div class="form-actions">
-    <%= menu_form.button 'Continue', :name => "final_menu_button", class: " btn btn-primary" %>
-  </div>  
-<% end %> 
-
+    <div class="form-actions">
+      <%= menu_form.button 'Continue', :name => "final_menu_button", class: " btn btn-primary" %>
+    </div>  
+  <% end %> 
+<% else %>
+  <div class="span3"><p><i> No recipes have been selected yet</i></p></div>
+<% end %>
