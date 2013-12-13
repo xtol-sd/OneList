@@ -3,29 +3,24 @@
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
   <% end %>
-  
-  <%= form_for(@menu, remote: true) do |menu_form| %>
-    <%= hidden_field_tag "menu[add_recipes][]" %>
 
-      <div class="form-inputs">
-        <% @recipes.each do |recipe| %>
-          </br> 
-          <%= check_box_tag "menu[add_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe), :onclick => "this.form.submit_button.click();" %>
-          <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
-          </br>
-
-          <div class="instructions">
-            <%= recipe.comment %>
-          </div>
-
-        <% end %>  
+  <% @recipes.each do |recipe| %>
+    <%= form_for(@menu, remote: true) do |menu_form| %>
+      <%= hidden_field_tag "menu[add_recipe][]" %>
+      <div class="form-inputs"> 
+        <%= check_box_tag "menu[add_recipe][]", recipe.id, @menu.recipes.compact.include?(recipe), :onclick => "this.form.submit_button.click();" %>
+        <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
         </br>
-      <%= will_paginate @recipes %>
-    </div>
-
-    <p>Done choosing recipes? (You'll have a chance to review.)</p>
-    <%= link_to 'Continue', menu_path(@menu), :class => "btn btn-primary" %>
-    <%= menu_form.submit :id => 'submit_button', :style => 'display: none;' %>
+        <div class="instructions">
+          <%= recipe.comment %>
+        </div>
+      </br>
+      <%= menu_form.submit :id => 'submit_button', :style => 'display: none;' %>
+      </div>
+    <% end %>
   <% end %>
-</div>
 
+  <%= will_paginate @recipes %>
+  <p>Done choosing recipes? (You'll have a chance to review.)</p>
+  <%= link_to 'Continue', menu_path(@menu), :class => "btn btn-primary" %>
+</div>

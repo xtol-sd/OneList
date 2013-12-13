@@ -1,51 +1,112 @@
 <div class="nav nav-tabs">
   <%= nav_link '1. Choose Recipes', edit_menu_path(@menu) %> 
-  <%= nav_link '2. Choose Items', add_others_path(@list) %> 
-  <%= nav_link '3. Review Shopping List', edit_list_path(@list) %>
+  <%= nav_link '2. Review Menu', menu_path(@menu) %> 
+  <%= nav_link '3. Choose Items', add_others_path(@list) %> 
+  <%= nav_link '4. Review Shopping List', edit_list_path(@list) %>
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
-<%= link_to 'Add a New Item', new_other_path, class: "btn btn-primary" %>
-</br></br>
-<input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Collapse Categories? </input>
+<div class = "pull-right">
+  <h6>Do you need to buy something that isn't on this list? 
+    <%= link_to 'Add a New Item', new_other_path %>
+  </h6>
+</div>
 
+<div class="span10"> 
 <%= form_for @list do |list_form| %>
-<%= hidden_field_tag "list[selected_others][]" %>
-  <div class="form-inputs">
-    <%= list_form.fields_for :other do |other_form| %>
-    <% previous_category = "" %>
+  <%= hidden_field_tag "list[selected_others][]" %>
+    <a data-toggle="collapse" data-target="#demo" >
+      <h4>Personal Care</h4>
+    </a>    
+    <div id="demo" class="collapse in"> 
       <% @others.each do |other| %>
-        <% if other.category != previous_category %>
-          <h4><%= other.category %></h4>
-        <% end %>
-        <div class="subcategory">
+        <% if other.category == "Personal Care" %> 
           <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
-          <%= other.default_amount %>
-          <%= other.default_unit %>
-          <%= other.name %>
-          </br></br>
-        </div>           
-        <% previous_category = other.category %>
-      <% end %>  
-    <% end %>
-  </br>
-    
-  </div>
+          <%= other.name %>  </br>
+        <% end %>
+      <% end %>
+    </div>
 
-  <div class="form-actions">
-    <%= list_form.button 'Continue', :name => 'add_others_button',  class: " btn btn-primary" %>
-  </div>
+    <a data-toggle="collapse" data-target="#demo2">
+      <h4>Kitchen</h4>
+    </a>    
+    <div id="demo2" class="collapse in"> 
+      <% @others.each do |other| %>
+        <% if other.category == "Kitchen" %> 
+          <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
+          <%= other.name %>  </br>
+        <% end %>
+      <% end %>
+    </div>
+
+    <a data-toggle="collapse" data-target="#demo3">
+      <h4>Food</h4>
+    </a>    
+    <div id="demo3" class="collapse in"> 
+      <% @others.each do |other| %>
+        <% if other.category == "Food" %> 
+          <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
+          <%= other.name %>  </br>
+        <% end %>
+      <% end %>
+    </div>
 
 
-<% end %>
+    <a data-toggle="collapse" data-target="#demo4">
+      <h4>Baby Stuff</h4>
+    </a>    
+    <div id="demo4" class="collapse in"> 
+      <% @others.each do |other| %>
+        <% if other.category == "Baby stuff" %> 
 
-<script>
-  var short_view = (localStorage.getItem("short_view")=="true");
-  $(".visibility_checkbox").prop('checked', short_view);
-  $(".subcategory").toggle(!short_view);
+          <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
+          <%= other.name %>  </br>
+        <% end %>
+      <% end %>
+    </div>
 
-  function toggle_visibility() {
-    localStorage.setItem("short_view","" + !short_view);
-    $(".subcategory").toggle(); 
-  };
-</script> 
+    <a data-toggle="collapse" data-target="#demo5">
+      <h4>Cleaning Supplies</h4>
+    </a>    
+    <div id="demo5" class="collapse in"> 
+      <% @others.each do |other| %>
+        <% if other.category == "Cleaning products" %> 
+          <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
+          <%= other.name %>  </br>
+        <% end %>
+      <% end %>
+    </div>
+
+
+    <a data-toggle="collapse" data-target="#demo6">
+      <h4>Office Supplies</h4>
+    </a>    
+    <div id="demo6" class="collapse in"> 
+      <% @others.each do |other| %>
+        <% if other.category == "Office Supplies" %> 
+          <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
+          <%= other.name %>  </br>
+        <% end %>
+      <% end %>
+    </div>
+
+
+    <a data-toggle="collapse" data-target="#demo7">
+      <h4>Other</h4>
+    </a>    
+    <div id="demo7" class="collapse in"> 
+      <% @others.each do |other| %>
+        <% if other.category == "Other" %> 
+          <%= check_box_tag "list[selected_others][]", other.id, @list.others.compact.include?(other) %>
+          <%= other.name %>  </br>
+        <% end %>
+      <% end %>
+    </div>
+    </br>
+
+    </div>
+    <div class = "span3">
+      <%= list_form.button 'Continue', :name => 'add_others_button',  class: " btn btn-primary" %>
+    </div>
+  <% end %>  
+</div>
