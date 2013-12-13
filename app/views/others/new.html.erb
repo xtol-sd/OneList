@@ -4,6 +4,8 @@
   <%= other_form.text_field :name %>
   <%= other_form.label :comment, 'Notes on Item:'%>
   <%= other_form.text_field :comment %> 
+  <%= other_form.label :category %>
+  <%= other_form.select :category, ["Personal Care", "Kitchen", "Baby stuff", "Cleaning products", "Office Supplies", "Food", "Other"] %>
  </br> 
  <%= other_form.button :submit, :class => "btn btn-primary" %>
 <% end %>

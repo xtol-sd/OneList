@@ -32,6 +32,9 @@ other_list = [
  [ "Postage stamps", "Office Supplies" ],
  [ "Batteries", "Other" ],
  [ "Light bulbs", "Other" ],
+ [ "Milk", "Food" ],
+ [ "Cold Cereal", "Food" ],
+ [ "Bananas", "Food" ],
  ]
 
 other_list.each do |name,  category|
