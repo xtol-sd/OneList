@@ -6,9 +6,8 @@
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
 
-<%= link_to 'Add a New Item', new_other_path, class: "btn btn-primary" %>
-</br></br>
-<input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Collapse Categories? </input>
+<input class="visibility_checkbox" type="checkbox" onclick="toggle_visibility()"> Collapse Categories? </input> |
+<%= link_to 'Add a New Item', new_other_path %>
 
 <%= form_for @list do |list_form| %>
 <%= hidden_field_tag "list[selected_others][]" %>
