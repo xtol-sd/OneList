@@ -7,11 +7,11 @@
 </div>
 
 <% if !@menu.recipes.empty? %>
-  <% if !@list.comment.nil? %>
+  <% if !@list.comment.empty? %>
     <h5>Notes:</h5>
     <i><%= @list.comment %></i>
   <% end %>  
-  <% if !@list.name.nil? %>
+  <% if !@list.name.empty? %>
     <h3><%= @list.name %>:</h3>
   <% end %>
   
@@ -47,11 +47,11 @@
   <% end %>
 <% else %>
   <% if !@list_other_items.empty? %>
-    <% if !@list.comment.nil? %>
+    <% if !@list.comment.empty? %>
       <h5>Notes:</h5>
       <i><%= @list.comment %></i>
     <% end %>
-    <% if !@list.name.nil? %>
+    <% if !@list.name.empty? %>
       <h3><%= @list.name %>:</h3>
     <% end %>
     <h4> Other Items </h4>
