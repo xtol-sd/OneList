@@ -5,14 +5,14 @@
   <%= nav_link '4. Review Shopping List', edit_list_path(@list) %>
   <%= nav_link 'Your Shopping List', list_path(@list) %>
 </div>
-    <% if !@menu.recipes.empty? %>
-      <% if !@list.comment.nil? %>
-        <h5>Notes:</h5>
-        <i><%= @list.comment %></i>
-      <% end %>  
-      <div class = "row">
-        <div class = "span7">
-      <% if !@list.name.nil? %>
+<% if !@menu.recipes.empty? %>
+  <% if !@list.comment.empty? %>
+    <h5>Notes:</h5>
+    <i><%= @list.comment %></i>
+  <% end %>  
+  <div class = "row">
+    <div class = "span7">
+      <% if !@list.name.empty? %>
         <h3><%= @list.name %>:</h3>
       <% end %>
       
@@ -30,7 +30,6 @@
           <% else %>  
             <%= Math::Fraction.new(list_item.item_amount) %>
           <% end %>
-        <%= list_item.unit %>  
         <% else %>
           <%= list_item.item.default_amount %>
           <%= list_item.item.default_unit %>
@@ -48,11 +47,11 @@
       <% end %>
     <% else %>
       <% if !@list_other_items.empty? %>
-        <% if !@list.comment.nil? %>
+        <% if !@list.comment.empty? %>
           <h5>Notes:</h5>
           <i><%= @list.comment %></i>
         <% end %>
-        <% if !@list.name.nil? %>
+        <% if !@list.name.empty? %>
           <h3><%= @list.name %>:</h3>
         <% end %>
         <h4> Other Items </h4>
