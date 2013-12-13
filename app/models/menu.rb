@@ -9,14 +9,18 @@ belongs_to :list
 	  self.selected_recipes.map {|recipe| recipe.id}
   end
 
-  def add_recipes= (ids)
+  def add_recipe= (ids)
 	  self.join_menu_recipes = all_recipes_array(ids)
   end
 
   def all_recipes_array(ids)
 	  previous_recipes = JoinMenuRecipe.where(:menu_id => self.id)
-    new_recipes = ids.map {|recipe_id| JoinMenuRecipe.create(:recipe_id => recipe_id)}  
-    all_recipes = previous_recipes + new_recipes
+    previous_recipe_ids = previous_recipes.map{|recipe| recipe.recipe_id} #removes duplicate recipe ids due to 'onclick' checkboxes
+    all_ids = [previous_recipe_ids + ids].flatten.uniq
+    JoinMenuRecipe.where(:menu_id => self.id).destroy_all
+    
+    all_ids.map {|recipe_id| JoinMenuRecipe.create(:recipe_id => recipe_id)} 
+
   end
 
   def update_recipe_ids

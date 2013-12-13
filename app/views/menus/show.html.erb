@@ -15,7 +15,6 @@
         <%= check_box_tag "menu[update_recipes][]", recipe.id, @menu.recipes.compact.include?(recipe) %>
         <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
         </br>
-         
       <% end %>  
     <% end %>
     </br> 
