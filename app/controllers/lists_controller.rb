@@ -33,6 +33,7 @@ class ListsController < ApplicationController
     @list_ingredients = @list.list_items.order(item_id: :asc)
     @list_other_items = @list.list_others.order(other_id: :asc)
     @menu = Menu.find_by_list_id(@list.id)
+    @recipes = @menu.recipes
   end
   
   def edit
