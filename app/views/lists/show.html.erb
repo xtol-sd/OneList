@@ -7,12 +7,14 @@
 </div>
 
 <% if !@menu.recipes.empty? %>
-  <h5>Notes:</h5>
-  <i>
-    <%= @list.comment %>
-  </i>
-  <h3><%= @list.name %>:</h3>
-
+  <% if !@list.comment.nil? %>
+    <h5>Notes:</h5>
+    <i><%= @list.comment %></i>
+  <% end %>  
+  <% if !@list.name.nil? %>
+    <h3><%= @list.name %>:</h3>
+  <% end %>
+  
   <h4>Recipe Ingredients</h4>
   <% @list_ingredients.each do |list_item| %>
     <% if list_item.item_amount %>
@@ -45,8 +47,13 @@
   <% end %>
 <% else %>
   <% if !@list_other_items.empty? %>
-    <i><%= @list.comment %></i>
-    <h3><%= @list.name %>:</h3>
+    <% if !@list.comment.nil? %>
+      <h5>Notes:</h5>
+      <i><%= @list.comment %></i>
+    <% end %>
+    <% if !@list.name.nil? %>
+      <h3><%= @list.name %>:</h3>
+    <% end %>
     <h4> Other Items </h4>
     <% @list_other_items.each do |list_other| %>
       <%= list_other.other.name %>

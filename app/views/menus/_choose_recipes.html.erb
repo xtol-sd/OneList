@@ -8,16 +8,15 @@
     <%= form_for(@menu, remote: true) do |menu_form| %>
       <%= hidden_field_tag "menu[add_recipe][]" %>
       <div class="form-inputs"> 
-        </br> 
         <%= check_box_tag "menu[add_recipe][]", recipe.id, @menu.recipes.compact.include?(recipe), :onclick => "this.form.submit_button.click();" %>
         <%= link_to recipe.name, recipe_path(recipe.id), :class => "checkbox inline" %>
         </br>
         <div class="instructions">
           <%= recipe.comment %>
         </div>
-      
-      </div>
+      </br>
       <%= menu_form.submit :id => 'submit_button', :style => 'display: none;' %>
+      </div>
     <% end %>
   <% end %>
 
