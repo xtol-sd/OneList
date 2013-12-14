@@ -19,8 +19,10 @@ gem 'jquery-ui-rails'
 gem "will_paginate", "~> 3.0.5"
 gem 'bootstrap-will_paginate'
 gem 'frac'
-gem "taps", "~> 0.3.24"
+gem "taps"
+gem 'yaml_db', github: 'jetthoughts/yaml_db', ref: 'fb4b6bd7e12de3cffa93e0a298a1e5253d7e92ba' 
 group :development do
+  gem 'sqlite3'
   gem 'pg'
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
