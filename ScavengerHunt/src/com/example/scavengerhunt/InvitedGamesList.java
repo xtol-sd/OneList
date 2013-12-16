@@ -1,6 +1,7 @@
 package com.example.scavengerhunt;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.Activity;
@@ -35,7 +36,6 @@ public class InvitedGamesList extends Activity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.invited_game, menu);
         return true;
     }
@@ -58,34 +58,39 @@ public class InvitedGamesList extends Activity {
 
     }
 
-    private void launchGameView(String gameId) {
-        final Intent intent = new Intent(InvitedGamesList.this, ViewGame.class);
+    private void launchGameView(final String gameId) {
+        final Intent intent = new Intent(InvitedGamesList.this, GameHub.class);
         intent.putExtra("gameId", gameId);
         Log.d("GameId", "game id is " + gameId);
         startActivity(intent);
     }
 
-    private void addToListView(ParseObject game, ArrayAdapter<String> adapter) {
+    private void addToListView(final ParseObject game,
+            final ArrayAdapter<String> adapter) {
         adapter.add(game.getString("name"));
         adapter.notifyDataSetChanged();
     }
 
     private void findInvitedGames() {
-        final ParseQuery<ParseObject> query = ParseQuery.getQuery("GamePlayers");
+        final ParseQuery<ParseObject> query = ParseQuery
+                .getQuery("GamePlayers");
         query.whereEqualTo("users", currentUser);
         query.include("game");
         query.findInBackground(new FindCallback<ParseObject>() {
             public void done(List<ParseObject> gamePlayers, ParseException e) {
                 if (e == null) {
-                    for (ParseObject gamePlayerObject : gamePlayers) {
+                    for (final ParseObject gamePlayerObject : gamePlayers) {
                         final ParseObject game = gamePlayerObject
                                 .getParseObject("game");
-                        invitedGames.add(game);
-                        addToListView(game, getInvitedGamesAdapter());
-
+                        Date startDatetime = game.getDate("start_datetime");
+                        Date endDatetime = game.getDate("end_datetime");
+                        if (new Date().before(endDatetime) && new Date().after(startDatetime) && game.getParseUser("winner") == null) {
+                            invitedGames.add(game);
+                            addToListView(game, getInvitedGamesAdapter());
+                        }
                     }
                 } else {
-                    Log.w("error", "game retreival failure");
+                    Log.w("error", "game retrieval failure");
                 }
             }
         });

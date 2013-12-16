@@ -8,9 +8,6 @@
 package com.example.scavengerhunt;
 
 public final class R {
-    public static final class array {
-        public static final int colors_array=0x7f050000;
-    }
     public static final class attr {
     }
     public static final class dimen {
@@ -34,50 +31,58 @@ public final class R {
         public static final int splash_logo=0x7f020007;
     }
     public static final class id {
-        public static final int SplashLayout=0x7f090025;
-        public static final int action_settings=0x7f090029;
-        public static final int button_Back=0x7f090019;
-        public static final int button_CreateGame=0x7f09000c;
-        public static final int button_ResetCreateGame=0x7f09000b;
-        public static final int button_addItem=0x7f090009;
-        public static final int button_editAddItem=0x7f090011;
-        public static final int button_editGame=0x7f09001a;
-        public static final int button_update=0x7f090012;
-        public static final int editEndDate=0x7f090005;
-        public static final int editEndTime=0x7f090007;
-        public static final int editNewItem=0x7f09001c;
-        public static final int editStartDate=0x7f090004;
-        public static final int editStartTime=0x7f090010;
-        public static final int edit_gameName=0x7f090002;
-        public static final int label_endDatetime=0x7f090006;
-        public static final int label_gameName=0x7f090001;
-        public static final int label_gamePlayerList=0x7f09000d;
-        public static final int label_itemList=0x7f090008;
-        public static final int label_startDatetime=0x7f090003;
-        public static final int layout_createGame=0x7f090000;
-        public static final int listview_currentPlayers=0x7f09001b;
-        public static final int listview_gameItems=0x7f090018;
-        public static final int listview_invitedGames=0x7f090013;
-        public static final int listview_items=0x7f09000a;
-        public static final int listview_myGames=0x7f090014;
-        public static final int listview_players=0x7f09000e;
-        public static final int loginbutton_cancel=0x7f090021;
-        public static final int loginbutton_continue=0x7f090020;
-        public static final int mainMenuButton_joinGame=0x7f090023;
-        public static final int mainMenuButton_myGames=0x7f090024;
-        public static final int mainMenuButton_newGame=0x7f090022;
-        public static final int menuitem_logout=0x7f09002a;
-        public static final int menuitem_prefs=0x7f09002b;
-        public static final int splash_appver_text_view=0x7f090028;
-        public static final int splash_image_view=0x7f090026;
-        public static final int splash_text_view=0x7f090027;
-        public static final int text_endDatetime=0x7f090017;
-        public static final int text_gameName=0x7f090015;
-        public static final int text_startDatetime=0x7f090016;
-        public static final int textbox_loginEmail=0x7f09001f;
-        public static final int textbox_loginPassword=0x7f09001e;
-        public static final int textbox_loginUsername=0x7f09001d;
-        public static final int view1=0x7f09000f;
+        public static final int SplashLayout=0x7f08002d;
+        public static final int action_settings=0x7f080031;
+        public static final int bar2=0x7f080018;
+        public static final int button_CreateGame=0x7f08000c;
+        public static final int button_ResetCreateGame=0x7f08000b;
+        public static final int button_addItem=0x7f080009;
+        public static final int button_editAddItem=0x7f080011;
+        public static final int button_editGame=0x7f080022;
+        public static final int button_update=0x7f080012;
+        public static final int editEndDate=0x7f080005;
+        public static final int editEndTime=0x7f080007;
+        public static final int editNewItem=0x7f080024;
+        public static final int editStartDate=0x7f080004;
+        public static final int editStartTime=0x7f080010;
+        public static final int edit_gameName=0x7f080002;
+        public static final int hint_remainingItems=0x7f08001a;
+        public static final int hint_text_endDatetime=0x7f080014;
+        public static final int hint_text_score=0x7f080016;
+        public static final int label_endDatetime=0x7f080006;
+        public static final int label_gameName=0x7f080001;
+        public static final int label_gamePlayerList=0x7f08000d;
+        public static final int label_itemList=0x7f080008;
+        public static final int label_startDatetime=0x7f080003;
+        public static final int layout_createGame=0x7f080000;
+        public static final int listview_currentPlayers=0x7f080023;
+        public static final int listview_gameItems=0x7f080021;
+        public static final int listview_invitedGames=0x7f08001d;
+        public static final int listview_items=0x7f08000a;
+        public static final int listview_myGames=0x7f08001e;
+        public static final int listview_players=0x7f08000e;
+        public static final int listview_remainingItems=0x7f080019;
+        public static final int loginbutton_cancel=0x7f080029;
+        public static final int loginbutton_continue=0x7f080028;
+        public static final int mainMenuButton_myGames=0x7f08002c;
+        public static final int mainMenuButton_newGame=0x7f08002b;
+        public static final int mainMenuButton_playGame=0x7f08002a;
+        public static final int menuitem_logout=0x7f080032;
+        public static final int menuitem_prefs=0x7f080033;
+        public static final int splash_appver_text_view=0x7f080030;
+        public static final int splash_image_view=0x7f08002e;
+        public static final int splash_text_view=0x7f08002f;
+        public static final int text_endDatetime=0x7f080015;
+        public static final int text_gameName=0x7f08001f;
+        public static final int text_score=0x7f080017;
+        public static final int text_startDatetime=0x7f080020;
+        public static final int text_totalPoints=0x7f08001c;
+        public static final int textbox_loginEmail=0x7f080027;
+        public static final int textbox_loginPassword=0x7f080026;
+        public static final int textbox_loginUsername=0x7f080025;
+        public static final int title_gameName=0x7f080013;
+        public static final int title_remainingItems=0x7f08001b;
+        public static final int view1=0x7f08000f;
     }
     public static final class layout {
         public static final int activity_create_game=0x7f030000;
@@ -92,95 +97,102 @@ public final class R {
         public static final int splash=0x7f030009;
     }
     public static final class menu {
-        public static final int create_game=0x7f080000;
-        public static final int date_time=0x7f080001;
-        public static final int date_time_picker=0x7f080002;
-        public static final int edit_game=0x7f080003;
-        public static final int game_hub=0x7f080004;
-        public static final int invited_game=0x7f080005;
-        public static final int mainmenu=0x7f080006;
-        public static final int my_games_list=0x7f080007;
-        public static final int view_game=0x7f080008;
+        public static final int create_game=0x7f070000;
+        public static final int date_time=0x7f070001;
+        public static final int date_time_picker=0x7f070002;
+        public static final int edit_game=0x7f070003;
+        public static final int game_hub=0x7f070004;
+        public static final int invited_game=0x7f070005;
+        public static final int mainmenu=0x7f070006;
+        public static final int my_games_list=0x7f070007;
+        public static final int view_game=0x7f070008;
     }
     public static final class string {
-        public static final int action_settings=0x7f060023;
-        public static final int app_name=0x7f060001;
-        public static final int app_version=0x7f060002;
-        public static final int button_addItem=0x7f060034;
-        public static final int button_back=0x7f060037;
-        public static final int button_create=0x7f060030;
-        public static final int button_edit=0x7f06003a;
-        public static final int button_joinGame=0x7f060036;
-        public static final int button_reset=0x7f060031;
+        public static final int action_settings=0x7f05001f;
+        /**  Already Won Dialog 
+         */
+        public static final int alreadyWon=0x7f050040;
+        public static final int app_name=0x7f050001;
+        public static final int app_version=0x7f050002;
+        public static final int button_addItem=0x7f050033;
+        public static final int button_back=0x7f050036;
+        public static final int button_create=0x7f05002f;
+        public static final int button_edit=0x7f050037;
+        public static final int button_joinGame=0x7f050035;
+        public static final int button_reset=0x7f050030;
         /**  Edit Game Screen 
          */
-        public static final int button_save=0x7f060039;
-        public static final int hello=0x7f060000;
-        public static final int hello_world=0x7f06003f;
-        public static final int hint_addItem=0x7f060033;
-        public static final int hint_email=0x7f060012;
-        public static final int hint_endDate=0x7f060029;
-        public static final int hint_endTime=0x7f06002a;
-        public static final int hint_newGameName=0x7f06002f;
-        public static final int hint_password=0x7f060010;
-        public static final int hint_startDate=0x7f060027;
-        public static final int hint_startTime=0x7f060028;
-        public static final int hint_username=0x7f06000e;
-        public static final int invited_games_instructions=0x7f06003d;
+        public static final int button_save=0x7f050039;
+        public static final int dialog_cancel=0x7f05003f;
+        /**  Found Item Dialog 
+         */
+        public static final int dialog_found=0x7f05003e;
+        public static final int hello=0x7f050000;
+        public static final int hint_addItem=0x7f050032;
+        public static final int hint_email=0x7f050012;
+        public static final int hint_endDate=0x7f050028;
+        public static final int hint_endTime=0x7f050029;
+        public static final int hint_newGameName=0x7f05002e;
+        public static final int hint_password=0x7f050010;
+        public static final int hint_startDate=0x7f050026;
+        public static final int hint_startTime=0x7f050027;
+        public static final int hint_username=0x7f05000e;
+        public static final int invited_games_instructions=0x7f05003c;
         /**  Generic 
          */
-        public static final int label_cancel=0x7f060005;
-        public static final int label_continue=0x7f060006;
-        public static final int label_create=0x7f060032;
+        public static final int label_cancel=0x7f050005;
+        public static final int label_continue=0x7f050006;
+        public static final int label_create=0x7f050031;
         /**  Game Creation Screen 
          */
-        public static final int label_createGame=0x7f060025;
-        public static final int label_currentGamePlayers=0x7f060038;
-        public static final int label_email=0x7f060011;
-        public static final int label_endDatetime=0x7f06002b;
+        public static final int label_createGame=0x7f050024;
+        public static final int label_currentGamePlayers=0x7f050038;
+        public static final int label_email=0x7f050011;
+        public static final int label_endDatetime=0x7f05002a;
         /**  Login Screen 
          */
-        public static final int label_enterUsernamePasswordEmail=0x7f06000c;
-        public static final int label_gameName=0x7f06002c;
-        public static final int label_gamePlayerList=0x7f06002d;
-        public static final int label_gamesiamplaying=0x7f060020;
-        public static final int label_itemList=0x7f06002e;
-        public static final int label_joingame=0x7f060021;
-        public static final int label_loginEmailAlreadyExists=0x7f06001c;
-        public static final int label_loginErrorMessage=0x7f060019;
-        public static final int label_loginPleaseTryAgainMessage=0x7f06001a;
-        public static final int label_loginUsernameAlreadyExists=0x7f06001b;
-        public static final int label_login_in_progress=0x7f060013;
-        public static final int label_login_please_wait=0x7f060015;
-        public static final int label_mygames=0x7f06001f;
-        public static final int label_newgame=0x7f06001e;
-        public static final int label_password=0x7f06000f;
-        public static final int label_queryErrorMessage=0x7f060017;
-        public static final int label_query_in_progress=0x7f060016;
-        public static final int label_selectOption=0x7f06001d;
-        public static final int label_signupErrorMessage=0x7f060018;
-        public static final int label_signup_in_progress=0x7f060014;
-        public static final int label_startDatetime=0x7f060026;
-        public static final int label_username=0x7f06000d;
+        public static final int label_enterUsernamePasswordEmail=0x7f05000c;
+        public static final int label_gameName=0x7f05002b;
+        public static final int label_gamePlayerList=0x7f05002c;
+        public static final int label_itemList=0x7f05002d;
+        public static final int label_loginEmailAlreadyExists=0x7f05001c;
+        public static final int label_loginErrorMessage=0x7f050019;
+        public static final int label_loginPleaseTryAgainMessage=0x7f05001a;
+        public static final int label_loginUsernameAlreadyExists=0x7f05001b;
+        public static final int label_login_in_progress=0x7f050013;
+        public static final int label_login_please_wait=0x7f050015;
+        public static final int label_mygames=0x7f050023;
+        public static final int label_newgame=0x7f050022;
+        public static final int label_password=0x7f05000f;
+        public static final int label_playgame=0x7f050021;
+        public static final int label_queryErrorMessage=0x7f050017;
+        public static final int label_query_in_progress=0x7f050016;
+        public static final int label_selectOption=0x7f05001d;
+        public static final int label_signupErrorMessage=0x7f050018;
+        public static final int label_signup_in_progress=0x7f050014;
+        public static final int label_startDatetime=0x7f050025;
+        public static final int label_username=0x7f05000d;
         /**  Menu Options 
          */
-        public static final int option_menu_about=0x7f060007;
-        public static final int option_menu_logout=0x7f06000a;
-        public static final int option_menu_prefs=0x7f060008;
-        public static final int option_menu_refresh=0x7f060009;
-        public static final int parse_app_id=0x7f060003;
-        public static final int parse_client_id=0x7f060004;
-        public static final int title_activity_edit_game=0x7f06003b;
-        public static final int title_activity_game_hub=0x7f06003e;
+        public static final int option_menu_about=0x7f050007;
+        public static final int option_menu_logout=0x7f05000a;
+        public static final int option_menu_prefs=0x7f050008;
+        public static final int option_menu_refresh=0x7f050009;
+        public static final int parse_app_id=0x7f050003;
+        public static final int parse_client_id=0x7f050004;
+        public static final int title_activity_edit_game=0x7f05003a;
+        public static final int title_activity_game_hub=0x7f05003d;
         /**  Invited Games Screen 
          */
-        public static final int title_activity_invited_game=0x7f06003c;
-        public static final int title_activity_main_menu=0x7f060024;
-        public static final int title_activity_my_games_list=0x7f06000b;
-        public static final int title_activity_start=0x7f060022;
+        public static final int title_activity_invited_game=0x7f05003b;
+        /**  Main Menu Screen 
+         */
+        public static final int title_activity_main_menu=0x7f050020;
+        public static final int title_activity_my_games_list=0x7f05000b;
+        public static final int title_activity_start=0x7f05001e;
         /**  View Game Screen 
          */
-        public static final int title_viewGame=0x7f060035;
+        public static final int title_viewGame=0x7f050034;
     }
     public static final class style {
         /** 
@@ -204,11 +216,11 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f070001;
-        public static final int LoginFormContainer=0x7f070002;
+        public static final int AppTheme=0x7f060001;
+        public static final int LoginFormContainer=0x7f060002;
     }
 }

@@ -415,7 +415,6 @@ public class EditGame extends Activity {
 
     private int[] findUserMatch(final List<ParseUser> userList,
             final ArrayList<ParseUser> gamePlayerList) {
-        Log.d("test1", "got to here");
         int[] gamePlayerPositions = new int[gamePlayerList.size()];
         for (int a = 0; a < gamePlayerList.size(); a++) {
             for (int i = 0; i < userList.size(); i++) {

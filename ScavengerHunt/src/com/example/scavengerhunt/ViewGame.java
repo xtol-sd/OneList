@@ -31,7 +31,7 @@ public class ViewGame extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         final String gameId = extras.getString("gameId");
         getGame();
         setContentView(R.layout.activity_view_game);
@@ -107,14 +107,12 @@ public class ViewGame extends Activity {
             try {
                 user = userInfo.getJSONObject(i);
             } catch (JSONException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             String userId = null;
             try {
                 userId = user.getString("objectId");
             } catch (JSONException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             gamePlayerIds[i] = userId;
@@ -151,7 +149,6 @@ public class ViewGame extends Activity {
                             addToListView(gameItems.getJSONArray("items")
                                     .getString(i), getItemAdapter());
                         } catch (JSONException e1) {
-                            // TODO Auto-generated catch block
                             e1.printStackTrace();
                         }
                     }
